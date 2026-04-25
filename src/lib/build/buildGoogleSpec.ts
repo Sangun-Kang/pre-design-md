@@ -11,7 +11,7 @@ import { buildTypeScale, getPairing, ratioName } from '../typeScale';
 import { buildSpacingScale } from '../spacingScale';
 import { buildRadiusScale } from '../radiusScale';
 import { buildShadowTokens } from '../shadowTokens';
-import { buildColorPalette, hueBucketName, oklchStringToHex } from '../colorPalette';
+import { buildColorPalette, categoryShortLabel, hueBucketName, oklchStringToHex } from '../colorPalette';
 
 // ──────────── helpers ────────────
 
@@ -134,16 +134,19 @@ function componentsYaml(r: RadiusInput | null): string[] {
 function overviewBody(d: DesignDecisions): string {
   const decided = DECISION_STEPS.filter((s) => d[s] != null);
   const intent: string[] = [];
-  if (d.color) intent.push(`${hueBucketName(d.color.primaryHue)}-led, ${d.color.chroma}`);
+  if (d.color) intent.push(categoryShortLabel(d.color));
   if (d.typography && d.typography.baseSize >= 18) intent.push('reader-friendly');
   if (d.typography && d.typography.baseSize <= 14) intent.push('compact');
   if (d.shadow?.intensity === 'strong') intent.push('dramatic depth');
   if (d.shadow?.intensity === 'none') intent.push('flat surfaces');
   const intentStr = intent.length > 0 ? intent.join(', ') : 'general-purpose';
 
-  const darkLine = d.color?.supportsDark
-    ? 'Dark mode is supported and dark variants of the palette are part of this spec.'
-    : 'Dark mode is out of scope for v1; this spec covers the light theme only.';
+  const darkLine =
+    d.color?.category === 'neon-on-dark'
+      ? 'This spec is designed for dark presentation by default — neon-on-dark always renders against dark neutrals.'
+      : d.color?.supportsDark
+        ? 'Dark mode is supported and dark variants of the palette are part of this spec.'
+        : 'Dark mode is out of scope for v1; this spec covers the light theme only.';
 
   return [
     '## Overview',
@@ -158,23 +161,43 @@ function overviewBody(d: DesignDecisions): string {
   ].join('\n');
 }
 
+function colorApproachLine(c: ColorInput): string {
+  switch (c.category) {
+    case 'hue-based': {
+      const chromaWord: Record<ColorInput['chroma'], string> = {
+        muted: 'calm and professional',
+        balanced: 'confident and modern',
+        vivid: 'energetic and brand-forward',
+      };
+      const neutralWord: Record<ColorInput['neutralStyle'], string> = {
+        pure: 'objective, neutral grays',
+        warm: 'inviting warmth',
+        cool: 'clinical, technical cool',
+        tinted: 'a cohesive tint binding colors to neutrals',
+      };
+      return `A ${hueBucketName(c.primaryHue)}-led palette, ${chromaWord[c.chroma]}, paired with ${neutralWord[c.neutralStyle]}.`;
+    }
+    case 'mono': {
+      if (Math.abs(c.warmth) < 0.1) {
+        return 'Pure monochrome — no chroma in primary or neutrals; hierarchy is carried entirely by lightness.';
+      }
+      const tone = c.warmth > 0 ? 'warm' : 'cool';
+      return `Monochrome with a barely-visible ${tone} tint (warmth ${c.warmth.toFixed(2)}). Hierarchy still carried by lightness.`;
+    }
+    case 'grayscale-accent':
+      return `Grayscale interface with a single ${hueBucketName(c.accentHue)} accent — neutrals carry the structure, the accent earns attention.`;
+    case 'neon-on-dark':
+      return `Neon-on-dark — dark canvas with luminous ${hueBucketName(c.accentHue)} accent.`;
+  }
+}
+
 function colorsBody(c: ColorInput): string {
-  const chromaWord: Record<ColorInput['chroma'], string> = {
-    muted: 'calm and professional',
-    balanced: 'confident and modern',
-    vivid: 'energetic and brand-forward',
-  };
-  const neutralWord: Record<ColorInput['neutralStyle'], string> = {
-    pure: 'objective, neutral grays',
-    warm: 'inviting warmth',
-    cool: 'clinical, technical cool',
-    tinted: 'a cohesive tint binding colors to neutrals',
-  };
   return [
     '## Colors',
     '',
-    `A ${hueBucketName(c.primaryHue)}-led palette, ${chromaWord[c.chroma]}, paired with ${neutralWord[c.neutralStyle]}. ` +
-      `The hex values in the frontmatter are derived from OKLCH source values; if you need the OKLCH form, see the Rich Prompt output.`,
+    `Color approach: ${categoryShortLabel(c)}.`,
+    '',
+    `${colorApproachLine(c)} The hex values in the frontmatter are derived from OKLCH source values; if you need the OKLCH form, see the Rich Prompt output.`,
     '',
     '### Interaction states (derived rules)',
     '',
@@ -237,9 +260,11 @@ function roundedBody(r: RadiusInput): string {
     '',
     `Base radius: ${r.base}px (${core[r.base] ?? 'balanced shape'}). Scale approach: ${r.scale}.`,
     '',
-    r.scale === 'scaled'
-      ? 'Per-component variation reinforces shape roles — inputs crisper, cards softer.'
-      : 'A single, uniform radius across components — one shape identity for the whole system.',
+    r.scale === 'asymmetric'
+      ? 'Diagonal asymmetry — only top-left and bottom-right corners are rounded; deliberately off-balance for an expressive shape language.'
+      : r.scale === 'scaled'
+        ? 'Per-component variation reinforces shape roles — inputs crisper, cards softer.'
+        : 'A single, uniform radius across components — one shape identity for the whole system.',
     '',
     'Per-component intent (resolved in the components block):',
     `- input: \`{rounded.${refs.input}}\``,

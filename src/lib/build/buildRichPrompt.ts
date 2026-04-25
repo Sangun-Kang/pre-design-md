@@ -11,7 +11,7 @@ import { buildTypeScale, getPairing, ratioName } from '../typeScale';
 import { buildSpacingScale } from '../spacingScale';
 import { buildRadiusScale } from '../radiusScale';
 import { buildShadowTokens } from '../shadowTokens';
-import { buildColorPalette, hueBucketName } from '../colorPalette';
+import { buildColorPalette, categoryShortLabel, hueBucketName } from '../colorPalette';
 
 // ──────────── Rationale tables ────────────
 
@@ -69,9 +69,11 @@ function rationaleRadius(r: RadiusInput): string {
   };
   const base = core[r.base] ?? 'balanced shape';
   const suffix =
-    r.scale === 'scaled'
-      ? ' — per-component variation that reinforces shape roles (inputs crisper, cards softer)'
-      : ' — uniform radius across components, a single shape identity';
+    r.scale === 'asymmetric'
+      ? ' — diagonal asymmetry (top-left and bottom-right only) for a deliberately off-balance, expressive moment'
+      : r.scale === 'scaled'
+        ? ' — per-component variation that reinforces shape roles (inputs crisper, cards softer)'
+        : ' — uniform radius across components, a single shape identity';
   return `${base}${suffix}.`;
 }
 
@@ -81,27 +83,47 @@ function rationaleShadow(s: ShadowInput): string {
     subtle: 'quiet hierarchy without depth theater',
     medium: 'clear elevation, material-adjacent',
     strong: 'dramatic, marketing-ready depth',
+    layered: 'stacked-layer depth — close + mid + far blur composed for a Material-like elevation read',
   };
   const base = core[s.intensity];
   const suffix = s.tintedPreferred ? ', with shadows tinted by the primary hue for cohesion' : '';
   return `${base}${suffix}.`;
 }
 
+function darkModeNote(c: ColorInput): string {
+  if (c.category === 'neon-on-dark') return ' Always presented in dark mode.';
+  return c.supportsDark ? ' Dark mode is supported.' : ' Light mode only for v1.';
+}
+
 function rationaleColor(c: ColorInput): string {
-  const chromaWord: Record<ColorInput['chroma'], string> = {
-    muted: 'calm and professional',
-    balanced: 'confident and modern',
-    vivid: 'energetic and brand-forward',
-  };
-  const neutralWord: Record<ColorInput['neutralStyle'], string> = {
-    pure: 'objective, neutral grays',
-    warm: 'inviting warmth',
-    cool: 'clinical, technical cool',
-    tinted: 'a cohesive tint binding colors to neutrals',
-  };
-  return `A ${hueBucketName(c.primaryHue)}-led palette, ${chromaWord[c.chroma]}, paired with ${neutralWord[c.neutralStyle]}.${
-    c.supportsDark ? ' Dark mode is supported.' : ' Light mode only for v1.'
-  }`;
+  switch (c.category) {
+    case 'hue-based': {
+      const chromaWord: Record<ColorInput['chroma'], string> = {
+        muted: 'calm and professional',
+        balanced: 'confident and modern',
+        vivid: 'energetic and brand-forward',
+      };
+      const neutralWord: Record<ColorInput['neutralStyle'], string> = {
+        pure: 'objective, neutral grays',
+        warm: 'inviting warmth',
+        cool: 'clinical, technical cool',
+        tinted: 'a cohesive tint binding colors to neutrals',
+      };
+      return `A ${hueBucketName(c.primaryHue)}-led palette, ${chromaWord[c.chroma]}, paired with ${neutralWord[c.neutralStyle]}.${darkModeNote(c)}`;
+    }
+    case 'mono': {
+      if (Math.abs(c.warmth) < 0.1) {
+        return `A pure black-and-white system — no chroma in primary or neutrals. Hierarchy comes from lightness alone, semantic colors stay muted to keep the monochrome identity.${darkModeNote(c)}`;
+      }
+      const direction =
+        c.warmth > 0 ? 'warm (toward sepia, ~60°)' : 'cool (toward blue-gray, ~240°)';
+      return `Monochrome with a barely-perceptible ${direction} tint (warmth ${c.warmth.toFixed(2)}). Easier on the eyes than absolute mono while keeping the no-color identity.${darkModeNote(c)}`;
+    }
+    case 'grayscale-accent':
+      return `Grayscale interface with one ${hueBucketName(c.accentHue)} accent. The neutrals carry the structure; the accent earns attention by being the only colorful element.${darkModeNote(c)}`;
+    case 'neon-on-dark':
+      return `Dark canvas with luminous ${hueBucketName(c.accentHue)} accent — energy, contrast, focus. The accent is engineered to glow against very dark neutrals.${darkModeNote(c)}`;
+  }
 }
 
 // ──────────── Sub-section builders ────────────
@@ -242,14 +264,39 @@ function scaleBlock(prefix: string, scale: Record<string, string>): string {
     .join('\n');
 }
 
+function colorMetaLines(c: ColorInput): string[] {
+  const lines: string[] = [`- Approach: ${categoryShortLabel(c)}`];
+  switch (c.category) {
+    case 'hue-based':
+      lines.push(
+        `- Primary hue: ${Math.round(c.primaryHue)}° (${hueBucketName(c.primaryHue)})`,
+        `- Chroma level: ${c.chroma}`,
+        `- Neutral style: ${c.neutralStyle}`,
+      );
+      break;
+    case 'mono':
+      if (Math.abs(c.warmth) >= 0.1) {
+        lines.push(`- Warmth: ${c.warmth.toFixed(2)} (negative = cool, positive = warm)`);
+      }
+      break;
+    case 'grayscale-accent':
+    case 'neon-on-dark':
+      lines.push(`- Accent hue: ${Math.round(c.accentHue)}° (${hueBucketName(c.accentHue)})`);
+      break;
+  }
+  const darkLine =
+    c.category === 'neon-on-dark'
+      ? '- Dark mode: forced (always on)'
+      : `- Dark mode: ${c.supportsDark ? 'supported' : 'not supported'}`;
+  lines.push(darkLine);
+  return lines;
+}
+
 function colorSection(c: ColorInput): string {
   const palette = buildColorPalette(c);
   const lines: string[] = [
     '## Color',
-    `- Primary hue: ${Math.round(c.primaryHue)}° (${hueBucketName(c.primaryHue)})`,
-    `- Chroma level: ${c.chroma}`,
-    `- Neutral style: ${c.neutralStyle}`,
-    `- Dark mode: ${c.supportsDark ? 'supported' : 'not supported'}`,
+    ...colorMetaLines(c),
     `- Rationale: ${rationaleColor(c)}`,
     '',
     '### Primary palette',
@@ -346,7 +393,7 @@ function missingDecisions(d: DesignDecisions): string[] {
 function overallIntent(d: DesignDecisions): string {
   const parts: string[] = [];
   if (d.color) {
-    parts.push(`${hueBucketName(d.color.primaryHue)}-led, ${d.color.chroma}`);
+    parts.push(categoryShortLabel(d.color));
   }
   if (d.typography) {
     if (d.typography.baseSize >= 18) parts.push('reader-friendly');

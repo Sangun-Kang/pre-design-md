@@ -24,21 +24,56 @@ export function App() {
       shadow,
       color,
     });
-    // When the user has settled on a primary hue, bleed it into the chrome
-    // accent so the entire app adopts the chosen color — the "surprise" beat.
+    // When the user has settled on a category, bleed the appropriate hue
+    // into the chrome accent. Mono / off-mono fall back to neutral grays.
     if (color) {
-      const h = color.primaryHue;
-      vars['--app-accent'] = `oklch(74% 0.15 ${h})`;
-      vars['--app-accent-hover'] = `oklch(80% 0.16 ${h})`;
-      vars['--app-accent-press'] = `oklch(68% 0.16 ${h})`;
-      vars['--app-accent-soft'] = `oklch(30% 0.1 ${h})`;
-      vars['--app-focus'] = `oklch(80% 0.16 ${h})`;
+      let accentHue: number | null;
+      let accentChroma: number;
+      switch (color.category) {
+        case 'grayscale-accent':
+          accentHue = color.accentHue;
+          accentChroma = 0.15;
+          break;
+        case 'neon-on-dark':
+          accentHue = color.accentHue;
+          accentChroma = 0.2;
+          break;
+        case 'mono':
+          accentHue = null;
+          accentChroma = 0;
+          break;
+        case 'hue-based':
+        default:
+          accentHue = color.primaryHue;
+          accentChroma = 0.15;
+      }
+      if (accentHue == null) {
+        vars['--app-accent'] = 'oklch(35% 0 0)';
+        vars['--app-accent-hover'] = 'oklch(45% 0 0)';
+        vars['--app-accent-press'] = 'oklch(25% 0 0)';
+        vars['--app-accent-soft'] = 'oklch(20% 0 0)';
+        vars['--app-focus'] = 'oklch(60% 0 0)';
+      } else {
+        vars['--app-accent'] = `oklch(74% ${accentChroma} ${accentHue})`;
+        vars['--app-accent-hover'] = `oklch(80% ${accentChroma} ${accentHue})`;
+        vars['--app-accent-press'] = `oklch(68% ${accentChroma} ${accentHue})`;
+        vars['--app-accent-soft'] = `oklch(30% ${accentChroma * 0.7} ${accentHue})`;
+        vars['--app-focus'] = `oklch(80% ${accentChroma} ${accentHue})`;
+      }
     }
     return vars as CSSProperties;
   }, [applyGlobally, typography, spacing, radius, shadow, color]);
 
+  // Neon on dark forces a dark presentation; tone-tinted components
+  // (Alert / Badge) read this attribute to swap to dark variants.
+  const isDark = applyGlobally && color?.category === 'neon-on-dark';
+
   return (
-    <div className={`app-root${applyGlobally ? ' app-root--global' : ''}`} style={style}>
+    <div
+      className={`app-root${applyGlobally ? ' app-root--global' : ''}`}
+      data-theme={isDark ? 'dark' : undefined}
+      style={style}
+    >
       <Wizard />
     </div>
   );

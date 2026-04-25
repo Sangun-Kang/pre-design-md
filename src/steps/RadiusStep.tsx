@@ -20,6 +20,7 @@ const PRESETS: Array<{
   { id: 'pill', label: 'Pill-like', descriptionKey: 'radius.desc.pill', input: { base: 16, scale: 'scaled' } },
   { id: 'capsule', label: 'Capsule', descriptionKey: 'radius.desc.capsule', input: { base: 24, scale: 'scaled' } },
   { id: 'uniform-soft', label: 'Soft uniform', descriptionKey: 'radius.desc.uniformSoft', input: { base: 8, scale: 'uniform' } },
+  { id: 'asymmetric', label: 'Asymmetric', descriptionKey: 'radius.desc.asymmetric', input: { base: 12, scale: 'asymmetric' } },
 ];
 
 function sameRadius(a: RadiusInput | null, b: RadiusInput): boolean {

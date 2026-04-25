@@ -33,12 +33,25 @@ export function buildRadiusScale(input: RadiusInput): RadiusTokens {
     full: '9999px',
   };
 
+  // Asymmetric: only top-left + bottom-right corners are rounded — the
+  // diagonal pattern is the visual signature. badge stays full pill so it
+  // still reads as a tag rather than a square.
+  const asymPair = (v: CssLength): CssLength =>
+    v === '0' ? '0' : `${v} 0 ${v} 0`;
+
   const components =
     scale === 'uniform'
       ? {
           input: tokens.md,
           button: tokens.md,
           card: tokens.md,
+          badge: tokens.full,
+        }
+      : scale === 'asymmetric'
+      ? {
+          input: asymPair(tokens.sm),
+          button: asymPair(tokens.md),
+          card: asymPair(tokens.lg),
           badge: tokens.full,
         }
       : {

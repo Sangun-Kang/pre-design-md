@@ -30,3 +30,25 @@
   background: oklch(from var(--color-danger-500) 0.94 0.04 h);
   color: oklch(from var(--color-danger-500) 0.38 0.14 h);
 }
+
+/* Dark theme — invert lightness so badges sit properly on dark surfaces. */
+:global([data-theme='dark']) .tone_neutral {
+  background: var(--color-neutral-800);
+  color: var(--color-neutral-100);
+}
+:global([data-theme='dark']) .tone_info {
+  background: oklch(from var(--color-info-500) 0.24 0.07 h);
+  color: oklch(from var(--color-info-500) 0.84 0.14 h);
+}
+:global([data-theme='dark']) .tone_success {
+  background: oklch(from var(--color-success-500) 0.24 0.07 h);
+  color: oklch(from var(--color-success-500) 0.84 0.14 h);
+}
+:global([data-theme='dark']) .tone_warning {
+  background: oklch(from var(--color-warning-500) 0.26 0.08 h);
+  color: oklch(from var(--color-warning-500) 0.86 0.14 h);
+}
+:global([data-theme='dark']) .tone_danger {
+  background: oklch(from var(--color-danger-500) 0.24 0.07 h);
+  color: oklch(from var(--color-danger-500) 0.84 0.14 h);
+}

@@ -95,7 +95,7 @@ export interface SpacingTokens {
 // ──────────── Radius ────────────
 
 export type RadiusBase = 0 | 2 | 4 | 8 | 12 | 16 | 24;
-export type RadiusScale = 'uniform' | 'scaled';
+export type RadiusScale = 'uniform' | 'scaled' | 'asymmetric';
 
 export interface RadiusInput {
   base: RadiusBase;
@@ -115,7 +115,7 @@ export interface RadiusTokens {
 
 // ──────────── Shadow ────────────
 
-export type ShadowIntensity = 'none' | 'subtle' | 'medium' | 'strong';
+export type ShadowIntensity = 'none' | 'subtle' | 'medium' | 'strong' | 'layered';
 
 export interface ShadowInput {
   intensity: ShadowIntensity;
@@ -144,11 +144,34 @@ export interface ShadowTokens {
 export type ChromaLevel = 'muted' | 'balanced' | 'vivid';
 export type NeutralStyle = 'pure' | 'warm' | 'cool' | 'tinted';
 
+export type ColorCategory =
+  | 'hue-based'
+  | 'mono'
+  | 'grayscale-accent'
+  | 'neon-on-dark';
+
+export const COLOR_CATEGORIES_PRIMARY: ColorCategory[] = [
+  'hue-based',
+  'mono',
+  'grayscale-accent',
+  'neon-on-dark',
+];
+
+/**
+ * Superset of every category's tunables. The active `category` decides which
+ * fields the palette builder actually reads; the rest are preserved verbatim
+ * so switching Mono → Hue-based → Mono restores the user's earlier settings.
+ */
 export interface ColorInput {
+  category: ColorCategory;
   primaryHue: number;
   chroma: ChromaLevel;
   neutralStyle: NeutralStyle;
   supportsDark: boolean;
+  /** Mono only. -1 = cool (blue-gray), 0 = pure neutral, +1 = warm (sepia). */
+  warmth: number;
+  /** Grayscale + accent / Neon on dark — distinct from primaryHue. */
+  accentHue: number;
 }
 
 export type Scale11 = Record<Step11, OklchStr>;

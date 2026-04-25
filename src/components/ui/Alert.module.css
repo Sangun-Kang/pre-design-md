@@ -65,3 +65,25 @@
   border-color: oklch(from var(--color-danger-500) 0.82 0.1 h);
   color: oklch(from var(--color-danger-500) 0.42 0.14 h);
 }
+
+/* Dark theme — deep tone-tinted bg, lighter icon color so the alert reads. */
+:global([data-theme='dark']) .tone_info {
+  background: oklch(from var(--color-info-500) 0.22 0.06 h);
+  border-color: oklch(from var(--color-info-500) 0.4 0.12 h);
+  color: oklch(from var(--color-info-500) 0.78 0.14 h);
+}
+:global([data-theme='dark']) .tone_success {
+  background: oklch(from var(--color-success-500) 0.22 0.06 h);
+  border-color: oklch(from var(--color-success-500) 0.4 0.12 h);
+  color: oklch(from var(--color-success-500) 0.78 0.14 h);
+}
+:global([data-theme='dark']) .tone_warning {
+  background: oklch(from var(--color-warning-500) 0.22 0.07 h);
+  border-color: oklch(from var(--color-warning-500) 0.42 0.13 h);
+  color: oklch(from var(--color-warning-500) 0.82 0.14 h);
+}
+:global([data-theme='dark']) .tone_danger {
+  background: oklch(from var(--color-danger-500) 0.22 0.06 h);
+  border-color: oklch(from var(--color-danger-500) 0.4 0.12 h);
+  color: oklch(from var(--color-danger-500) 0.78 0.14 h);
+}

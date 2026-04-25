@@ -1,6 +1,7 @@
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import { pickImage } from '../lib/imageFilter';
+import { effectiveAccentHue } from '../lib/colorPalette';
 import { IMAGE_POOL } from '../assets/preview-images';
 import { useDesignStore } from '../store/designStore';
 import { useT } from '../i18n';
@@ -8,8 +9,10 @@ import styles from './LandingSection.module.css';
 
 export function LandingSection() {
   const color = useDesignStore((s) => s.color);
-  const hue = color?.primaryHue ?? 235;
-  const heroImg = pickImage(hue, IMAGE_POOL);
+  // Mono / off-mono(neutral) → no tinted backdrop. Other categories pick
+  // an image whose dominant hue matches the active accent.
+  const accentHue = color ? effectiveAccentHue(color) : 235;
+  const heroImg = accentHue != null ? pickImage(accentHue, IMAGE_POOL) : null;
   const t = useT();
 
   const features = [

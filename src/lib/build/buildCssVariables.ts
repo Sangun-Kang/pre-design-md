@@ -3,7 +3,7 @@ import { buildTypeScale } from '../typeScale';
 import { buildSpacingScale } from '../spacingScale';
 import { buildRadiusScale } from '../radiusScale';
 import { buildShadowTokens } from '../shadowTokens';
-import { buildColorPalette } from '../colorPalette';
+import { buildColorPalette, categoryShortLabel } from '../colorPalette';
 
 /**
  * Plain `.css` output. Drop-in :root custom properties — no markdown,
@@ -73,7 +73,14 @@ export function buildCssVariables(d: DesignDecisions): string {
 
   if (d.color) {
     const palette = buildColorPalette(d.color);
-    sections.push('  /* Color — OKLCH (source of truth) */');
+    const darkNote =
+      d.color.category === 'neon-on-dark'
+        ? 'forced dark'
+        : d.color.supportsDark
+          ? 'light + dark'
+          : 'light';
+    sections.push(`  /* Color: ${categoryShortLabel(d.color)}, ${darkNote} */`);
+    sections.push('  /* OKLCH (source of truth) */');
     for (const [k, v] of Object.entries(palette.primary)) {
       sections.push(`  --color-primary-${k}: ${v};`);
     }

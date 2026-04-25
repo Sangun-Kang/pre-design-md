@@ -205,6 +205,7 @@ export const ja: Messages = {
   'radius.desc.pill': '16px · scaled — 軽快で錠剤形に近い',
   'radius.desc.capsule': '24px · scaled — ほぼカプセルに近い大胆な丸み',
   'radius.desc.uniformSoft': '8px · uniform — ひとつの形に統一された個性',
+  'radius.desc.asymmetric': '12px · 対角 — 左上と右下だけ丸く、デザイン的に大胆',
 
   'spacing.desc.tight': '4px · linear — データ UI に合う精密なリズム',
   'spacing.desc.tightDramatic': '4px · multiplicative — 間隔が劇的に広がる構造',
@@ -217,4 +218,21 @@ export const ja: Messages = {
   'shadow.desc.subtle': 'あるかないか分からない控えめな気配',
   'shadow.desc.medium': 'Material 寄りのはっきりしたレイヤー',
   'shadow.desc.strong': '劇的でマーケティング向けの深み',
+  'shadow.desc.layered': '重なったレイヤーの奥行き — Material 風',
+
+  'color.approach': 'カラーの方向性',
+  'color.warmth': '寒暖',
+  'color.warmth.cool': '寒色',
+  'color.warmth.warm': '暖色',
+  'color.accentHue': 'アクセント hue',
+  'color.darkForcedHint': ' — このカテゴリでは常に ON です。',
+
+  'color.category.hue-based.label': 'Hue-based',
+  'color.category.hue-based.desc': 'hue を決めると 11 段階のパレットと相性の良いニュートラルが揃います。',
+  'color.category.mono.label': 'Mono',
+  'color.category.mono.desc': '白黒ベース。寒暖スライダーでほんのり暖色／寒色に寄せられます。',
+  'color.category.grayscale-accent.label': 'Grayscale + accent',
+  'color.category.grayscale-accent.desc': 'ほぼ無彩色、差し色がひとつ。',
+  'color.category.neon-on-dark.label': 'Neon on dark',
+  'color.category.neon-on-dark.desc': '暗いキャンバスに光るアクセント。常にダーク。',
 };

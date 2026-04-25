@@ -118,9 +118,130 @@
   gap: var(--app-space-md);
 }
 
+.toggleRowDisabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .muted {
   color: var(--app-text-muted);
   font-size: 0.8125rem;
+  display: block;
+  margin-top: 0.15rem;
+}
+
+.warmthLabels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-family: var(--app-font-mono);
+}
+
+/* ── Category grid + cards ── */
+.categoryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--app-space-xs);
+}
+
+.moreGrid {
+  margin-top: var(--app-space-xs);
+  animation: moreFadeIn 0.18s ease;
+}
+
+@keyframes moreFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.categoryCard {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-sm);
+  padding: 0.625rem 0.75rem;
+  background: var(--app-surface-sunken);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-md);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.12s ease;
+  font: inherit;
+}
+
+.categoryCard:hover {
+  border-color: var(--app-border-strong);
+  background: var(--app-surface);
+}
+
+.categoryCardActive {
+  border-color: var(--app-text);
+  background: var(--app-surface);
+  box-shadow: 0 0 0 1px var(--app-text) inset;
+}
+
+.categorySwatch {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--app-radius-full);
+  border: 1px solid var(--app-border-strong);
+}
+
+.categoryText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.categoryLabel {
+  font-family: var(--app-font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--app-text);
+}
+
+.categoryDesc {
+  font-size: 0.6875rem;
+  color: var(--app-text-muted);
+  line-height: 1.35;
+}
+
+.moreToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: var(--app-space-xs);
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  border: 1px dashed var(--app-border);
+  border-radius: var(--app-radius-md);
+  cursor: pointer;
+  font-family: var(--app-font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--app-text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.moreToggle:hover {
+  color: var(--app-text);
+  border-color: var(--app-border-strong);
+}
+
+.chevron {
+  font-size: 0.75rem;
+  color: var(--app-text-subtle);
 }
 
 /* ── Preview panel (user tokens live here, so Color step feels like a real UI) ── */

@@ -205,6 +205,7 @@ export const en: Messages = {
   'radius.desc.pill': '16px · scaled — playful, pill-adjacent',
   'radius.desc.capsule': '24px · scaled — bold, near-capsule curves',
   'radius.desc.uniformSoft': '8px · uniform — one shape identity throughout',
+  'radius.desc.asymmetric': '12px · diagonal — only top-left and bottom-right rounded',
 
   'spacing.desc.tight': '4px · linear — precise rhythm for data UI',
   'spacing.desc.tightDramatic': '4px · multiplicative — gaps expand dramatically',
@@ -217,4 +218,21 @@ export const en: Messages = {
   'shadow.desc.subtle': 'a quiet hint, barely there',
   'shadow.desc.medium': 'Material-adjacent, clear layers',
   'shadow.desc.strong': 'dramatic, marketing-ready depth',
+  'shadow.desc.layered': 'stacked layers — Material-style depth',
+
+  'color.approach': 'Color approach',
+  'color.warmth': 'Warmth',
+  'color.warmth.cool': 'Cool',
+  'color.warmth.warm': 'Warm',
+  'color.accentHue': 'Accent hue',
+  'color.darkForcedHint': ' — always on for this category.',
+
+  'color.category.hue-based.label': 'Hue-based',
+  'color.category.hue-based.desc': 'Pick a hue and get a full 11-step palette with matching neutrals.',
+  'color.category.mono.label': 'Mono',
+  'color.category.mono.desc': 'Black and white, optionally with a barely-warm or cool tint.',
+  'color.category.grayscale-accent.label': 'Grayscale + accent',
+  'color.category.grayscale-accent.desc': 'Mostly neutral, one color speaks.',
+  'color.category.neon-on-dark.label': 'Neon on dark',
+  'color.category.neon-on-dark.desc': 'Dark canvas with a luminous accent. Always dark.',
 };

@@ -205,6 +205,7 @@ export const ko: Messages = {
   'radius.desc.pill': '16px · scaled — 경쾌하고 알약형에 가까운',
   'radius.desc.capsule': '24px · scaled — 거의 캡슐에 가까운 대담한 곡선',
   'radius.desc.uniformSoft': '8px · uniform — 한 가지 모양으로 통일된 정체성',
+  'radius.desc.asymmetric': '12px · 대각선 — 좌상단과 우하단만 둥글게, 디자인적 파격',
 
   'spacing.desc.tight': '4px · linear — 데이터 UI에 맞는 정밀한 리듬',
   'spacing.desc.tightDramatic': '4px · multiplicative — 간격이 극적으로 벌어지는 구조',
@@ -217,4 +218,21 @@ export const ko: Messages = {
   'shadow.desc.subtle': '있는 듯 없는 듯 살짝',
   'shadow.desc.medium': 'Material에 가까운 또렷한 레이어',
   'shadow.desc.strong': '극적이고 마케팅에 어울리는 깊이',
+  'shadow.desc.layered': '여러 레이어가 겹쳐진 깊이감 — Material 계열',
+
+  'color.approach': '컬러 접근 방식',
+  'color.warmth': '톤',
+  'color.warmth.cool': '차갑게',
+  'color.warmth.warm': '따뜻하게',
+  'color.accentHue': '액센트 hue',
+  'color.darkForcedHint': ' — 이 카테고리는 다크가 항상 켜져 있어요.',
+
+  'color.category.hue-based.label': 'Hue-based',
+  'color.category.hue-based.desc': 'hue를 정하면 11단계 팔레트와 어울리는 중립색까지 한 번에.',
+  'color.category.mono.label': 'Mono',
+  'color.category.mono.desc': '흑백 베이스. 톤 슬라이더로 살짝만 따뜻하거나 차갑게.',
+  'color.category.grayscale-accent.label': 'Grayscale + accent',
+  'color.category.grayscale-accent.desc': '거의 무채색, 한 가지 색만 말한다.',
+  'color.category.neon-on-dark.label': 'Neon on dark',
+  'color.category.neon-on-dark.desc': '어두운 배경에 빛나는 액센트. 항상 다크 모드.',
 };

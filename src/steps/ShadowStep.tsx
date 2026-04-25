@@ -16,6 +16,7 @@ const PRESETS: Array<{
   { id: 'subtle', label: 'Subtle', descriptionKey: 'shadow.desc.subtle' },
   { id: 'medium', label: 'Medium', descriptionKey: 'shadow.desc.medium' },
   { id: 'strong', label: 'Strong', descriptionKey: 'shadow.desc.strong' },
+  { id: 'layered', label: 'Layered', descriptionKey: 'shadow.desc.layered' },
 ];
 
 function ShadowPreview({ intensity, tinted, hue }: { intensity: ShadowIntensity; tinted: boolean; hue: number }) {

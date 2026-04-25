@@ -16,7 +16,15 @@ export const DEFAULT_DECISIONS: Required<{
   spacing: { baseUnit: 8, scale: 'linear' },
   radius: { base: 8, scale: 'scaled' },
   shadow: { intensity: 'medium', tintedPreferred: false },
-  color: { primaryHue: 250, chroma: 'balanced', neutralStyle: 'pure', supportsDark: false },
+  color: {
+    category: 'hue-based',
+    primaryHue: 250,
+    chroma: 'balanced',
+    neutralStyle: 'pure',
+    supportsDark: false,
+    warmth: 0,
+    accentHue: 250,
+  },
 };
 
 export function buildTokensBundle(decisions: DesignDecisions): TokensBundle {
@@ -98,14 +106,26 @@ export function tokensToCssVars(bundle: TokensBundle): Record<string, string> {
   vars['--color-danger-500'] = bundle.color.semantic.danger;
   vars['--color-info-500'] = bundle.color.semantic.info;
 
-  // Semantic surfaces (derived from neutral — consumers use these)
-  vars['--color-bg'] = bundle.color.neutral['50'];
-  vars['--color-surface'] = bundle.color.neutral['50'];
-  vars['--color-surface-raised'] = 'oklch(100% 0 0)';
-  vars['--color-text'] = bundle.color.neutral['900'];
-  vars['--color-text-muted'] = bundle.color.neutral['600'];
-  vars['--color-border'] = bundle.color.neutral['200'];
-  vars['--color-border-strong'] = bundle.color.neutral['300'];
+  // Semantic surfaces (derived from neutral — consumers use these).
+  // Neon on dark inverts the mapping so the standard component vars
+  // automatically render against a dark stage.
+  if (bundle.color.meta.category === 'neon-on-dark') {
+    vars['--color-bg'] = bundle.color.neutral['950'];
+    vars['--color-surface'] = bundle.color.neutral['900'];
+    vars['--color-surface-raised'] = bundle.color.neutral['800'];
+    vars['--color-text'] = bundle.color.neutral['50'];
+    vars['--color-text-muted'] = bundle.color.neutral['300'];
+    vars['--color-border'] = bundle.color.neutral['700'];
+    vars['--color-border-strong'] = bundle.color.neutral['600'];
+  } else {
+    vars['--color-bg'] = bundle.color.neutral['50'];
+    vars['--color-surface'] = bundle.color.neutral['50'];
+    vars['--color-surface-raised'] = 'oklch(100% 0 0)';
+    vars['--color-text'] = bundle.color.neutral['900'];
+    vars['--color-text-muted'] = bundle.color.neutral['600'];
+    vars['--color-border'] = bundle.color.neutral['200'];
+    vars['--color-border-strong'] = bundle.color.neutral['300'];
+  }
 
   return vars;
 }

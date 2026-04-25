@@ -59,7 +59,7 @@ function getBell(i: number): number {
   return BELL[i] ?? 0.5;
 }
 
-function buildPrimary(hue: number, chroma: ChromaLevel): Scale11 {
+function buildHueBasedPrimary(hue: number, chroma: ChromaLevel): Scale11 {
   const peak = peakCFor(chroma);
   const scale = {} as Scale11;
   SCALE_STEPS.forEach((step, i) => {
@@ -70,7 +70,7 @@ function buildPrimary(hue: number, chroma: ChromaLevel): Scale11 {
   return scale;
 }
 
-function buildNeutral(input: ColorInput): Scale11 {
+function buildHueBasedNeutral(input: ColorInput): Scale11 {
   const { neutralStyle, primaryHue, chroma } = input;
   const scale = {} as Scale11;
 
@@ -110,6 +110,94 @@ function buildSemantic(chroma: ChromaLevel): SemanticColors {
   };
 }
 
+// ──────────── per-category builders ────────────
+
+interface BasePalette {
+  primary: Scale11;
+  neutral: Scale11;
+  semantic: SemanticColors;
+}
+
+function pureGrayscale(): Scale11 {
+  const scale = {} as Scale11;
+  SCALE_STEPS.forEach((step, i) => {
+    scale[step] = oklchStr(getL(i), 0, 0);
+  });
+  return scale;
+}
+
+function buildHueBased(input: ColorInput): BasePalette {
+  return {
+    primary: buildHueBasedPrimary(input.primaryHue, input.chroma),
+    neutral: buildHueBasedNeutral(input),
+    semantic: buildSemantic(input.chroma),
+  };
+}
+
+// Mono absorbs the former "off-mono" via warmth: 0 = pure black/white,
+// |warmth| > 0 = barely-perceptible warm/cool tint in neutrals.
+function buildMono(input: ColorInput): BasePalette {
+  const warmth = Math.max(-1, Math.min(1, input.warmth));
+  const cFactor = Math.abs(warmth);
+  if (cFactor < 0.01) {
+    const gray = pureGrayscale();
+    const grayCopy = pureGrayscale();
+    return { primary: gray, neutral: grayCopy, semantic: buildSemantic('muted') };
+  }
+  const hue = warmth >= 0 ? 60 : 240;
+  const peak = 0.012 * cFactor; // Tiny chroma — feels like tone, not color.
+
+  const scale = {} as Scale11;
+  SCALE_STEPS.forEach((step, i) => {
+    scale[step] = oklchStr(getL(i), peak * getBell(i), hue);
+  });
+  const scaleCopy = {} as Scale11;
+  SCALE_STEPS.forEach((step, i) => {
+    scaleCopy[step] = oklchStr(getL(i), peak * getBell(i), hue);
+  });
+  return { primary: scale, neutral: scaleCopy, semantic: buildSemantic('muted') };
+}
+
+function buildGrayscaleAccent(input: ColorInput): BasePalette {
+  return {
+    primary: buildHueBasedPrimary(input.accentHue, 'balanced'),
+    neutral: pureGrayscale(),
+    semantic: buildSemantic('muted'),
+  };
+}
+
+const NEON_PRIMARY_L: number[] = [0.95, 0.90, 0.85, 0.80, 0.75, 0.70, 0.62, 0.50, 0.38, 0.28, 0.20];
+
+function buildNeonOnDark(input: ColorInput): BasePalette {
+  const peak = 0.30;
+  const primary = {} as Scale11;
+  SCALE_STEPS.forEach((step, i) => {
+    const l = NEON_PRIMARY_L[i] ?? 0.5;
+    primary[step] = oklchStr(l, peak * getBell(i), input.accentHue);
+  });
+  // Neutral keeps the standard light→dark scale; applyTokens flips
+  // surface/text mapping when category === 'neon-on-dark'.
+  return {
+    primary,
+    neutral: pureGrayscale(),
+    semantic: buildSemantic('vivid'),
+  };
+}
+
+function dispatchCategory(input: ColorInput): BasePalette {
+  switch (input.category) {
+    case 'mono':
+      return buildMono(input);
+    case 'grayscale-accent':
+      return buildGrayscaleAccent(input);
+    case 'neon-on-dark':
+      return buildNeonOnDark(input);
+    case 'hue-based':
+    default:
+      return buildHueBased(input);
+  }
+}
+
 function buildDarkScale(source: Scale11): Scale11 {
   const dark = {} as Scale11;
   const reversed = [...SCALE_STEPS].reverse() as Step11[];
@@ -131,16 +219,12 @@ function dimSemantic(sem: SemanticColors): SemanticColors {
 }
 
 export function buildColorPalette(input: ColorInput): ColorPalette {
-  const { primaryHue, chroma, supportsDark } = input;
-
-  const primary = buildPrimary(primaryHue, chroma);
-  const neutral = buildNeutral(input);
-  const semantic = buildSemantic(chroma);
+  const base = dispatchCategory(input);
 
   const palette: ColorPalette = {
-    primary,
-    neutral,
-    semantic,
+    primary: base.primary,
+    neutral: base.neutral,
+    semantic: base.semantic,
     interactionStates: {
       hover: { lightnessDelta: -0.05 },
       active: { lightnessDelta: -0.1 },
@@ -154,11 +238,14 @@ export function buildColorPalette(input: ColorInput): ColorPalette {
     meta: input,
   };
 
-  if (supportsDark) {
+  // Neon on dark forces a dark presentation. Light-mode users still get
+  // light variants so consumer code that flips by media query keeps working.
+  const includeDark = input.supportsDark || input.category === 'neon-on-dark';
+  if (includeDark) {
     palette.dark = {
-      primary: buildDarkScale(primary),
-      neutral: buildDarkScale(neutral),
-      semantic: dimSemantic(semantic),
+      primary: buildDarkScale(base.primary),
+      neutral: buildDarkScale(base.neutral),
+      semantic: dimSemantic(base.semantic),
     };
   }
 
@@ -172,6 +259,43 @@ export function buildColorPalette(input: ColorInput): ColorPalette {
  */
 export function oklchStringToHex(input: string): string {
   return formatHex(input) ?? '#000000';
+}
+
+/**
+ * The hue actually carrying color identity for the chosen category.
+ * Returns null when the category is achromatic (mono, or off-mono with warmth ≈ 0)
+ * so consumers can skip hue-based effects (e.g. tinted hero backgrounds).
+ */
+export function effectiveAccentHue(c: ColorInput): number | null {
+  switch (c.category) {
+    // Mono is fundamentally achromatic — its warmth is meant to be a *barely*
+    // perceptible tint in neutrals, not a hero-level accent.
+    case 'mono':
+      return null;
+    case 'grayscale-accent':
+    case 'neon-on-dark':
+      return c.accentHue;
+    case 'hue-based':
+    default:
+      return c.primaryHue;
+  }
+}
+
+/** Short, single-line description of the color choice for prose / comments. */
+export function categoryShortLabel(c: ColorInput): string {
+  switch (c.category) {
+    case 'hue-based':
+      return `${hueBucketName(c.primaryHue)}-led, ${c.chroma}`;
+    case 'mono': {
+      if (Math.abs(c.warmth) < 0.1) return 'pure monochrome';
+      const tone = c.warmth > 0 ? 'warm tint' : 'cool tint';
+      return `monochrome (${tone})`;
+    }
+    case 'grayscale-accent':
+      return `grayscale with ${hueBucketName(c.accentHue)} accent`;
+    case 'neon-on-dark':
+      return `${hueBucketName(c.accentHue)} neon on dark`;
+  }
 }
 
 export function hueBucketName(hue: number): string {
