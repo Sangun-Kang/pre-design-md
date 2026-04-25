@@ -12,12 +12,41 @@
 }
 
 .brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
   font-family: var(--app-font-mono);
   font-weight: 600;
   font-size: 0.875rem;
   color: var(--app-text);
   letter-spacing: -0.01em;
   white-space: nowrap;
+}
+
+.ratio {
+  font-family: var(--app-font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--app-text-subtle);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+
+.progressBar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--app-accent);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  border-top-right-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progressBar {
+    transition: none;
+  }
 }
 
 .list {

@@ -3,13 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)" />
+
+    <title>pre-design-md — Turn "make it look nice" into a spec</title>
+    <meta
+      name="description"
+      content="A 5-step visual decision tool that turns your design intent (typography · spacing · radius · shadow · color) into a single DESIGN.md prompt for Claude Code, Cursor, and Codex."
+    />
+    <link rel="canonical" href="https://pre-design-md.dev/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="pre-design-md" />
+    <meta property="og:title" content="pre-design-md — Turn &quot;make it look nice&quot; into a spec" />
+    <meta
+      property="og:description"
+      content="Five steps, one decision each. Get a single DESIGN.md prompt your AI tools can actually follow."
+    />
+    <meta property="og:url" content="https://pre-design-md.dev/" />
+    <meta property="og:image" content="https://pre-design-md.dev/og.png" />
+    <meta property="og:image:width" content="2922" />
+    <meta property="og:image:height" content="1216" />
+    <meta property="og:image:alt" content="pre-design-md — five-step visual decision tool" />
+    <meta property="og:locale" content="ko_KR" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="ja_JP" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="pre-design-md" />
+    <meta
+      name="twitter:description"
+      content="A 5-step visual decision tool that produces a DESIGN.md prompt for AI editors."
+    />
+    <meta name="twitter:image" content="https://pre-design-md.dev/og.png" />
+
+    <!-- Favicon — inline SVG: 4-dot palette, evokes the token grid -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230b0b0b'/%3E%3Ccircle cx='5' cy='5' r='1.6' fill='%23398ad6'/%3E%3Ccircle cx='11' cy='5' r='1.6' fill='%23a4a4a4'/%3E%3Ccircle cx='5' cy='11' r='1.6' fill='%2346944b'/%3E%3Ccircle cx='11' cy='11' r='1.6' fill='%23c35c57'/%3E%3C/svg%3E"
+    />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&family=Gowun+Dodum&family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=M+PLUS+Rounded+1c:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Shippori+Mincho:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <title>pre-design-md</title>
   </head>
   <body>
     <div id="root"></div>

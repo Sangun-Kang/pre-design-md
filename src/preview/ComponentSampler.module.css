@@ -67,3 +67,16 @@
   flex-direction: column;
   gap: var(--space-sm);
 }
+
+@media (max-width: 768px) {
+  .root {
+    padding: var(--space-md);
+    gap: var(--space-lg);
+  }
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  .stat {
+    font-size: var(--font-size-2xl);
+  }
+}

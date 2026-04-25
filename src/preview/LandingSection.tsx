@@ -32,7 +32,7 @@ export function LandingSection() {
       <div className={styles.nav}>
         <div className={styles.navBrand}>
           <span className={styles.navMark} />
-          Pinecone
+          Pre-design-md
         </div>
         <ul className={styles.navLinks}>
           <li><a href="#">{t('landing.nav.product')}</a></li>
@@ -120,7 +120,7 @@ export function LandingSection() {
         <div className={styles.footerTop}>
           <div className={styles.footerBrandBlock}>
             <div className={styles.footerBrand}>
-              <span className={styles.navMark} /> Pinecone
+              <span className={styles.navMark} /> Pre-design-md
             </div>
             <p className={styles.footerTag}>{t('landing.footer.tag')}</p>
           </div>

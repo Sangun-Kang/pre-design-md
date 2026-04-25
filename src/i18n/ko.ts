@@ -162,7 +162,7 @@ export const ko: Messages = {
   'landing.nav.cta': '시작하기',
   'landing.hero.badge': 'v2.0 · 내일 출시',
   'landing.hero.lede':
-    'Pinecone은 팀의 비주얼 언어를, AI 툴이 실제로 따라갈 수 있는 한 장의 마크다운으로 바꿉니다. 이후 새 컴포넌트도 같은 톤을 유지해요.',
+    'Pre-design-md은 팀의 비주얼 언어를, AI 툴이 실제로 따라갈 수 있는 한 장의 마크다운으로 바꿉니다. 이후 새 컴포넌트도 같은 톤을 유지해요.',
   'landing.hero.ctaPrimary': '무료로 시작',
   'landing.hero.ctaSecondary': '데모 보기 ↗',
   'landing.hero.trustedBy': '이 디자인 팀들이 함께합니다',

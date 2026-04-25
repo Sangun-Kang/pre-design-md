@@ -118,6 +118,7 @@
   width: 45rem;
   height: 45rem;
   background: radial-gradient(circle, var(--color-primary-300), transparent 65%);
+  animation: glowDriftA 28s ease-in-out infinite alternate;
 }
 
 .heroGlowB {
@@ -127,6 +128,32 @@
   height: 50rem;
   background: radial-gradient(circle, var(--color-primary-500), transparent 70%);
   opacity: 0.35;
+  animation: glowDriftB 36s ease-in-out infinite alternate;
+}
+
+@keyframes glowDriftA {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(3.5%, -2.5%, 0) scale(1.08);
+  }
+}
+
+@keyframes glowDriftB {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-4%, 3%, 0) scale(1.05);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroGlowA,
+  .heroGlowB {
+    animation: none;
+  }
 }
 
 .heroInner {
@@ -527,22 +554,81 @@
   .nav {
     grid-template-columns: auto 1fr;
     gap: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
   }
   .navLinks {
     display: none;
   }
+  .navActions {
+    gap: var(--space-sm);
+  }
+
+  .hero {
+    padding: clamp(2rem, 6vw, 3rem) var(--space-md);
+  }
+  .heroTitle {
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+  .heroLede {
+    font-size: 0.95rem;
+  }
+  .heroProof {
+    margin-top: var(--space-lg);
+    padding-top: var(--space-md);
+  }
+  .proofLogos {
+    gap: var(--space-md);
+  }
+  .proofLogo {
+    font-size: 1rem;
+  }
+
   .stats {
     grid-template-columns: 1fr;
   }
   .stat {
+    padding: var(--space-md) var(--space-md);
     border-right: none;
     border-bottom: 1px solid var(--color-border);
   }
   .stat:last-child { border-bottom: none; }
+
+  .features {
+    padding: clamp(2rem, 6vw, 3rem) var(--space-md);
+    gap: var(--space-xl);
+  }
+  .feature {
+    padding: var(--space-md);
+  }
+
+  .cta {
+    padding: clamp(2rem, 6vw, 3rem) var(--space-md);
+  }
+  .ctaActions {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .footer {
+    padding: var(--space-xl) var(--space-md) var(--space-md);
+    gap: var(--space-lg);
+  }
   .footerTop {
     grid-template-columns: 1fr;
+    gap: var(--space-lg);
   }
   .footerCols {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+  .footerBottom {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 420px) {
+  .footerCols {
+    grid-template-columns: 1fr;
   }
 }

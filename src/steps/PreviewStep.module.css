@@ -18,3 +18,12 @@
   margin: 0;
   letter-spacing: -0.01em;
 }
+
+@media (max-width: 768px) {
+  .body {
+    gap: var(--space-xl);
+  }
+  .sectionTitle {
+    font-size: var(--font-size-lg);
+  }
+}

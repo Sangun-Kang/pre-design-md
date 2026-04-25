@@ -162,7 +162,7 @@ export const en: Messages = {
   'landing.nav.cta': 'Get started',
   'landing.hero.badge': 'v2.0 · shipping tomorrow',
   'landing.hero.lede':
-    "Pinecone turns your team's visual language into a single markdown file your AI tools can actually follow — so every new component stays in tune.",
+    "Pre-design-md turns your team's visual language into a single markdown file your AI tools can actually follow — so every new component stays in tune.",
   'landing.hero.ctaPrimary': 'Start free',
   'landing.hero.ctaSecondary': 'Watch demo ↗',
   'landing.hero.trustedBy': 'Trusted by design teams at',

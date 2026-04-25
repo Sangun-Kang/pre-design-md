@@ -162,7 +162,7 @@ export const ja: Messages = {
   'landing.nav.cta': 'はじめる',
   'landing.hero.badge': 'v2.0 · 明日ローンチ',
   'landing.hero.lede':
-    'Pinecone は、チームのビジュアル言語を、AI ツールが実際に従える 1 枚のマークダウンに変換します。以降のコンポーネントも同じ調子で揃います。',
+    'Pre-design-md は、チームのビジュアル言語を、AI ツールが実際に従える 1 枚のマークダウンに変換します。以降のコンポーネントも同じ調子で揃います。',
   'landing.hero.ctaPrimary': '無料ではじめる',
   'landing.hero.ctaSecondary': 'デモを見る ↗',
   'landing.hero.trustedBy': 'このデザインチームが採用しています',

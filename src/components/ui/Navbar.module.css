@@ -36,3 +36,13 @@
   display: flex;
   gap: var(--space-sm);
 }
+
+@media (max-width: 640px) {
+  .nav {
+    gap: var(--space-md);
+    padding: var(--space-xs) var(--space-md);
+  }
+  .links {
+    display: none;
+  }
+}

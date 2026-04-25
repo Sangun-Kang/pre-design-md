@@ -23,9 +23,18 @@ export function StepNav() {
   const setStep = useDesignStore((s) => s.setStep);
   const { lang, setLang, t } = useLang();
 
+  const currentIdx = STEP_ORDER.indexOf(currentStep);
+  const total = STEP_ORDER.length;
+  const ratio = total > 1 ? currentIdx / (total - 1) : 0;
+
   return (
     <nav className={styles.nav} aria-label="Progress">
-      <div className={styles.brand}>pre-design-md</div>
+      <div className={styles.brand}>
+        <span>pre-design-md</span>
+        <span className={styles.ratio} aria-label={`Step ${currentIdx + 1} of ${total}`}>
+          {currentIdx + 1}/{total}
+        </span>
+      </div>
       <ol className={styles.list}>
         {STEP_ORDER.map((step, i) => {
           const completedGeneric = completedSteps as Set<string>;
@@ -64,6 +73,11 @@ export function StepNav() {
           </button>
         ))}
       </div>
+      <div
+        className={styles.progressBar}
+        style={{ width: `${ratio * 100}%` }}
+        aria-hidden
+      />
     </nav>
   );
 }
