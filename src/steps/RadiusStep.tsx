@@ -9,17 +9,17 @@ import styles from './RadiusStep.module.css';
 const PRESETS: Array<{
   id: string;
   label: string;
-  description: string;
+  descriptionKey: string;
   input: RadiusInput;
 }> = [
-  { id: 'sharp', label: 'Sharp', description: '0px · uniform — technical, precise edges', input: { base: 0, scale: 'uniform' } },
-  { id: 'whisper', label: 'Whisper', description: '2px · scaled — barely there, pro editor', input: { base: 2, scale: 'scaled' } },
-  { id: 'subtle', label: 'Subtle', description: '4px · scaled — softened but sober', input: { base: 4, scale: 'scaled' } },
-  { id: 'soft', label: 'Soft', description: '8px · scaled — the modern default', input: { base: 8, scale: 'scaled' } },
-  { id: 'rounded', label: 'Rounded', description: '12px · scaled — friendly, app-like', input: { base: 12, scale: 'scaled' } },
-  { id: 'pill', label: 'Pill-like', description: '16px · scaled — playful, pill-adjacent', input: { base: 16, scale: 'scaled' } },
-  { id: 'capsule', label: 'Capsule', description: '24px · scaled — bold, almost pill everywhere', input: { base: 24, scale: 'scaled' } },
-  { id: 'uniform-soft', label: 'Soft uniform', description: '8px · uniform — single shape identity', input: { base: 8, scale: 'uniform' } },
+  { id: 'sharp', label: 'Sharp', descriptionKey: 'radius.desc.sharp', input: { base: 0, scale: 'uniform' } },
+  { id: 'whisper', label: 'Whisper', descriptionKey: 'radius.desc.whisper', input: { base: 2, scale: 'scaled' } },
+  { id: 'subtle', label: 'Subtle', descriptionKey: 'radius.desc.subtle', input: { base: 4, scale: 'scaled' } },
+  { id: 'soft', label: 'Soft', descriptionKey: 'radius.desc.soft', input: { base: 8, scale: 'scaled' } },
+  { id: 'rounded', label: 'Rounded', descriptionKey: 'radius.desc.rounded', input: { base: 12, scale: 'scaled' } },
+  { id: 'pill', label: 'Pill-like', descriptionKey: 'radius.desc.pill', input: { base: 16, scale: 'scaled' } },
+  { id: 'capsule', label: 'Capsule', descriptionKey: 'radius.desc.capsule', input: { base: 24, scale: 'scaled' } },
+  { id: 'uniform-soft', label: 'Soft uniform', descriptionKey: 'radius.desc.uniformSoft', input: { base: 8, scale: 'uniform' } },
 ];
 
 function sameRadius(a: RadiusInput | null, b: RadiusInput): boolean {
@@ -68,7 +68,7 @@ export function RadiusStep() {
           key={p.id}
           selected={sameRadius(radius, p.input)}
           label={p.label}
-          description={p.description}
+          description={t(p.descriptionKey)}
           onClick={() => updateRadius(p.input)}
           flush
         >

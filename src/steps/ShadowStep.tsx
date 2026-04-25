@@ -10,12 +10,12 @@ import styles from './ShadowStep.module.css';
 const PRESETS: Array<{
   id: ShadowIntensity;
   label: string;
-  description: string;
+  descriptionKey: string;
 }> = [
-  { id: 'none', label: 'Flat', description: 'no shadow — UI-chrome light' },
-  { id: 'subtle', label: 'Subtle', description: 'quiet hint, barely there' },
-  { id: 'medium', label: 'Medium', description: 'Material-adjacent, clear layers' },
-  { id: 'strong', label: 'Strong', description: 'dramatic, marketing-ready depth' },
+  { id: 'none', label: 'Flat', descriptionKey: 'shadow.desc.flat' },
+  { id: 'subtle', label: 'Subtle', descriptionKey: 'shadow.desc.subtle' },
+  { id: 'medium', label: 'Medium', descriptionKey: 'shadow.desc.medium' },
+  { id: 'strong', label: 'Strong', descriptionKey: 'shadow.desc.strong' },
 ];
 
 function ShadowPreview({ intensity, tinted, hue }: { intensity: ShadowIntensity; tinted: boolean; hue: number }) {
@@ -67,7 +67,7 @@ export function ShadowStep() {
             key={p.id}
             selected={shadow?.intensity === p.id}
             label={p.label}
-            description={p.description}
+            description={t(p.descriptionKey)}
             onClick={() => select(p.id)}
             flush
           >

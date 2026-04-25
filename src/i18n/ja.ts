@@ -196,4 +196,25 @@ export const ja: Messages = {
   'export.tab.richPrompt.hint': 'OKLCH そのまま、根拠も全部。AI エージェントに渡す文脈が最も豊富。',
   'export.tab.cssVars.label': 'CSS Variables',
   'export.tab.cssVars.hint': 'スタイルシートに貼るだけ。マークダウンもプロンプトも無し。',
+
+  'radius.desc.sharp': '0px · uniform — 鋭く正確、技術的な印象',
+  'radius.desc.whisper': '2px · scaled — ほぼ気づかない、プロ向けエディタ調',
+  'radius.desc.subtle': '4px · scaled — 柔らかいけれど落ち着いた',
+  'radius.desc.soft': '8px · scaled — もっとも無難なモダンの基本',
+  'radius.desc.rounded': '12px · scaled — 親しみやすくアプリ的な丸み',
+  'radius.desc.pill': '16px · scaled — 軽快で錠剤形に近い',
+  'radius.desc.capsule': '24px · scaled — ほぼカプセルに近い大胆な丸み',
+  'radius.desc.uniformSoft': '8px · uniform — ひとつの形に統一された個性',
+
+  'spacing.desc.tight': '4px · linear — データ UI に合う精密なリズム',
+  'spacing.desc.tightDramatic': '4px · multiplicative — 間隔が劇的に広がる構造',
+  'spacing.desc.standard': '8px · linear — 馴染みやすくバランスの取れたウェブの呼吸',
+  'spacing.desc.generous': '8px · multiplicative — マーケティング向けのゆったりした余白',
+  'spacing.desc.halfStep': '6px · linear — 珍しい目盛り、エディトリアルアプリ調',
+  'spacing.desc.airy': '10px · linear — ゆとりがあり堂々とした空気感',
+
+  'shadow.desc.flat': '影なし — UI クロームを軽やかに',
+  'shadow.desc.subtle': 'あるかないか分からない控えめな気配',
+  'shadow.desc.medium': 'Material 寄りのはっきりしたレイヤー',
+  'shadow.desc.strong': '劇的でマーケティング向けの深み',
 };

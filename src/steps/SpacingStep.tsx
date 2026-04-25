@@ -9,43 +9,43 @@ import styles from './SpacingStep.module.css';
 const PRESETS: Array<{
   id: string;
   label: string;
-  description: string;
+  descriptionKey: string;
   input: SpacingInput;
 }> = [
   {
     id: '4-linear',
     label: 'Tight grid',
-    description: '4px · linear — dense data UI, precise rhythm',
+    descriptionKey: 'spacing.desc.tight',
     input: { baseUnit: 4, scale: 'linear' },
   },
   {
     id: '4-mult',
     label: 'Tight + dramatic',
-    description: '4px · multiplicative — gaps expand dramatically',
+    descriptionKey: 'spacing.desc.tightDramatic',
     input: { baseUnit: 4, scale: 'multiplicative' },
   },
   {
     id: '8-linear',
     label: 'Standard web',
-    description: '8px · linear — familiar, balanced rhythm',
+    descriptionKey: 'spacing.desc.standard',
     input: { baseUnit: 8, scale: 'linear' },
   },
   {
     id: '8-mult',
     label: 'Generous',
-    description: '8px · multiplicative — marketing breathing room',
+    descriptionKey: 'spacing.desc.generous',
     input: { baseUnit: 8, scale: 'multiplicative' },
   },
   {
     id: '6-linear',
     label: 'Half-step',
-    description: '6px · linear — uncommon grain, editorial apps',
+    descriptionKey: 'spacing.desc.halfStep',
     input: { baseUnit: 6, scale: 'linear' },
   },
   {
     id: '10-linear',
     label: 'Airy',
-    description: '10px · linear — generous, confident, marketing-heavy',
+    descriptionKey: 'spacing.desc.airy',
     input: { baseUnit: 10, scale: 'linear' },
   },
 ];
@@ -103,7 +103,7 @@ export function SpacingStep() {
           key={p.id}
           selected={sameSpacing(spacing, p.input)}
           label={p.label}
-          description={p.description}
+          description={t(p.descriptionKey)}
           onClick={() => updateSpacing(p.input)}
           flush
         >

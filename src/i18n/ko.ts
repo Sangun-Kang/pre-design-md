@@ -196,4 +196,25 @@ export const ko: Messages = {
   'export.tab.richPrompt.hint': 'OKLCH 그대로, 근거 전부. AI 에이전트에 줄 맥락이 가장 풍부해요.',
   'export.tab.cssVars.label': 'CSS Variables',
   'export.tab.cssVars.hint': '스타일시트에 바로 붙여넣기. 마크다운도 프롬프트도 없어요.',
+
+  'radius.desc.sharp': '0px · uniform — 정밀한 직각, 기술적인 인상',
+  'radius.desc.whisper': '2px · scaled — 거의 모르게 살짝, 프로용 에디터 톤',
+  'radius.desc.subtle': '4px · scaled — 부드럽지만 차분한',
+  'radius.desc.soft': '8px · scaled — 가장 무난한 모던 기본값',
+  'radius.desc.rounded': '12px · scaled — 친근하고 앱스러운 둥글기',
+  'radius.desc.pill': '16px · scaled — 경쾌하고 알약형에 가까운',
+  'radius.desc.capsule': '24px · scaled — 거의 캡슐에 가까운 대담한 곡선',
+  'radius.desc.uniformSoft': '8px · uniform — 한 가지 모양으로 통일된 정체성',
+
+  'spacing.desc.tight': '4px · linear — 데이터 UI에 맞는 정밀한 리듬',
+  'spacing.desc.tightDramatic': '4px · multiplicative — 간격이 극적으로 벌어지는 구조',
+  'spacing.desc.standard': '8px · linear — 익숙하고 균형 잡힌 웹 리듬',
+  'spacing.desc.generous': '8px · multiplicative — 마케팅용 넉넉한 호흡',
+  'spacing.desc.halfStep': '6px · linear — 흔치 않은 결, 에디토리얼 앱 톤',
+  'spacing.desc.airy': '10px · linear — 여유롭고 자신감 있는 분위기',
+
+  'shadow.desc.flat': '그림자 없음 — UI 크롬을 가볍게',
+  'shadow.desc.subtle': '있는 듯 없는 듯 살짝',
+  'shadow.desc.medium': 'Material에 가까운 또렷한 레이어',
+  'shadow.desc.strong': '극적이고 마케팅에 어울리는 깊이',
 };

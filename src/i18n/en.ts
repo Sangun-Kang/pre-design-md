@@ -196,4 +196,25 @@ export const en: Messages = {
   'export.tab.richPrompt.hint': 'OKLCH preserved, full rationale. Maximum context for AI agents.',
   'export.tab.cssVars.label': 'CSS Variables',
   'export.tab.cssVars.hint': 'Drop into your stylesheet. No markdown, no prompt.',
+
+  'radius.desc.sharp': '0px · uniform — crisp right angles, technical feel',
+  'radius.desc.whisper': '2px · scaled — barely-there softness, pro-editor tone',
+  'radius.desc.subtle': '4px · scaled — softened but sober',
+  'radius.desc.soft': '8px · scaled — the safe modern default',
+  'radius.desc.rounded': '12px · scaled — friendly, app-like roundness',
+  'radius.desc.pill': '16px · scaled — playful, pill-adjacent',
+  'radius.desc.capsule': '24px · scaled — bold, near-capsule curves',
+  'radius.desc.uniformSoft': '8px · uniform — one shape identity throughout',
+
+  'spacing.desc.tight': '4px · linear — precise rhythm for data UI',
+  'spacing.desc.tightDramatic': '4px · multiplicative — gaps expand dramatically',
+  'spacing.desc.standard': '8px · linear — familiar, balanced web rhythm',
+  'spacing.desc.generous': '8px · multiplicative — marketing breathing room',
+  'spacing.desc.halfStep': '6px · linear — uncommon grain, editorial apps',
+  'spacing.desc.airy': '10px · linear — generous, confident atmosphere',
+
+  'shadow.desc.flat': 'no shadow — keep the UI chrome light',
+  'shadow.desc.subtle': 'a quiet hint, barely there',
+  'shadow.desc.medium': 'Material-adjacent, clear layers',
+  'shadow.desc.strong': 'dramatic, marketing-ready depth',
 };
