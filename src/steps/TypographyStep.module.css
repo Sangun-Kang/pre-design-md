@@ -1,0 +1,267 @@
+.bodyOverride {
+  display: flex !important;
+  flex-direction: column;
+  gap: var(--app-space-xl);
+  position: relative;
+}
+
+/* ── Pairing grid (main content) ── */
+.pairingsSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-sm);
+  padding-bottom: 4rem; /* room for collapsed dock handle */
+}
+
+.sectionEyebrow {
+  font-family: var(--app-font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--app-text-subtle);
+}
+
+.pairingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: var(--app-space-md);
+}
+
+.pairingGrid:has([data-selected="true"]) [data-selected="false"] {
+  opacity: 0.35;
+  filter: saturate(0.55);
+  transform: scale(0.985);
+}
+.pairingGrid:has([data-selected="true"]) [data-selected="false"]:hover {
+  opacity: 0.78;
+  filter: saturate(0.85);
+  transform: scale(1);
+}
+
+.pairingCardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--app-space-md);
+  padding: var(--app-space-lg);
+  height: 11rem;
+  background: oklch(100% 0 0);
+  color: oklch(14% 0 0);
+}
+
+.pairingHeading {
+  font-size: 1.625rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: oklch(14% 0 0);
+}
+
+.pairingBody {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: oklch(42% 0 0);
+}
+
+/* ── Bottom dock ── */
+.dock {
+  position: sticky;
+  bottom: var(--app-space-md);
+  align-self: center;
+  width: 100%;
+  max-width: 52rem;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-xl);
+  box-shadow: var(--app-shadow-lg);
+  z-index: 5;
+}
+
+.dockHandle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--app-font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--app-text);
+  gap: var(--app-space-sm);
+  border-radius: var(--app-radius-xl) var(--app-radius-xl) 0 0;
+}
+
+.dockHandle:hover {
+  background: var(--app-surface-sunken);
+}
+
+.dockLabel {
+  flex: 1;
+  text-align: left;
+}
+
+.dockChevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.7rem;
+  color: var(--app-text-muted);
+  transition: transform 0.25s ease;
+  transform: rotate(180deg); /* collapsed points down */
+}
+
+.dockChevronOpen {
+  transform: rotate(0); /* open points up */
+}
+
+/* Grid-rows collapse trick — 3 layers: grid → overflow clip → padded body */
+.dockContent {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.22, 0.82, 0.44, 1.1);
+}
+
+.dockOpen .dockContent {
+  grid-template-rows: 1fr;
+}
+
+.dockInner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.dockBody {
+  padding: 0 var(--app-space-lg) var(--app-space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-md);
+  border-top: 1px solid var(--app-border);
+  padding-top: var(--app-space-lg);
+}
+
+.controlRow {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  align-items: center;
+  gap: var(--app-space-md);
+}
+
+.controlLabel {
+  font-family: var(--app-font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--app-text-subtle);
+}
+
+.seg {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  background: var(--app-surface-sunken);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-md);
+}
+
+.segBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 0.45rem 0.75rem;
+  border-radius: calc(var(--app-radius-md) - 3px);
+  background: transparent;
+  color: var(--app-text-muted);
+  font-family: var(--app-font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: background 0.15s ease, color 0.15s ease;
+  flex: 1;
+  min-width: 2.75rem;
+}
+
+.segBtn:hover {
+  color: var(--app-text);
+  background: var(--app-surface);
+}
+
+.segBtnActive {
+  background: var(--app-accent) !important;
+  color: var(--app-accent-text) !important;
+  box-shadow: var(--app-shadow-sm);
+}
+
+.segPrimary {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.segSecondary {
+  font-family: var(--app-font-mono);
+  font-size: 0.625rem;
+  opacity: 0.72;
+  font-weight: 400;
+}
+
+.livePreview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-xs);
+}
+
+.previewEyebrow {
+  font-family: var(--app-font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--app-text-subtle);
+}
+
+.previewCanvas {
+  padding: var(--app-space-lg);
+  background: var(--app-surface-sunken);
+  border-radius: var(--app-radius-lg);
+  color: oklch(16% 0 0);
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-sm);
+  min-height: 8rem;
+  border: 1px solid var(--app-border);
+}
+
+.previewHeading {
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.previewBody {
+  color: oklch(36% 0 0);
+  max-width: 42rem;
+}
+
+@media (max-width: 768px) {
+  .controlRow {
+    grid-template-columns: 1fr;
+    gap: var(--app-space-xs);
+  }
+  .seg {
+    flex-wrap: wrap;
+  }
+  .pairingGrid {
+    grid-template-columns: 1fr;
+  }
+  .previewCanvas {
+    padding: var(--app-space-md);
+  }
+  .dock {
+    max-width: none;
+    bottom: 0;
+    border-radius: var(--app-radius-lg) var(--app-radius-lg) 0 0;
+  }
+}

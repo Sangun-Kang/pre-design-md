@@ -1,0 +1,131 @@
+.bodyOverride {
+  display: flex !important;
+  flex-direction: column;
+  gap: var(--app-space-lg);
+}
+
+.presetGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--app-space-lg);
+}
+
+.presetGrid:has([data-selected="true"]) [data-selected="false"] {
+  opacity: 0.35;
+  filter: saturate(0.55);
+  transform: scale(0.985);
+}
+.presetGrid:has([data-selected="true"]) [data-selected="false"]:hover {
+  opacity: 0.78;
+  filter: saturate(0.85);
+  transform: scale(1);
+}
+
+.preview {
+  background: oklch(93% 0 0);
+  height: 17rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--app-space-lg);
+}
+
+.stage {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  width: 100%;
+  padding: 0 var(--app-space-sm);
+}
+
+.card {
+  aspect-ratio: 1 / 1.15;
+  background: oklch(100% 0 0);
+  border-radius: 0.625rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0.5rem;
+  transition: box-shadow 0.35s ease;
+}
+
+.cardLabel {
+  font-family: var(--app-font-mono);
+  font-size: 0.625rem;
+  color: oklch(38% 0 0);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ── Tinted row ── */
+.tintedRow {
+  padding: var(--app-space-md) var(--app-space-lg);
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-lg);
+}
+
+.tintedLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--app-space-md);
+  cursor: pointer;
+}
+
+.tintedInput {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tintedBox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 0.375rem;
+  border: 1.5px solid var(--app-border-strong);
+  background: var(--app-surface-sunken);
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.tintedBoxActive {
+  background: var(--app-accent);
+  border-color: var(--app-accent);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none'><path d='M2.5 6.5l2.5 2.5 4.5-5' stroke='%23141414' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.tintedInput:focus-visible + .tintedBox {
+  outline: 2px solid var(--app-focus);
+  outline-offset: 2px;
+}
+
+.tintedText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tintedTitle {
+  font-weight: 600;
+  color: var(--app-text);
+  font-size: 0.9375rem;
+}
+
+.tintedHint {
+  color: var(--app-text-muted);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .presetGrid {
+    grid-template-columns: 1fr;
+  }
+}

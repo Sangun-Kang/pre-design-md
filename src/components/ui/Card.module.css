@@ -1,0 +1,51 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.elevated {
+  box-shadow: var(--shadow-md);
+}
+
+.header {
+  padding: var(--space-card-padding);
+  padding-bottom: var(--space-sm);
+}
+
+.title {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-heading);
+  line-height: var(--line-height-tight);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.body {
+  padding: var(--space-card-padding);
+  padding-top: var(--space-sm);
+  flex: 1;
+  color: var(--color-text);
+  line-height: var(--line-height-normal);
+}
+
+.footer {
+  padding: var(--space-card-padding);
+  padding-top: var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}

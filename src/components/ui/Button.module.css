@@ -1,0 +1,92 @@
+.base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-body-strong);
+  border-radius: var(--radius-button);
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease, opacity 0.12s ease;
+  white-space: nowrap;
+  line-height: 1.2;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.base:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.base:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+.size_sm {
+  padding: calc(var(--space-button-padding-y) * 0.75) calc(var(--space-button-padding-x) * 0.8);
+  font-size: var(--font-size-sm);
+}
+
+.size_md {
+  padding: var(--space-button-padding-y) var(--space-button-padding-x);
+  font-size: var(--font-size-base);
+}
+
+.size_lg {
+  padding: calc(var(--space-button-padding-y) * 1.35) calc(var(--space-button-padding-x) * 1.25);
+  font-size: var(--font-size-md);
+}
+
+.variant_primary {
+  background: var(--color-primary-500);
+  color: oklch(100% 0 0);
+  border-color: var(--color-primary-500);
+  box-shadow: var(--shadow-sm);
+}
+.variant_primary:hover:not(:disabled) {
+  background: var(--color-primary-600);
+  border-color: var(--color-primary-600);
+}
+.variant_primary:active:not(:disabled) {
+  background: var(--color-primary-700);
+  border-color: var(--color-primary-700);
+}
+
+.variant_secondary {
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+.variant_secondary:hover:not(:disabled) {
+  background: var(--color-neutral-100);
+  border-color: var(--color-neutral-400);
+}
+.variant_secondary:active:not(:disabled) {
+  background: var(--color-neutral-200);
+}
+
+.variant_ghost {
+  background: transparent;
+  color: var(--color-primary-700);
+  border-color: transparent;
+}
+.variant_ghost:hover:not(:disabled) {
+  background: var(--color-primary-100);
+}
+.variant_ghost:active:not(:disabled) {
+  background: var(--color-primary-200);
+}
+
+.variant_destructive {
+  background: var(--color-danger-500);
+  color: oklch(100% 0 0);
+  border-color: var(--color-danger-500);
+  box-shadow: var(--shadow-sm);
+}
+.variant_destructive:hover:not(:disabled) {
+  filter: brightness(0.92);
+}
+.variant_destructive:active:not(:disabled) {
+  filter: brightness(0.84);
+}

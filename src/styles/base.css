@@ -1,0 +1,194 @@
+/*
+ * Two token layers:
+ * 1. --app-*  : fixed light chrome used by the wizard UI (nav, buttons, cards, text).
+ *               Never changes based on user decisions, except --app-accent which
+ *               can adopt the user's primary hue at Color/Preview steps.
+ * 2. --color-*, --font-*, --space-*, --radius-*, --shadow-* :
+ *               user-decision tokens. They act as the :root defaults before the
+ *               user has decided, and are overridden inside PreviewScope containers.
+ *               At Color/Preview steps they're additionally injected at the app root.
+ */
+
+:root {
+  /* ── App chrome (light) ── */
+  --app-bg: oklch(99% 0 0);
+  --app-surface: oklch(100% 0 0);
+  --app-surface-raised: oklch(100% 0 0);
+  --app-surface-sunken: oklch(97% 0 0);
+  --app-border: oklch(92% 0 0);
+  --app-border-strong: oklch(85% 0 0);
+
+  --app-text: oklch(18% 0 0);
+  --app-text-muted: oklch(48% 0 0);
+  --app-text-subtle: oklch(62% 0 0);
+  --app-text-inverse: oklch(100% 0 0);
+
+  --app-accent: oklch(20% 0 0);
+  --app-accent-hover: oklch(12% 0 0);
+  --app-accent-press: oklch(6% 0 0);
+  --app-accent-soft: oklch(93% 0 0);
+  --app-accent-text: oklch(100% 0 0);
+
+  --app-focus: oklch(50% 0 0);
+
+  --app-danger: oklch(55% 0.2 25);
+  --app-warning: oklch(65% 0.15 80);
+  --app-success: oklch(55% 0.15 145);
+
+  --app-font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --app-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --app-shadow-sm: 0 1px 2px 0 oklch(0% 0 0 / 0.05);
+  --app-shadow-md: 0 4px 12px -2px oklch(0% 0 0 / 0.08), 0 2px 4px -2px oklch(0% 0 0 / 0.06);
+  --app-shadow-lg: 0 16px 32px -8px oklch(0% 0 0 / 0.12), 0 6px 12px -6px oklch(0% 0 0 / 0.08);
+
+  --app-radius-sm: 0.375rem;
+  --app-radius-md: 0.625rem;
+  --app-radius-lg: 0.875rem;
+  --app-radius-xl: 1.25rem;
+  --app-radius-full: 9999px;
+
+  --app-space-2xs: 0.25rem;
+  --app-space-xs: 0.5rem;
+  --app-space-sm: 0.75rem;
+  --app-space-md: 1rem;
+  --app-space-lg: 1.5rem;
+  --app-space-xl: 2rem;
+  --app-space-2xl: 3rem;
+  --app-space-3xl: 4rem;
+
+  /* ── User decision tokens (defaults mirror buildTokensBundle's DEFAULT_DECISIONS) ── */
+  --font-family-heading: 'Inter', system-ui, sans-serif;
+  --font-family-body: 'Inter', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --font-size-xs: 0.64rem;
+  --font-size-sm: 0.8rem;
+  --font-size-base: 1rem;
+  --font-size-md: 1.25rem;
+  --font-size-lg: 1.5625rem;
+  --font-size-xl: 1.9531rem;
+  --font-size-2xl: 2.4414rem;
+  --font-size-3xl: 3.0518rem;
+  --font-size-4xl: 3.8147rem;
+
+  --line-height-tight: 1.275;
+  --line-height-normal: 1.58;
+  --line-height-relaxed: 1.73;
+
+  --font-weight-body: 400;
+  --font-weight-body-strong: 600;
+  --font-weight-heading: 700;
+
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+
+  --radius-none: 0;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  --radius-input: var(--radius-sm);
+  --radius-button: var(--radius-md);
+  --radius-card: var(--radius-lg);
+  --radius-badge: var(--radius-full);
+
+  --shadow-sm: 0 1px 2px 0 oklch(0% 0 0 / 0.06);
+  --shadow-md: 0 4px 6px -1px oklch(0% 0 0 / 0.1), 0 2px 4px -2px oklch(0% 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px oklch(0% 0 0 / 0.15), 0 4px 6px -4px oklch(0% 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px oklch(0% 0 0 / 0.2), 0 8px 10px -6px oklch(0% 0 0 / 0.15);
+
+  --color-primary-50:  oklch(98.5% 0.021 250);
+  --color-primary-100: oklch(96% 0.042 250);
+  --color-primary-200: oklch(90% 0.077 250);
+  --color-primary-300: oklch(82% 0.112 250);
+  --color-primary-400: oklch(72% 0.133 250);
+  --color-primary-500: oklch(62% 0.14 250);
+  --color-primary-600: oklch(52% 0.133 250);
+  --color-primary-700: oklch(42% 0.112 250);
+  --color-primary-800: oklch(32% 0.091 250);
+  --color-primary-900: oklch(22% 0.063 250);
+  --color-primary-950: oklch(15% 0.049 250);
+
+  --color-neutral-50:  oklch(98.5% 0 0);
+  --color-neutral-100: oklch(96% 0 0);
+  --color-neutral-200: oklch(90% 0 0);
+  --color-neutral-300: oklch(82% 0 0);
+  --color-neutral-400: oklch(72% 0 0);
+  --color-neutral-500: oklch(62% 0 0);
+  --color-neutral-600: oklch(52% 0 0);
+  --color-neutral-700: oklch(42% 0 0);
+  --color-neutral-800: oklch(32% 0 0);
+  --color-neutral-900: oklch(22% 0 0);
+  --color-neutral-950: oklch(15% 0 0);
+
+  --color-success-500: oklch(60% 0.14 145);
+  --color-warning-500: oklch(72% 0.14 80);
+  --color-danger-500:  oklch(60% 0.14 25);
+  --color-info-500:    oklch(60% 0.14 240);
+
+  --color-bg: var(--color-neutral-50);
+  --color-surface: var(--color-neutral-50);
+  --color-surface-raised: oklch(100% 0 0);
+  --color-text: var(--color-neutral-900);
+  --color-text-muted: var(--color-neutral-600);
+  --color-border: var(--color-neutral-200);
+  --color-border-strong: var(--color-neutral-300);
+}
+
+html {
+  font-family: var(--app-font-sans);
+  font-size: 16px;
+  color: var(--app-text);
+  background: var(--app-bg);
+  line-height: 1.5;
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--app-font-sans);
+  min-height: 100%;
+  font-feature-settings: 'cv11' 1, 'ss01' 1;
+}
+
+code, pre, kbd, samp {
+  font-family: var(--app-font-mono);
+}
+
+::selection {
+  background: var(--app-accent-soft);
+  color: var(--app-accent-press);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(85% 0 0);
+  border-radius: var(--app-radius-full);
+  border: 2px solid var(--app-bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(70% 0 0);
+}

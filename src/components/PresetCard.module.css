@@ -1,0 +1,84 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--app-surface);
+  border: 1.5px solid var(--app-border);
+  border-radius: var(--app-radius-lg);
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+  min-width: 0;
+  color: var(--app-text);
+  transition:
+    border-color 0.18s ease,
+    transform 0.2s cubic-bezier(0.3, 1.3, 0.5, 1),
+    box-shadow 0.2s ease,
+    opacity 0.28s ease,
+    filter 0.28s ease,
+    background 0.18s ease;
+}
+
+.card:hover {
+  border-color: var(--app-border-strong);
+  transform: translateY(-1px);
+  box-shadow: var(--app-shadow-md);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--app-focus);
+  outline-offset: 3px;
+}
+
+.selected {
+  border-color: var(--app-accent) !important;
+  background: var(--app-surface-raised);
+  box-shadow:
+    0 0 0 3px oklch(from var(--app-accent) l c h / 0.18),
+    var(--app-shadow-md) !important;
+  transform: translateY(-2px) !important;
+}
+
+.preview {
+  padding: var(--app-space-lg);
+  background: oklch(97% 0 0);
+  min-height: 13rem;
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+  color: oklch(16% 0 0);
+}
+
+.previewFlush {
+  padding: 0;
+}
+
+.previewInner {
+  width: 100%;
+}
+
+.meta {
+  padding: var(--app-space-sm) var(--app-space-md);
+  border-top: 1px solid var(--app-border);
+  background: var(--app-surface);
+}
+
+.label {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--app-text);
+  margin-bottom: 0.1rem;
+  letter-spacing: -0.01em;
+}
+
+.description {
+  font-size: 0.8125rem;
+  color: var(--app-text-muted);
+  line-height: 1.4;
+}
+
+/* Unselected siblings fade when another preset is selected within the same grid.
+   This works on any parent that sets display: grid/flex and contains multiple PresetCards. */
+:where([data-selected]) {
+  will-change: opacity, filter, transform;
+}

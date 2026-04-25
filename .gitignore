@@ -1,0 +1,30 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+dist-ssr
+*.tsbuildinfo
+
+# Vite incremental build cache
+.vite
+
+# tsc -b emits these from vite.config.ts; generated, not source
+vite.config.d.ts
+vite.config.js
+
+# OS / editor
+.DS_Store
+.idea
+.vscode
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

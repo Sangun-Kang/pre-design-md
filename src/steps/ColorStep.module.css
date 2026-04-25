@@ -1,0 +1,228 @@
+.bodyOverride {
+  display: grid !important;
+  grid-template-columns: minmax(20rem, 24rem) 1fr;
+  gap: var(--app-space-xl);
+  align-items: flex-start;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-xl);
+  padding: var(--app-space-lg);
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-lg);
+  position: sticky;
+  top: 5.5rem;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-sm);
+}
+
+.sectionTitle {
+  font-family: var(--app-font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--app-text-subtle);
+  margin: 0;
+}
+
+.hueRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--app-space-xs);
+}
+
+.hueChip {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--app-radius-full);
+  border: 2px solid var(--app-border);
+  cursor: pointer;
+  transition: transform 0.12s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  background: transparent;
+}
+
+.hueChip:hover {
+  transform: scale(1.08);
+  border-color: var(--app-border-strong);
+}
+
+.hueChipSelected {
+  border-color: var(--app-text);
+  box-shadow: 0 0 0 2px var(--app-surface), 0 0 0 4px var(--app-text);
+}
+
+.sliderLabel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-xs);
+  font-size: 0.8125rem;
+  color: var(--app-text-muted);
+  font-family: var(--app-font-mono);
+}
+
+.slider {
+  width: 100%;
+  accent-color: var(--app-accent);
+}
+
+.radioGroup {
+  display: flex;
+  gap: var(--app-space-md);
+  flex-wrap: wrap;
+}
+
+.chipGroup {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  background: var(--app-surface-sunken);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-md);
+}
+
+.chipBtn {
+  flex: 1;
+  padding: 0.45rem 0.75rem;
+  background: transparent;
+  color: var(--app-text-muted);
+  font-family: var(--app-font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border-radius: calc(var(--app-radius-md) - 3px);
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  text-transform: capitalize;
+}
+
+.chipBtn:hover {
+  color: var(--app-text);
+  background: var(--app-surface-raised);
+}
+
+.chipBtnActive {
+  background: var(--app-accent) !important;
+  color: var(--app-accent-text) !important;
+}
+
+.toggleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-md);
+}
+
+.muted {
+  color: var(--app-text-muted);
+  font-size: 0.8125rem;
+}
+
+/* ── Preview panel (user tokens live here, so Color step feels like a real UI) ── */
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-lg);
+  padding: var(--app-space-xl);
+  background: var(--color-surface-raised, oklch(100% 0 0));
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-lg);
+  min-width: 0;
+  color: var(--color-text, oklch(15% 0 0));
+  font-family: var(--font-family-body);
+}
+
+.swatchRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-xs);
+}
+
+.swatchLabel {
+  font-family: var(--app-font-mono);
+  font-size: 0.6875rem;
+  color: var(--color-text-muted, oklch(55% 0 0));
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  gap: 2px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.swatch {
+  height: 2.5rem;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.2rem;
+  justify-content: center;
+}
+
+.swatchStep {
+  font-family: var(--app-font-mono);
+  font-size: 0.55rem;
+  color: oklch(100% 0 0 / 0.6);
+  mix-blend-mode: difference;
+}
+
+.semanticRow {
+  display: flex;
+  gap: var(--app-space-md);
+  flex-wrap: wrap;
+}
+
+.semantic {
+  display: flex;
+  align-items: center;
+  gap: var(--app-space-xs);
+  padding: var(--app-space-xs) var(--app-space-sm);
+  border: 1px solid var(--color-border, oklch(90% 0 0));
+  border-radius: var(--radius-md);
+  background: var(--color-surface, oklch(98% 0 0));
+}
+
+.semanticSwatch {
+  width: 1rem;
+  height: 1rem;
+  border-radius: var(--radius-sm);
+}
+
+.semanticLabel {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted, oklch(52% 0 0));
+}
+
+.uiSample {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-md);
+  padding: var(--app-space-md);
+  border: 1px dashed var(--color-border, oklch(88% 0 0));
+  border-radius: var(--radius-md);
+  background: var(--color-surface, oklch(99% 0 0));
+}
+
+.uiRow {
+  display: flex;
+  gap: var(--app-space-sm);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+@media (max-width: 1024px) {
+  .bodyOverride {
+    grid-template-columns: 1fr;
+  }
+  .controls {
+    position: static;
+  }
+}

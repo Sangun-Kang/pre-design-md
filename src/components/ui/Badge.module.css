@@ -1,0 +1,32 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: calc(var(--space-2xs) * 0.75) var(--space-xs);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-body-strong);
+  line-height: 1;
+  border-radius: var(--radius-badge);
+  white-space: nowrap;
+}
+
+.tone_neutral {
+  background: var(--color-neutral-100);
+  color: var(--color-neutral-800);
+}
+.tone_info {
+  background: oklch(from var(--color-info-500) 0.94 0.03 h);
+  color: oklch(from var(--color-info-500) 0.38 0.14 h);
+}
+.tone_success {
+  background: oklch(from var(--color-success-500) 0.94 0.04 h);
+  color: oklch(from var(--color-success-500) 0.36 0.14 h);
+}
+.tone_warning {
+  background: oklch(from var(--color-warning-500) 0.95 0.05 h);
+  color: oklch(from var(--color-warning-500) 0.38 0.14 h);
+}
+.tone_danger {
+  background: oklch(from var(--color-danger-500) 0.94 0.04 h);
+  color: oklch(from var(--color-danger-500) 0.38 0.14 h);
+}

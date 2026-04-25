@@ -1,0 +1,192 @@
+import type { Messages } from './types';
+
+export const ko: Messages = {
+  'lang.en': 'English',
+  'lang.ko': '한국어',
+  'lang.ja': '日本語',
+
+  'nav.start': '시작',
+  'nav.typography': 'Typography',
+  'nav.spacing': 'Spacing',
+  'nav.radius': 'Radius',
+  'nav.shadow': 'Shadow',
+  'nav.color': 'Color',
+  'nav.preview': '프리뷰',
+  'nav.export': '내보내기',
+
+  'common.next': '다음',
+  'common.back': '이전',
+  'common.restart': '처음부터',
+
+  'start.heroA': '"느낌"을,',
+  'start.heroB': '"결정"으로.',
+  'start.chainPrefix': '다섯 단계, 결정은 한 번씩.',
+  'start.chain.0': 'Typography',
+  'start.chain.1': 'Spacing',
+  'start.chain.2': 'Radius',
+  'start.chain.3': 'Shadow',
+  'start.chain.4': 'Color',
+  'start.startBtn': '시작하기',
+  'start.quickExport': '기본값으로 내보내기',
+
+  'typography.eyebrow': 'STEP 1 · TYPOGRAPHY',
+  'typography.title': '뼈대를 먼저.',
+  'typography.description':
+    '폰트 페어링을 고르면 기본이 잡힙니다. 기본 크기와 비율은 하단 패널에서 조정해요.',
+  'typography.pairingsHeading': '폰트 페어링',
+  'typography.dockToggleOpen': '스케일 설정 열기',
+  'typography.dockToggleClose': '스케일 설정 닫기',
+  'typography.baseSize': '기본 크기',
+  'typography.ratio': '스케일 비율',
+  'typography.livePreview': '현재 스케일',
+  'typography.sampleHeading': '"느낌"을 "결정"으로.',
+  'typography.sampleBody':
+    '글자가 페이지에 놓이는 방식이 화면의 성격을 만듭니다. 같은 단어라도 시선이 머무는 무게가 달라져요.',
+  'typography.sampleCaption': '— 캡션 · 메타데이터 · 부가 설명',
+  'typography.pairingHeading': '"느낌"을 "결정"으로.',
+  'typography.pairingBody':
+    '다람쥐 헌 쳇바퀴에 타고파. 글자의 결은 이 시스템에서 내리는 모든 결정의 분위기를 실어 나릅니다.',
+
+  'spacing.eyebrow': 'STEP 2 · SPACING',
+  'spacing.title': '간격의 리듬.',
+  'spacing.description':
+    '기본 단위와 스케일 방식을 정합니다. 이후 모든 컴포넌트의 padding과 gap이 이 기준을 따라갑니다.',
+
+  'radius.eyebrow': 'STEP 3 · RADIUS',
+  'radius.title': '모서리의 성격.',
+  'radius.description':
+    '기본 반지름과 적용 방식을 고릅니다. uniform은 전체를 같은 값으로, scaled는 카드를 둥글게 인풋을 날카롭게 — 역할에 따라 달라져요.',
+
+  'shadow.eyebrow': 'STEP 4 · SHADOW',
+  'shadow.title': '표면의 깊이.',
+  'shadow.description':
+    '그림자의 세기를 고릅니다. primary 색이 은은히 배어드는 tinted 그림자도 선택할 수 있어요.',
+  'shadow.tintedTitle': 'Tinted 그림자',
+  'shadow.tintedHint':
+    'primary 색이 은은히 배어드는 그림자입니다. Color 단계에서 정한 색이 반영돼요.',
+
+  'color.eyebrow': 'STEP 5 · COLOR',
+  'color.title': '분위기를 결정하는 색.',
+  'color.description':
+    'primary 색상과 채도, 중립 계열만 정하면 11단계 팔레트와 semantic, interaction 상태까지 자동으로 파생됩니다.',
+  'color.primaryHue': 'Primary 색상',
+  'color.chroma': '채도',
+  'color.neutralStyle': '중립 계열',
+  'color.darkMode': '다크 모드 지원',
+  'color.darkModeHint': ' — 다크 모드용 색도 DESIGN.md에 함께 포함됩니다.',
+
+  'preview.eyebrow': 'STEP 6 · PREVIEW',
+  'preview.title': '모든 결정을 한 화면에.',
+  'preview.description':
+    '지금까지의 결정이 실제 UI에 반영된 상태입니다. 어색하면 상단 진행 바에서 해당 단계로 바로 돌아갈 수 있어요.',
+  'preview.sectionSampler': '컴포넌트',
+  'preview.sectionLanding': '랜딩 섹션',
+
+  'export.eyebrow': 'STEP 7 · EXPORT',
+  'export.title': 'DESIGN.md 프롬프트',
+  'export.description':
+    '아래 프롬프트를 복사해 Claude Code의 /init 직후, 또는 Cursor·Codex의 프로젝트 시작 시 붙여넣으면 DESIGN.md가 생성됩니다.',
+  'export.incompleteTitle': '아직 결정하지 않은 단계가 있어요',
+  'export.incompleteBody':
+    '미결정 단계({missing})는 프롬프트에서 빠지고 상단에 WARNING 블록이 붙습니다. 돌아가서 마저 정하면 더 충실한 DESIGN.md가 나와요.',
+  'export.summaryTitle': '결정 요약',
+  'export.promptTitle': 'DESIGN.md 프롬프트',
+  'export.copyBtn': '클립보드에 복사',
+  'export.copied': '복사됨 ✓',
+  'export.usageTitle': '사용 방법',
+  'export.usage.1':
+    '**Claude Code**: 새 프로젝트에서 `/init` 직후 이 프롬프트를 붙여넣으세요. 프로젝트 루트에 `DESIGN.md`가 생성됩니다.',
+  'export.usage.2':
+    '**Cursor / Codex**: 프로젝트 시작 시 채팅창에 붙여넣고 "이 지침을 따라 `DESIGN.md`를 생성해 줘"라고 요청하세요.',
+  'export.usage.3':
+    '생성된 `DESIGN.md`는 팀이 공유하는 디자인 결정의 source of truth가 됩니다. 이후 AI가 새 컴포넌트를 만들 때마다 이 파일을 참조해요.',
+
+  'decisions.undecided': '— 아직 없음',
+
+  'start.scrollHint': '아래로 스크롤 ↓',
+  'start.info.eyebrow': '이 사이트가 뭐냐면',
+  'start.info.title': '코드보다 먼저, 디자인 스펙.',
+  'start.info.whyLabel': 'WHY',
+  'start.info.whyTitle': '이제 UI 코드는 AI가 씁니다',
+  'start.info.whyBody':
+    '공유 스펙이 없으면 컴포넌트마다 모서리, 간격, 색이 제각각이 됩니다. 전체는 따로 만든 조각들을 이어붙인 느낌이 돼요.',
+  'start.info.doLabel': '무엇을 하나',
+  'start.info.doTitle': '다섯 단계, 결정은 한 번씩',
+  'start.info.doBody':
+    'Typography → Spacing → Radius → Shadow → Color. 각 단계에서 핵심 결정만 내리면, 나머지 디자인 토큰은 자동으로 파생됩니다.',
+  'start.info.getLabel': '무엇이 나오나',
+  'start.info.getTitle': 'DESIGN.md 프롬프트 하나',
+  'start.info.getBody':
+    'Claude Code · Cursor · Codex에 붙여넣으면, 프로젝트 전체에서 참조하는 source of truth가 됩니다. 이후 새 컴포넌트도 같은 스펙을 따라가요.',
+  'start.info.ctaTitle': '채 2분이면 충분합니다.',
+  'start.info.ctaBody': '가입도, 저장 절차도 없어요 — 다섯 단계면 끝.',
+
+  'sampler.block.nav': '내비게이션',
+  'sampler.block.buttons': '버튼',
+  'sampler.block.inputs': '입력',
+  'sampler.block.cards': '카드',
+  'sampler.block.badges': '뱃지',
+  'sampler.block.alerts': '알림',
+  'sampler.action': '실행',
+  'sampler.cancel': '취소',
+  'sampler.moreInfo': '자세히',
+  'sampler.disabled': '비활성',
+  'sampler.emailPlaceholder': '이메일 주소',
+  'sampler.choosePlan': '플랜을 선택하세요',
+  'sampler.planFree': '무료',
+  'sampler.planPro': '프로',
+  'sampler.planTeam': '팀',
+  'sampler.tellMore': '더 알려주세요…',
+  'sampler.agreeTerms': '약관에 동의합니다',
+  'sampler.card.title': '카드 제목',
+  'sampler.card.body': '카드 본문입니다. 이미지는 현재 primary 색상과 조화되는 것이 자동으로 선택됩니다.',
+  'sampler.card.textOnly': '텍스트 전용 카드',
+  'sampler.card.textOnlyBody':
+    '이미지 없이 제목 · 본문 · 액션으로 구성된 카드. padding과 radius는 Spacing · Radius 단계의 토큰을 따라갑니다.',
+  'sampler.card.stat': '지표 카드',
+  'sampler.card.statLabel': '전주 대비 성장률',
+  'sampler.alert.new.title': '새 버전이 있어요',
+  'sampler.alert.new.body': '버전 2.3이 준비됐습니다. 재시작해 적용하세요.',
+  'sampler.alert.upload.title': '업로드 완료',
+  'sampler.alert.upload.body': '파일이 정상적으로 처리됐어요.',
+  'sampler.alert.storage.title': '저장 공간이 거의 가득 찼어요',
+  'sampler.alert.storage.body': '현재 플랜 저장 공간의 92%를 사용 중입니다.',
+  'sampler.alert.connection.title': '연결 실패',
+  'sampler.alert.connection.body': '서비스에 닿을 수 없어요. 네트워크를 확인해 주세요.',
+
+  'landing.nav.product': '제품',
+  'landing.nav.docs': '문서',
+  'landing.nav.changelog': '업데이트',
+  'landing.nav.pricing': '요금제',
+  'landing.nav.signin': '로그인',
+  'landing.nav.cta': '시작하기',
+  'landing.hero.badge': 'v2.0 · 내일 출시',
+  'landing.hero.lede':
+    'Pinecone은 팀의 비주얼 언어를, AI 툴이 실제로 따라갈 수 있는 한 장의 마크다운으로 바꿉니다. 이후 새 컴포넌트도 같은 톤을 유지해요.',
+  'landing.hero.ctaPrimary': '무료로 시작',
+  'landing.hero.ctaSecondary': '데모 보기 ↗',
+  'landing.hero.trustedBy': '이 디자인 팀들이 함께합니다',
+  'landing.stats.steps': '단계',
+  'landing.stats.palette': '팔레트 단계',
+  'landing.stats.time': 'DESIGN.md까지',
+  'landing.features.eyebrow': '이렇게 동작해요',
+  'landing.features.title': '세 가지 원칙, 하나의 산출물.',
+  'landing.feature.1.title': '결정의 수를 줄이기',
+  'landing.feature.1.body':
+    '구조적 결정만 정해두면 나머지 토큰은 소수의 base 값에서 자동 파생돼요. 조합 폭발 없음.',
+  'landing.feature.2.title': '의도 보존',
+  'landing.feature.2.body':
+    'CSS 값만이 아니라 "왜 이 선택인지”까지 담겨, AI가 명시되지 않은 맥락에서도 일관되게 판단합니다.',
+  'landing.feature.3.title': '에이전트 레디',
+  'landing.feature.3.body':
+    '결과물은 마크다운 파일 하나. Claude Code · Cursor · Codex 모두 이를 source of truth로 해석해요.',
+  'landing.cta.title': '일관된 시스템을 출시할 준비, 됐나요?',
+  'landing.cta.lede': '다섯 질문. 마크다운 하나. 추가 회의 제로.',
+  'landing.cta.primary': '무료로 시작',
+  'landing.cta.secondary': '문의하기',
+  'landing.footer.tag': 'AI 툴 시대에 맞게 인코딩된 디자인 의도.',
+  'landing.footer.product': '제품',
+  'landing.footer.company': '회사',
+  'landing.footer.legal': '약관',
+  'landing.footer.copy': '© 2026 Sangun Kang · sangun950@gmail.com',
+};

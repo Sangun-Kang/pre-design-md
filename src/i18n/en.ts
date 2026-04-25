@@ -1,0 +1,192 @@
+import type { Messages } from './types';
+
+export const en: Messages = {
+  'lang.en': 'English',
+  'lang.ko': '한국어',
+  'lang.ja': '日本語',
+
+  'nav.start': 'Start',
+  'nav.typography': 'Typography',
+  'nav.spacing': 'Spacing',
+  'nav.radius': 'Radius',
+  'nav.shadow': 'Shadow',
+  'nav.color': 'Color',
+  'nav.preview': 'Preview',
+  'nav.export': 'Export',
+
+  'common.next': 'Next',
+  'common.back': 'Back',
+  'common.restart': 'Start over',
+
+  'start.heroA': 'Turn "make it look nice”',
+  'start.heroB': 'into a spec.',
+  'start.chainPrefix': 'Five steps, one decision each.',
+  'start.chain.0': 'Typography',
+  'start.chain.1': 'Spacing',
+  'start.chain.2': 'Radius',
+  'start.chain.3': 'Shadow',
+  'start.chain.4': 'Color',
+  'start.startBtn': 'Begin',
+  'start.quickExport': 'Export with defaults',
+
+  'typography.eyebrow': 'STEP 1 · TYPOGRAPHY',
+  'typography.title': 'The frame, first.',
+  'typography.description':
+    'Pick a font pairing to set the foundation. Fine-tune base size and scale ratio in the panel below.',
+  'typography.pairingsHeading': 'Font pairing',
+  'typography.dockToggleOpen': 'Scale settings',
+  'typography.dockToggleClose': 'Hide scale settings',
+  'typography.baseSize': 'Base size',
+  'typography.ratio': 'Ratio',
+  'typography.livePreview': 'Current scale',
+  'typography.sampleHeading': 'make it look nice.',
+  'typography.sampleBody':
+    'How letters sit on the page decides the personality of the screen — same words, different weight of attention.',
+  'typography.sampleCaption': '— caption · metadata · subtle annotations',
+  'typography.pairingHeading': 'make it look nice',
+  'typography.pairingBody':
+    'Pack my box with five dozen liquor jugs. The letterforms carry the mood of every decision made in this system.',
+
+  'spacing.eyebrow': 'STEP 2 · SPACING',
+  'spacing.title': 'The rhythm of space.',
+  'spacing.description':
+    'The base unit and scale approach decide the padding and gap of every component downstream.',
+
+  'radius.eyebrow': 'STEP 3 · RADIUS',
+  'radius.title': 'The character of corners.',
+  'radius.description':
+    'Pick a base radius and how it applies. Uniform keeps every component the same; scaled makes cards softer and inputs crisper — radius by role.',
+
+  'shadow.eyebrow': 'STEP 4 · SHADOW',
+  'shadow.title': 'Depth at the surface.',
+  'shadow.description':
+    'Pick the intensity. Optionally tint shadows with your primary hue for cohesion.',
+  'shadow.tintedTitle': 'Tinted shadow',
+  'shadow.tintedHint':
+    'Shadows lightly tinted by the primary hue. The hue is pulled from the Color step once decided.',
+
+  'color.eyebrow': 'STEP 5 · COLOR',
+  'color.title': 'The mood color sets.',
+  'color.description':
+    'Pick a primary hue, chroma, and neutral style. The 11-step palette, semantic colors, and interaction states are all derived.',
+  'color.primaryHue': 'Primary hue',
+  'color.chroma': 'Chroma',
+  'color.neutralStyle': 'Neutral style',
+  'color.darkMode': 'Support dark mode',
+  'color.darkModeHint': ' — dark variants will be included in DESIGN.md.',
+
+  'preview.eyebrow': 'STEP 6 · PREVIEW',
+  'preview.title': 'Everything together.',
+  'preview.description':
+    'Every decision applied to a realistic UI. Jump back via the stepper if anything feels off.',
+  'preview.sectionSampler': 'Component sampler',
+  'preview.sectionLanding': 'Landing section',
+
+  'export.eyebrow': 'STEP 7 · EXPORT',
+  'export.title': 'DESIGN.md prompt',
+  'export.description':
+    'Copy the prompt below and paste it into Claude Code (right after /init), or into your AI editor of choice, to generate the project’s DESIGN.md.',
+  'export.incompleteTitle': 'Some steps are undecided',
+  'export.incompleteBody':
+    'Undecided steps ({missing}) are omitted from the prompt and a WARNING block is added at the top. Go back and finish them for a richer DESIGN.md.',
+  'export.summaryTitle': 'Decision summary',
+  'export.promptTitle': 'DESIGN.md prompt',
+  'export.copyBtn': 'Copy to clipboard',
+  'export.copied': 'Copied ✓',
+  'export.usageTitle': 'How to use',
+  'export.usage.1':
+    '**Claude Code**: in a new project, run `/init`, then paste this prompt. A `DESIGN.md` will be generated at the repo root.',
+  'export.usage.2':
+    '**Cursor / Codex**: paste into the chat at project start and ask it to "follow this and generate `DESIGN.md`."',
+  'export.usage.3':
+    'The generated `DESIGN.md` becomes the team’s source of truth — AI tools will refer to it every time they build a new component.',
+
+  'decisions.undecided': '— not yet',
+
+  'start.scrollHint': 'Scroll for more ↓',
+  'start.info.eyebrow': 'WHAT THIS IS',
+  'start.info.title': 'A design spec, before the code.',
+  'start.info.whyLabel': 'WHY',
+  'start.info.whyTitle': 'AI writes most of your UI now',
+  'start.info.whyBody':
+    'Without a shared spec, every component drifts in its own direction — different radii, different spacing, different hues — and the product feels patched together.',
+  'start.info.doLabel': 'WHAT YOU DO',
+  'start.info.doTitle': 'Five steps, one decision each',
+  'start.info.doBody':
+    'Typography → Spacing → Radius → Shadow → Color. Each step asks for just the base decisions; the full token system is derived for you.',
+  'start.info.getLabel': 'WHAT YOU GET',
+  'start.info.getTitle': 'A single DESIGN.md prompt',
+  'start.info.getBody':
+    'Paste it into Claude Code, Cursor, or Codex. They treat it as the source of truth for the whole project — every future component stays in tune.',
+  'start.info.ctaTitle': 'Ready in about two minutes.',
+  'start.info.ctaBody': 'No signup, no saving — just five steps.',
+
+  'sampler.block.nav': 'Navigation',
+  'sampler.block.buttons': 'Buttons',
+  'sampler.block.inputs': 'Inputs',
+  'sampler.block.cards': 'Cards',
+  'sampler.block.badges': 'Badges',
+  'sampler.block.alerts': 'Alerts',
+  'sampler.action': 'Action',
+  'sampler.cancel': 'Cancel',
+  'sampler.moreInfo': 'More info',
+  'sampler.disabled': 'Disabled',
+  'sampler.emailPlaceholder': 'Email address',
+  'sampler.choosePlan': 'Choose a plan',
+  'sampler.planFree': 'Free',
+  'sampler.planPro': 'Pro',
+  'sampler.planTeam': 'Team',
+  'sampler.tellMore': 'Tell us more…',
+  'sampler.agreeTerms': 'I agree to the terms',
+  'sampler.card.title': 'Card title',
+  'sampler.card.body': 'This card shows body content. The image is auto-picked to harmonize with the current primary hue.',
+  'sampler.card.textOnly': 'Text-only card',
+  'sampler.card.textOnlyBody':
+    'A card without image — title, body, action. Padding and radius follow the tokens from the Spacing/Radius steps.',
+  'sampler.card.stat': 'Stat card',
+  'sampler.card.statLabel': 'Week-over-week growth',
+  'sampler.alert.new.title': 'New version available',
+  'sampler.alert.new.body': 'Version 2.3 is ready. Restart to apply.',
+  'sampler.alert.upload.title': 'Upload complete',
+  'sampler.alert.upload.body': 'Your files have been processed successfully.',
+  'sampler.alert.storage.title': 'Storage nearly full',
+  'sampler.alert.storage.body': "You've used 92% of your plan's storage.",
+  'sampler.alert.connection.title': 'Connection failed',
+  'sampler.alert.connection.body': "We couldn't reach the service. Check your network.",
+
+  'landing.nav.product': 'Product',
+  'landing.nav.docs': 'Docs',
+  'landing.nav.changelog': 'Changelog',
+  'landing.nav.pricing': 'Pricing',
+  'landing.nav.signin': 'Sign in',
+  'landing.nav.cta': 'Get started',
+  'landing.hero.badge': 'v2.0 · shipping tomorrow',
+  'landing.hero.lede':
+    "Pinecone turns your team's visual language into a single markdown file your AI tools can actually follow — so every new component stays in tune.",
+  'landing.hero.ctaPrimary': 'Start free',
+  'landing.hero.ctaSecondary': 'Watch demo ↗',
+  'landing.hero.trustedBy': 'Trusted by design teams at',
+  'landing.stats.steps': 'Steps',
+  'landing.stats.palette': 'Palette stops',
+  'landing.stats.time': 'To DESIGN.md',
+  'landing.features.eyebrow': 'How it works',
+  'landing.features.title': 'Three principles, one output.',
+  'landing.feature.1.title': 'Fewer decisions',
+  'landing.feature.1.body':
+    'Only the structural choices matter — everything else derives from a handful of base values. No combination explosion.',
+  'landing.feature.2.title': 'Intent preserved',
+  'landing.feature.2.body':
+    'Not just CSS values — the why behind each choice is captured so your AI tools can judge unlisted contexts too.',
+  'landing.feature.3.title': 'Agent-ready',
+  'landing.feature.3.body':
+    'Output is a single markdown file. Claude Code, Cursor, and Codex all parse it as design-system source of truth.',
+  'landing.cta.title': 'Ready to ship a coherent system?',
+  'landing.cta.lede': 'Five questions. One markdown file. Zero follow-up meetings.',
+  'landing.cta.primary': 'Start free',
+  'landing.cta.secondary': 'Talk to us',
+  'landing.footer.tag': 'Design intent, encoded for the age of AI tooling.',
+  'landing.footer.product': 'Product',
+  'landing.footer.company': 'Company',
+  'landing.footer.legal': 'Legal',
+  'landing.footer.copy': '© 2026 Sangun Kang · sangun950@gmail.com',
+};

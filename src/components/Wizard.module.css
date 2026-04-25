@@ -1,0 +1,41 @@
+.wizard {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--app-bg);
+  color: var(--app-text);
+  font-family: var(--app-font-sans);
+}
+
+.main {
+  flex: 1;
+  padding: var(--app-space-2xl) var(--app-space-3xl);
+  max-width: 1400px;
+  width: 100%;
+  margin-inline: auto;
+  animation: stepIn 0.4s cubic-bezier(0.22, 0.82, 0.44, 1.08) both;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainFull {
+  padding: 0;
+  max-width: none;
+}
+
+@keyframes stepIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: var(--app-space-lg) var(--app-space-md);
+  }
+}
