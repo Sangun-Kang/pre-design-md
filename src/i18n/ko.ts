@@ -189,4 +189,11 @@ export const ko: Messages = {
   'landing.footer.company': '회사',
   'landing.footer.legal': '약관',
   'landing.footer.copy': '© 2026 Sangun Kang · sangun950@gmail.com',
+
+  'export.tab.googleSpec.label': 'Google DESIGN.md',
+  'export.tab.googleSpec.hint': '공식 스펙. lint도 통과해요. 가장 무난한 선택.',
+  'export.tab.richPrompt.label': 'Rich Prompt',
+  'export.tab.richPrompt.hint': 'OKLCH 그대로, 근거 전부. AI 에이전트에 줄 맥락이 가장 풍부해요.',
+  'export.tab.cssVars.label': 'CSS Variables',
+  'export.tab.cssVars.hint': '스타일시트에 바로 붙여넣기. 마크다운도 프롬프트도 없어요.',
 };

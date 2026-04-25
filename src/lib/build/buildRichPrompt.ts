@@ -5,13 +5,13 @@ import type {
   ShadowInput,
   SpacingInput,
   TypographyInput,
-} from '../types/design';
-import { buildTypeScale, getPairing, ratioName } from './typeScale';
-import { buildSpacingScale } from './spacingScale';
-import { buildRadiusScale } from './radiusScale';
-import { buildShadowTokens } from './shadowTokens';
-import { buildColorPalette, hueBucketName } from './colorPalette';
-import { DECISION_STEPS } from '../types/design';
+} from '../../types/design';
+import { DECISION_STEPS } from '../../types/design';
+import { buildTypeScale, getPairing, ratioName } from '../typeScale';
+import { buildSpacingScale } from '../spacingScale';
+import { buildRadiusScale } from '../radiusScale';
+import { buildShadowTokens } from '../shadowTokens';
+import { buildColorPalette, hueBucketName } from '../colorPalette';
 
 // ──────────── Rationale tables ────────────
 
@@ -41,9 +41,7 @@ function rationaleTypography(t: TypographyInput): string {
     },
   };
   const row = table[t.baseSize];
-  const core = row ? row[ratioBucket] : 'balanced typography';
-  const pairing = getPairing(t.pairingId);
-  return `${core}. Combined with ${pairing.name}: ${pairing.description}`;
+  return row ? row[ratioBucket] : 'balanced typography';
 }
 
 function rationaleSpacing(s: SpacingInput): string {
@@ -51,8 +49,10 @@ function rationaleSpacing(s: SpacingInput): string {
   const table: Record<string, string> = {
     '4-linear': 'Tight, precise grid — data-dense surfaces with consistent rhythm.',
     '4-multiplicative': 'Tight at base but dramatic jumps — playful with clear hierarchy.',
+    '6-linear': 'Half-step grid — uncommon grain, fits editorial apps.',
     '8-linear': 'Balanced, familiar web rhythm — wide compatibility and predictable density.',
     '8-multiplicative': 'Generous and bold — marketing-friendly breathing room.',
+    '10-linear': 'Airy and confident — marketing-heavy product surfaces.',
   };
   return table[key] ?? 'Balanced spacing rhythm.';
 }
@@ -60,10 +60,12 @@ function rationaleSpacing(s: SpacingInput): string {
 function rationaleRadius(r: RadiusInput): string {
   const core: Record<number, string> = {
     0: 'hard-edged, technical',
+    2: 'barely-there softening',
     4: 'softened but sober',
     8: 'friendly and modern',
     12: 'approachable, app-like',
     16: 'playful, pill-adjacent',
+    24: 'bold, almost-pill',
   };
   const base = core[r.base] ?? 'balanced shape';
   const suffix =
@@ -110,11 +112,19 @@ function typographySection(t: TypographyInput): string {
   const sizeBlock = (Object.keys(tokens.sizes) as Array<keyof typeof tokens.sizes>)
     .map((k) => `--font-size-${k}: ${tokens.sizes[k]};`)
     .join('\n');
+
+  // Bug 2 fix: only mention "Combined with X" when heading and body fonts truly differ.
+  const sameFamily = pairing.heading === pairing.body;
+  const pairingNote = sameFamily
+    ? `single-family system (${pairing.name}) — heading and body share the typeface for unity`
+    : `pairs ${pairing.name.toLowerCase()} — heading and body use different families for hierarchy`;
+
   return [
     '## Typography',
     `- Base font size: ${t.baseSize}px`,
     `- Modular scale ratio: ${t.ratio} (${ratioName(t.ratio)})`,
     `- Font pairing: ${pairing.name} — ${pairing.description}`,
+    `- Pairing structure: ${pairingNote}`,
     `- Rationale: ${rationaleTypography(t)}`,
     '',
     '### Type scale',
@@ -179,6 +189,14 @@ function radiusSection(r: RadiusInput): string {
   const tokenBlock = (Object.keys(tokens.tokens) as Array<keyof typeof tokens.tokens>)
     .map((k) => `--radius-${k}: ${tokens.tokens[k]};`)
     .join('\n');
+  // Bug 3 fix: emit per-component radius CSS variables so the Usage prose
+  // references (var(--radius-card), var(--radius-button), ...) actually resolve.
+  const componentBlock = [
+    `--radius-input: ${tokens.components.input};`,
+    `--radius-button: ${tokens.components.button};`,
+    `--radius-card: ${tokens.components.card};`,
+    `--radius-badge: ${tokens.components.badge};`,
+  ].join('\n');
   return [
     '## Radius',
     `- Base radius: ${r.base}px (${tokens.meta.label})`,
@@ -190,11 +208,10 @@ function radiusSection(r: RadiusInput): string {
     tokenBlock,
     '```',
     '',
-    '### Per-component',
-    `- Input: \`${tokens.components.input}\``,
-    `- Button: \`${tokens.components.button}\``,
-    `- Card: \`${tokens.components.card}\``,
-    `- Badge: \`${tokens.components.badge}\``,
+    '### Per-component variables',
+    '```css',
+    componentBlock,
+    '```',
   ].join('\n');
 }
 
@@ -289,12 +306,22 @@ const USAGE_GUIDELINES = `## Usage guidelines
 - Section spacing: \`var(--space-3xl)\` between major blocks
 - Stack spacing within a block: \`var(--space-md)\``;
 
-const NOT_SECTION = `## What this design system is NOT
-
-- Not a component library specification — tokens only
-- Not opinionated about responsive breakpoints
-- Extend these tokens via prefixed custom properties (\`--color-brand-*\`), do not replace
-- Dark mode tokens: {INCLUDED or OUT-OF-SCOPE_FOR_V1 — derived from the decision above}`;
+// Bug 1 fix: dark-mode line is no longer a placeholder; it's resolved from
+// the actual decision and produces a real sentence (or is omitted).
+function notSection(d: DesignDecisions): string {
+  const supportsDark = d.color?.supportsDark ?? false;
+  const darkLine = supportsDark
+    ? '- Dark mode tokens: included — see the "Dark variants" block in the Color section.'
+    : '- Dark mode tokens: out of scope for v1 — light mode only.';
+  return [
+    '## What this design system is NOT',
+    '',
+    '- Not a component library specification — tokens only',
+    '- Not opinionated about responsive breakpoints',
+    '- Extend these tokens via prefixed custom properties (`--color-brand-*`), do not replace',
+    darkLine,
+  ].join('\n');
+}
 
 const AI_INSTRUCTIONS = `## Generation instructions for AI
 
@@ -319,9 +346,7 @@ function missingDecisions(d: DesignDecisions): string[] {
 function overallIntent(d: DesignDecisions): string {
   const parts: string[] = [];
   if (d.color) {
-    parts.push(
-      `${hueBucketName(d.color.primaryHue)}-led, ${d.color.chroma}`,
-    );
+    parts.push(`${hueBucketName(d.color.primaryHue)}-led, ${d.color.chroma}`);
   }
   if (d.typography) {
     if (d.typography.baseSize >= 18) parts.push('reader-friendly');
@@ -334,7 +359,7 @@ function overallIntent(d: DesignDecisions): string {
   return parts.length > 0 ? parts.join(', ') : 'to be determined';
 }
 
-export function buildDesignPrompt(d: DesignDecisions): string {
+export function buildRichPrompt(d: DesignDecisions): string {
   const missing = missingDecisions(d);
   const sections: string[] = [INTRO, ''];
 
@@ -366,7 +391,7 @@ export function buildDesignPrompt(d: DesignDecisions): string {
   }
   if (d.color) sections.push(colorSection(d.color), '');
 
-  sections.push(USAGE_GUIDELINES, '', NOT_SECTION, '', AI_INSTRUCTIONS);
+  sections.push(USAGE_GUIDELINES, '', notSection(d), '', AI_INSTRUCTIONS);
 
   return sections.join('\n');
 }

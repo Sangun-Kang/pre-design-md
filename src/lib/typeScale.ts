@@ -172,12 +172,11 @@ const TYPE_STEPS: Array<{ key: TypeKey; power: number }> = [
   { key: 'xs', power: -2 },
   { key: 'sm', power: -1 },
   { key: 'base', power: 0 },
-  { key: 'md', power: 1 },
-  { key: 'lg', power: 2 },
-  { key: 'xl', power: 3 },
-  { key: '2xl', power: 4 },
-  { key: '3xl', power: 5 },
-  { key: '4xl', power: 6 },
+  { key: 'lg', power: 1 },
+  { key: 'xl', power: 2 },
+  { key: '2xl', power: 3 },
+  { key: '3xl', power: 4 },
+  { key: '4xl', power: 5 },
 ];
 
 const clamp = (n: number, min: number, max: number) => Math.min(max, Math.max(min, n));

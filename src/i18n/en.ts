@@ -189,4 +189,11 @@ export const en: Messages = {
   'landing.footer.company': 'Company',
   'landing.footer.legal': 'Legal',
   'landing.footer.copy': '© 2026 Sangun Kang · sangun950@gmail.com',
+
+  'export.tab.googleSpec.label': 'Google DESIGN.md',
+  'export.tab.googleSpec.hint': 'Official spec, lint-compatible. The safest choice.',
+  'export.tab.richPrompt.label': 'Rich Prompt',
+  'export.tab.richPrompt.hint': 'OKLCH preserved, full rationale. Maximum context for AI agents.',
+  'export.tab.cssVars.label': 'CSS Variables',
+  'export.tab.cssVars.hint': 'Drop into your stylesheet. No markdown, no prompt.',
 };

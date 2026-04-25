@@ -189,4 +189,11 @@ export const ja: Messages = {
   'landing.footer.company': '会社',
   'landing.footer.legal': '規約',
   'landing.footer.copy': '© 2026 Sangun Kang · sangun950@gmail.com',
+
+  'export.tab.googleSpec.label': 'Google DESIGN.md',
+  'export.tab.googleSpec.hint': '公式仕様。lint にも通る、いちばん無難な選択。',
+  'export.tab.richPrompt.label': 'Rich Prompt',
+  'export.tab.richPrompt.hint': 'OKLCH そのまま、根拠も全部。AI エージェントに渡す文脈が最も豊富。',
+  'export.tab.cssVars.label': 'CSS Variables',
+  'export.tab.cssVars.hint': 'スタイルシートに貼るだけ。マークダウンもプロンプトも無し。',
 };

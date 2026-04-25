@@ -1,3 +1,4 @@
+import { formatHex } from 'culori';
 import type {
   ChromaLevel,
   ColorInput,
@@ -162,6 +163,15 @@ export function buildColorPalette(input: ColorInput): ColorPalette {
   }
 
   return palette;
+}
+
+/**
+ * Convert any culori-parseable color string (oklch, hsl, hex, ...) to sRGB hex.
+ * If the OKLCH point is outside the sRGB gamut, culori clips to the nearest
+ * representable color. Returns black as a last-resort fallback.
+ */
+export function oklchStringToHex(input: string): string {
+  return formatHex(input) ?? '#000000';
 }
 
 export function hueBucketName(hue: number): string {

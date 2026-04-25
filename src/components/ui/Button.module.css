@@ -35,7 +35,7 @@
 
 .size_lg {
   padding: calc(var(--space-button-padding-y) * 1.35) calc(var(--space-button-padding-x) * 1.25);
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-lg);
 }
 
 .variant_primary {

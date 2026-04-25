@@ -1,28 +1,81 @@
 import { useMemo, useState, type ReactNode } from 'react';
+import clsx from 'clsx';
 import { StepLayout } from '../components/StepLayout';
 import { Alert } from '../components/ui/Alert';
 import { useDesignStore, selectDecisions } from '../store/designStore';
-import { buildDesignPrompt } from '../lib/buildPrompt';
+import {
+  buildGoogleSpec,
+  buildRichPrompt,
+  buildCssVariables,
+  type OutputFormat,
+} from '../lib/build';
 import { DECISION_STEPS } from '../types/design';
 import { useT } from '../i18n';
 import styles from './ExportStep.module.css';
 
+interface TabDef {
+  id: OutputFormat;
+  labelKey: string;
+  hintKey: string;
+  build: (d: Parameters<typeof buildGoogleSpec>[0]) => string;
+}
+
+const TABS: TabDef[] = [
+  {
+    id: 'google-spec',
+    labelKey: 'export.tab.googleSpec.label',
+    hintKey: 'export.tab.googleSpec.hint',
+    build: buildGoogleSpec,
+  },
+  {
+    id: 'rich-prompt',
+    labelKey: 'export.tab.richPrompt.label',
+    hintKey: 'export.tab.richPrompt.hint',
+    build: buildRichPrompt,
+  },
+  {
+    id: 'css-vars',
+    labelKey: 'export.tab.cssVars.label',
+    hintKey: 'export.tab.cssVars.hint',
+    build: buildCssVariables,
+  },
+];
+
 export function ExportStep() {
   const decisions = useDesignStore(selectDecisions);
+  const [activeId, setActiveId] = useState<OutputFormat>('google-spec');
   const [copied, setCopied] = useState(false);
   const t = useT();
 
-  const prompt = useMemo(() => buildDesignPrompt(decisions), [decisions]);
+  // Pre-compute all three so switching tabs is instant.
+  const outputs = useMemo<Record<OutputFormat, string>>(
+    () => ({
+      'google-spec': buildGoogleSpec(decisions),
+      'rich-prompt': buildRichPrompt(decisions),
+      'css-vars': buildCssVariables(decisions),
+    }),
+    [decisions],
+  );
+
+  const activeTab = TABS.find((x) => x.id === activeId)!;
+  const activeOutput = outputs[activeId];
+
   const missing = DECISION_STEPS.filter((s) => decisions[s] == null);
 
   async function onCopy() {
     try {
-      await navigator.clipboard.writeText(prompt);
+      await navigator.clipboard.writeText(activeOutput);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
       setCopied(false);
     }
+  }
+
+  // Reset "copied" state when switching tabs to avoid stale "Copied ✓".
+  function selectTab(id: OutputFormat) {
+    setActiveId(id);
+    setCopied(false);
   }
 
   const undecidedStr = t('decisions.undecided');
@@ -74,41 +127,51 @@ export function ExportStep() {
         </dl>
       </section>
 
-      <section className={styles.promptSection}>
-        <div className={styles.promptHead}>
-          <h2 className={styles.sectionTitle}>{t('export.promptTitle')}</h2>
+      <section className={styles.tabsBlock}>
+        <div className={styles.tabBar} role="tablist">
+          {TABS.map((tab) => (
+            <button
+              key={tab.id}
+              role="tab"
+              type="button"
+              aria-selected={activeId === tab.id}
+              className={clsx(styles.tab, activeId === tab.id && styles.tabActive)}
+              onClick={() => selectTab(tab.id)}
+            >
+              {t(tab.labelKey)}
+            </button>
+          ))}
+        </div>
+        <p className={styles.tabHint}>{t(activeTab.hintKey)}</p>
+
+        <div className={styles.outputHead}>
           <button type="button" className={styles.copyBtn} onClick={onCopy}>
             {copied ? t('export.copied') : t('export.copyBtn')}
           </button>
         </div>
         <textarea
+          key={activeId}
           readOnly
-          value={prompt}
+          value={activeOutput}
           className={styles.textarea}
           onClick={(e) => (e.target as HTMLTextAreaElement).select()}
-          rows={18}
+          rows={20}
         />
       </section>
 
       <section className={styles.usage}>
         <h2 className={styles.sectionTitle}>{t('export.usageTitle')}</h2>
         <ol className={styles.steps}>
-          <li>
-            <Markdown>{t('export.usage.1')}</Markdown>
-          </li>
-          <li>
-            <Markdown>{t('export.usage.2')}</Markdown>
-          </li>
-          <li>
-            <Markdown>{t('export.usage.3')}</Markdown>
-          </li>
+          <li><Markdown>{t('export.usage.1')}</Markdown></li>
+          <li><Markdown>{t('export.usage.2')}</Markdown></li>
+          <li><Markdown>{t('export.usage.3')}</Markdown></li>
         </ol>
       </section>
     </StepLayout>
   );
 }
 
-function Entry({ label, children }: { label: string; children: React.ReactNode }) {
+function Entry({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className={styles.entry}>
       <dt className={styles.entryLabel}>{label}</dt>
@@ -131,11 +194,8 @@ function Markdown({ children }: { children: string }) {
     const idx = m.index ?? 0;
     if (idx > last) parts.push(children.slice(last, idx));
     const raw = m[0];
-    if (raw.startsWith('**')) {
-      parts.push(<strong key={key++}>{raw.slice(2, -2)}</strong>);
-    } else {
-      parts.push(<code key={key++}>{raw.slice(1, -1)}</code>);
-    }
+    if (raw.startsWith('**')) parts.push(<strong key={key++}>{raw.slice(2, -2)}</strong>);
+    else parts.push(<code key={key++}>{raw.slice(1, -1)}</code>);
     last = idx + raw.length;
   }
   if (last < children.length) parts.push(children.slice(last));

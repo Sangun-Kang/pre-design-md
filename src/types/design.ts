@@ -35,7 +35,7 @@ export const SCALE_STEPS: Step11[] = [
   '50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950',
 ];
 
-export type TypeKey = 'xs' | 'sm' | 'base' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
+export type TypeKey = 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl';
 export type SpacingKey = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
 export type RadiusKey = 'none' | 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
