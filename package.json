@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "preview": "vite preview",
-    "typecheck": "tsc --noEmit"
+    "preview": "npm run build && wrangler dev",
+    "typecheck": "tsc --noEmit",
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -17,12 +18,14 @@
     "zustand": "^4.5.5"
   },
   "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.33.2",
     "@types/culori": "^2.1.1",
     "@types/node": "^25.6.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.7.0",
     "typescript": "^5.6.3",
-    "vite": "^6.4.2"
+    "vite": "^6.4.2",
+    "wrangler": "^4.85.0"
   }
 }
