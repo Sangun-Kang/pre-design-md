@@ -6,6 +6,10 @@
   <img src="./images/cover.png" alt="pre-design-md cover" width="640" />
 </p>
 
+<p align="center">
+  <a href="https://pre-design-md.dev"><strong>Try it live → pre-design-md.dev</strong></a>
+</p>
+
 ## The problem
 
 AI coding has a harness. Type checkers, linters, tests, CI — they put autonomy inside boundaries. Output is always judged mechanically, which is why it's repeatable, which is why it's reproducible.
@@ -50,7 +54,11 @@ You preview each decision applied to real components, not abstract swatches.
 
 Default is Google DESIGN.md. The Rich Prompt is where this tool's actual value lives — it's designed for an AI agent to read and reason from, not just paste.
 
-## Quick start
+## Try it
+
+Hosted at **[pre-design-md.dev](https://pre-design-md.dev)** — five steps, no signup, ~2 minutes from start to a finished prompt.
+
+## Run locally
 
 ```bash
 git clone https://github.com/<you>/pre-design-md
