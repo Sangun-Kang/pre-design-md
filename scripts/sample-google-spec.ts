@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { buildGoogleSpec, buildRichPrompt, buildCssVariables } from '../src/lib/build';
 
 const sample = {
