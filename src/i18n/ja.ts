@@ -74,6 +74,10 @@ export const ja: Messages = {
   'color.neutralStyle': 'ニュートラル',
   'color.darkMode': 'ダークモード対応',
   'color.darkModeHint': ' — ダークモード用のカラーも DESIGN.md に含まれます。',
+  'color.derived.primary': 'hue と彩度から派生',
+  'color.derived.neutral': 'ニュートラルスタイルから派生',
+  'color.derived.semantic': '彩度に合わせて自動派生 · semantic hue は固定',
+  'color.derived.sample': '決定したトークンを使ったライブコンポーネント',
 
   'preview.eyebrow': 'STEP 6 · PREVIEW',
   'preview.title': 'すべての決定を、一画面に。',
@@ -81,6 +85,7 @@ export const ja: Messages = {
     'ここまでの決定が実際の UI に反映された状態です。しっくりこなければ、上部のステッパーから該当ステップに戻って調整できます。',
   'preview.sectionSampler': 'コンポーネント',
   'preview.sectionLanding': 'ランディング',
+  'preview.banner.tokensApplied': 'ライブプレビュー — 決定したトークンが標準コンポーネントに反映されています',
 
   'export.eyebrow': 'STEP 7 · EXPORT',
   'export.title': 'DESIGN.md プロンプト',

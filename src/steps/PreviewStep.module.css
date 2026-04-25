@@ -4,6 +4,39 @@
   gap: var(--space-2xl);
 }
 
+.banner {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--app-space-xs);
+  align-self: flex-start;
+  padding: var(--app-space-2xs) var(--app-space-sm);
+  background: var(--app-surface-sunken);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-full);
+  font-family: var(--app-font-mono);
+  font-size: 0.75rem;
+  color: var(--app-text-muted);
+  letter-spacing: 0.01em;
+}
+
+.bannerDot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 9999px;
+  background: var(--app-accent);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--app-accent) 25%, transparent);
+  animation: bannerPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes bannerPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bannerDot { animation: none; }
+}
+
 .section {
   display: flex;
   flex-direction: column;

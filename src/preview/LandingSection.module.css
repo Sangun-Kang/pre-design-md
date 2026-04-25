@@ -190,7 +190,14 @@
   color: var(--color-text);
 }
 
+/* Preview hero echoes Start: big black main line, smaller tinted second line. */
 .heroAccent {
+  display: inline-block;
+  margin-top: 0.15em;
+  font-size: clamp(1.5rem, 3.6vw, 2.6rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
   background: linear-gradient(
     110deg,
     var(--color-primary-600) 0%,

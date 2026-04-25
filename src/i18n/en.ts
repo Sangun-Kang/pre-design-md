@@ -74,6 +74,10 @@ export const en: Messages = {
   'color.neutralStyle': 'Neutral style',
   'color.darkMode': 'Support dark mode',
   'color.darkModeHint': ' — dark variants will be included in DESIGN.md.',
+  'color.derived.primary': 'derived from your hue + chroma',
+  'color.derived.neutral': 'derived from your neutral style',
+  'color.derived.semantic': 'auto-derived from chroma · fixed semantic hues',
+  'color.derived.sample': 'live components using your tokens',
 
   'preview.eyebrow': 'STEP 6 · PREVIEW',
   'preview.title': 'Everything together.',
@@ -81,6 +85,7 @@ export const en: Messages = {
     'Every decision applied to a realistic UI. Jump back via the stepper if anything feels off.',
   'preview.sectionSampler': 'Component sampler',
   'preview.sectionLanding': 'Landing section',
+  'preview.banner.tokensApplied': 'Live preview — your tokens applied to standard components',
 
   'export.eyebrow': 'STEP 7 · EXPORT',
   'export.title': 'DESIGN.md prompt',

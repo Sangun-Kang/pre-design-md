@@ -40,10 +40,21 @@ const DEFAULT: ColorInput = {
 
 type T = ReturnType<typeof useT>;
 
-function Swatches({ scale, label }: { scale: Scale11; label: string }) {
+function Swatches({
+  scale,
+  label,
+  hint,
+}: {
+  scale: Scale11;
+  label: string;
+  hint?: string;
+}) {
   return (
     <div className={styles.swatchRow}>
-      <span className={styles.swatchLabel}>{label}</span>
+      <div className={styles.swatchHead}>
+        <span className={styles.swatchLabel}>{label}</span>
+        {hint && <span className={styles.swatchHint}>{hint}</span>}
+      </div>
       <div className={styles.swatches}>
         {SCALE_STEPS.map((step: Step11) => (
           <div key={step} className={styles.swatch} style={{ background: scale[step] }}>
@@ -110,35 +121,55 @@ export function ColorStep() {
       </div>
 
       <div className={styles.preview}>
-        <Swatches scale={palette.primary} label="primary" />
-        <Swatches scale={palette.neutral} label="neutral" />
+        <Swatches
+          scale={palette.primary}
+          label="primary"
+          hint={t('color.derived.primary')}
+        />
+        <Swatches
+          scale={palette.neutral}
+          label="neutral"
+          hint={t('color.derived.neutral')}
+        />
 
-        <div className={styles.semanticRow}>
-          {(Object.entries(palette.semantic) as Array<[string, string]>).map(([k, v]) => (
-            <div key={k} className={styles.semantic}>
-              <div className={styles.semanticSwatch} style={{ background: v }} />
-              <span className={styles.semanticLabel}>{k}</span>
-            </div>
-          ))}
+        <div className={styles.semanticBlock}>
+          <div className={styles.swatchHead}>
+            <span className={styles.swatchLabel}>semantic</span>
+            <span className={styles.swatchHint}>{t('color.derived.semantic')}</span>
+          </div>
+          <div className={styles.semanticRow}>
+            {(Object.entries(palette.semantic) as Array<[string, string]>).map(([k, v]) => (
+              <div key={k} className={styles.semantic}>
+                <div className={styles.semanticSwatch} style={{ background: v }} />
+                <span className={styles.semanticLabel}>{k}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className={styles.uiSample}>
-          <div className={styles.uiRow}>
-            <Button variant="primary">Primary</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="ghost">Ghost</Button>
-            <Button variant="destructive">Delete</Button>
+        <div className={styles.uiSampleBlock}>
+          <div className={styles.swatchHead}>
+            <span className={styles.swatchLabel}>components</span>
+            <span className={styles.swatchHint}>{t('color.derived.sample')}</span>
           </div>
-          <div className={styles.uiRow}>
-            <Badge tone="neutral">neutral</Badge>
-            <Badge tone="info">info</Badge>
-            <Badge tone="success">success</Badge>
-            <Badge tone="warning">warning</Badge>
-            <Badge tone="danger">danger</Badge>
+          <div className={styles.uiSample}>
+            <div className={styles.uiRow}>
+              <Button variant="primary">Primary</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="ghost">Ghost</Button>
+              <Button variant="destructive">Delete</Button>
+            </div>
+            <div className={styles.uiRow}>
+              <Badge tone="neutral">neutral</Badge>
+              <Badge tone="info">info</Badge>
+              <Badge tone="success">success</Badge>
+              <Badge tone="warning">warning</Badge>
+              <Badge tone="danger">danger</Badge>
+            </div>
+            <Alert tone="info" title="Info alert">
+              Semantic colors adapt to the chosen category.
+            </Alert>
           </div>
-          <Alert tone="info" title="Info alert">
-            Semantic colors adapt to the chosen category.
-          </Alert>
         </div>
       </div>
     </StepLayout>

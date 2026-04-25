@@ -14,6 +14,11 @@ export function PreviewStep() {
       canProceed={true}
       cardsClassName={styles.body}
     >
+      <div className={styles.banner} role="note">
+        <span className={styles.bannerDot} aria-hidden />
+        <span>{t('preview.banner.tokensApplied')}</span>
+      </div>
+
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>{t('preview.sectionSampler')}</h2>
         <ComponentSampler />

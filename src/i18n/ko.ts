@@ -74,6 +74,10 @@ export const ko: Messages = {
   'color.neutralStyle': '중립 계열',
   'color.darkMode': '다크 모드 지원',
   'color.darkModeHint': ' — 다크 모드용 색도 DESIGN.md에 함께 포함됩니다.',
+  'color.derived.primary': 'hue · 채도 결정에서 파생',
+  'color.derived.neutral': '중립 계열 결정에서 파생',
+  'color.derived.semantic': '채도에 맞춰 자동 파생 · semantic hue는 고정',
+  'color.derived.sample': '결정한 토큰이 적용된 라이브 컴포넌트',
 
   'preview.eyebrow': 'STEP 6 · PREVIEW',
   'preview.title': '모든 결정을 한 화면에.',
@@ -81,6 +85,7 @@ export const ko: Messages = {
     '지금까지의 결정이 실제 UI에 반영된 상태입니다. 어색하면 상단 진행 바에서 해당 단계로 바로 돌아갈 수 있어요.',
   'preview.sectionSampler': '컴포넌트',
   'preview.sectionLanding': '랜딩 섹션',
+  'preview.banner.tokensApplied': '라이브 프리뷰 — 결정한 토큰이 표준 컴포넌트에 적용된 모습',
 
   'export.eyebrow': 'STEP 7 · EXPORT',
   'export.title': 'DESIGN.md 프롬프트',
