@@ -17,9 +17,13 @@ export function TypographyStep() {
   const { lang } = useLang();
   const pairings = getPairingsForLang(lang);
 
+  // Used only to render previews when the user hasn't picked yet — never
+  // shown as "selected" in the UI; the seg buttons and pairing cards
+  // gate their active state on `typography != null`.
   const baseSize = typography?.baseSize ?? 16;
   const ratio = typography?.ratio ?? 1.25;
   const pairingId = typography?.pairingId ?? 'modern-sans';
+  const committed = typography != null;
 
   function set(partial: Partial<TypographyInput>) {
     update({ baseSize, ratio, pairingId, ...partial });
@@ -42,8 +46,8 @@ export function TypographyStep() {
                 key={s}
                 type="button"
                 role="radio"
-                aria-checked={baseSize === s}
-                className={clsx(styles.segBtn, baseSize === s && styles.segBtnActive)}
+                aria-checked={committed && baseSize === s}
+                className={clsx(styles.segBtn, committed && baseSize === s && styles.segBtnActive)}
                 onClick={() => set({ baseSize: s })}
               >
                 {s}px
@@ -59,8 +63,8 @@ export function TypographyStep() {
                 key={r}
                 type="button"
                 role="radio"
-                aria-checked={ratio === r}
-                className={clsx(styles.segBtn, ratio === r && styles.segBtnActive)}
+                aria-checked={committed && ratio === r}
+                className={clsx(styles.segBtn, committed && ratio === r && styles.segBtnActive)}
                 onClick={() => set({ ratio: r })}
               >
                 {r}

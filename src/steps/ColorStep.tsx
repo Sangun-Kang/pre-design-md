@@ -71,7 +71,11 @@ export function ColorStep() {
   const color = useDesignStore((s) => s.color);
   const updateColor = useDesignStore((s) => s.updateColor);
   const t = useT();
+  // `current` drives previews/swatches when color is still null; the UI
+  // gates "selected" highlights on `committed` so nothing reads as picked
+  // until the user actually clicks.
   const current: ColorInput = color ?? DEFAULT;
+  const committed = color != null;
 
   function set<K extends keyof ColorInput>(key: K, value: ColorInput[K]) {
     updateColor({ ...current, [key]: value });
@@ -114,7 +118,7 @@ export function ColorStep() {
               <CategoryCard
                 key={cat}
                 category={cat}
-                active={current.category === cat}
+                active={committed && current.category === cat}
                 swatch={categorySwatches[cat]}
                 onClick={() => selectCategory(cat)}
                 t={t}
@@ -123,7 +127,7 @@ export function ColorStep() {
           </div>
         </section>
 
-        <CategoryControls current={current} set={set} t={t} />
+        <CategoryControls current={current} committed={committed} set={set} t={t} />
       </div>
 
       <div className={styles.preview}>
@@ -212,10 +216,12 @@ function CategoryCard({
 
 function CategoryControls({
   current,
+  committed,
   set,
   t,
 }: {
   current: ColorInput;
+  committed: boolean;
   set: <K extends keyof ColorInput>(k: K, v: ColorInput[K]) => void;
   t: T;
 }) {
@@ -226,6 +232,7 @@ function CategoryControls({
         <HueControl
           label={t('color.primaryHue')}
           value={current.primaryHue}
+          committed={committed}
           onChange={(v) => set('primaryHue', v)}
         />
       )}
@@ -233,6 +240,7 @@ function CategoryControls({
         <HueControl
           label={t('color.accentHue')}
           value={current.accentHue}
+          committed={committed}
           onChange={(v) => set('accentHue', v)}
         />
       )}
@@ -242,12 +250,14 @@ function CategoryControls({
             title={t('color.chroma')}
             options={['muted', 'balanced', 'vivid'] as ChromaLevel[]}
             value={current.chroma}
+            committed={committed}
             onChange={(v) => set('chroma', v)}
           />
           <ChipsSection
             title={t('color.neutralStyle')}
             options={['pure', 'warm', 'cool', 'tinted'] as NeutralStyle[]}
             value={current.neutralStyle}
+            committed={committed}
             onChange={(v) => set('neutralStyle', v)}
           />
         </>
@@ -256,8 +266,8 @@ function CategoryControls({
         <WarmthSlider value={current.warmth} onChange={(v) => set('warmth', v)} t={t} />
       )}
       <DarkToggle
-        value={current.supportsDark}
-        forced={cat === 'neon-on-dark'}
+        value={committed && current.supportsDark}
+        forced={committed && cat === 'neon-on-dark'}
         onChange={(v) => set('supportsDark', v)}
         t={t}
       />
@@ -268,10 +278,12 @@ function CategoryControls({
 function HueControl({
   label,
   value,
+  committed,
   onChange,
 }: {
   label: string;
   value: number;
+  committed: boolean;
   onChange: (v: number) => void;
 }) {
   return (
@@ -286,7 +298,7 @@ function HueControl({
             onClick={() => onChange(p.hue)}
             className={clsx(
               styles.hueChip,
-              Math.abs(value - p.hue) < 2 && styles.hueChipSelected,
+              committed && Math.abs(value - p.hue) < 2 && styles.hueChipSelected,
             )}
             style={{ background: `oklch(62% 0.17 ${p.hue})` }}
             title={`${p.label} — ${p.hue}°`}
@@ -295,7 +307,7 @@ function HueControl({
       </div>
       <label className={styles.sliderLabel}>
         <span>
-          {Math.round(value)}° ({hueBucketName(value)})
+          {committed ? `${Math.round(value)}° (${hueBucketName(value)})` : '—'}
         </span>
         <input
           type="range"
@@ -316,11 +328,13 @@ function ChipsSection<O extends string>({
   title,
   options,
   value,
+  committed,
   onChange,
 }: {
   title: string;
   options: O[];
   value: O;
+  committed: boolean;
   onChange: (v: O) => void;
 }) {
   return (
@@ -331,7 +345,7 @@ function ChipsSection<O extends string>({
           <button
             key={opt}
             type="button"
-            className={clsx(styles.chipBtn, value === opt && styles.chipBtnActive)}
+            className={clsx(styles.chipBtn, committed && value === opt && styles.chipBtnActive)}
             onClick={() => onChange(opt)}
           >
             {opt}

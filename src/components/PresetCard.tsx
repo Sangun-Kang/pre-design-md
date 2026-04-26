@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import type { ReactNode } from 'react';
+import type { KeyboardEvent, ReactNode } from 'react';
 import styles from './PresetCard.module.css';
 
 export interface PresetCardProps {
@@ -22,10 +22,24 @@ export function PresetCard({
   previewBackground,
   flush,
 }: PresetCardProps) {
+  // Rendered as <div role="button"> rather than <button> because some
+  // previews embed real <button>/<input> elements as visual samples (e.g.
+  // SpacingStep, RadiusStep). A native <button> wrapper produces invalid
+  // nested-interactive HTML; the div + role + keyboard handler keeps the
+  // a11y semantics without the nesting.
+  function handleKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      onClick();
+    }
+  }
+
   return (
-    <button
-      type="button"
+    <div
+      role="button"
+      tabIndex={0}
       onClick={onClick}
+      onKeyDown={handleKeyDown}
       className={clsx(styles.card, selected && styles.selected)}
       data-selected={selected ? 'true' : 'false'}
       aria-pressed={selected}
@@ -40,6 +54,6 @@ export function PresetCard({
         <div className={styles.label}>{label}</div>
         {description && <div className={styles.description}>{description}</div>}
       </div>
-    </button>
+    </div>
   );
 }
