@@ -97,9 +97,9 @@ export const ja: Messages = {
   'export.downloadBtn': '{name} をダウンロード',
   'export.usageTitle': 'フォーマット別の使い方',
   'export.usage.googleSpec':
-    '**Google DESIGN.md** — Claude Code の `/init` 直後、または Cursor / Codex のチャットにそのまま貼り付け、*「これに従って `DESIGN.md` を生成して」* と依頼します。公式仕様・lint 互換で、いちばん無難な既定値。',
+    '**Google DESIGN.md** — Claude Code の `/init` 直後、または Cursor / Codex のチャットにそのまま貼り付け、*「これに従って `DESIGN.md` を生成して」* と依頼します。公式仕様・lint 互換で、いちばん無難な既定値。上記のフロー以外でも、ChatGPT・Gemini などどの AI エディタ／チャットに貼り付けても、プロジェクトの状況に合わせて自由に活用できます。',
   'export.usage.richPrompt':
-    '**Rich Prompt** — 使い方は上と同じですが、AI に OKLCH の元値と各決定の*根拠*まで理解させたいときに選びます。値の写しではなく、デザイン意図まで推論してほしいチーム向け。',
+    '**Rich Prompt** — 使い方は上と同じですが、AI に OKLCH の元値と各決定の*根拠*まで理解させたいときに選びます。値の写しではなく、デザイン意図まで推論してほしいチーム向け。上記のフロー以外でも、ChatGPT・Gemini などどの AI エディタ／チャットに貼り付けても、プロジェクトの状況に合わせて自由に活用できます。',
   'export.usage.cssVars':
     '**CSS Variables** — `.css` ファイルをダウンロードし、スタイルシートに import するか、`:root { … }` ブロックをそのまま貼り付けます。マークダウンのラッパー無し、純粋な custom property のみ — AI なしで即適用可能。',
   'export.usage.figmaTokens':

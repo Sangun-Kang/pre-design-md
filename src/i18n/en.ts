@@ -97,9 +97,9 @@ export const en: Messages = {
   'export.downloadBtn': 'Download {name}',
   'export.usageTitle': 'How to use each format',
   'export.usage.googleSpec':
-    '**Google DESIGN.md** — Paste into Claude Code right after `/init`, or into Cursor / Codex at project start. Ask the agent to *"follow this and generate `DESIGN.md`."* The official, lint-compatible spec — the safest default.',
+    '**Google DESIGN.md** — Paste into Claude Code right after `/init`, or into Cursor / Codex at project start. Ask the agent to *"follow this and generate `DESIGN.md`."* The official, lint-compatible spec — the safest default. Beyond the flow above, paste it into any AI editor or chat (ChatGPT, Gemini, etc.) and apply it however your project needs.',
   'export.usage.richPrompt':
-    '**Rich Prompt** — Same flow as Google DESIGN.md, but pick this when you want the AI to keep OKLCH source values and the rationale behind each decision. Best for teams that want their AI to reason about design intent, not just copy values.',
+    '**Rich Prompt** — Same flow as Google DESIGN.md, but pick this when you want the AI to keep OKLCH source values and the rationale behind each decision. Best for teams that want their AI to reason about design intent, not just copy values. Beyond the flow above, paste it into any AI editor or chat (ChatGPT, Gemini, etc.) and apply it however your project needs.',
   'export.usage.cssVars':
     '**CSS Variables** — Download the `.css` file and import it (or paste the `:root { … }` block) into your stylesheet. Plain custom properties — no markdown wrapper, no AI required.',
   'export.usage.figmaTokens':

@@ -97,9 +97,9 @@ export const ko: Messages = {
   'export.downloadBtn': '{name} 다운로드',
   'export.usageTitle': '포맷별 사용법',
   'export.usage.googleSpec':
-    '**Google DESIGN.md** — Claude Code의 `/init` 직후, 또는 Cursor / Codex 채팅에 그대로 붙여넣고 *"이 지침을 따라 `DESIGN.md`를 생성해 줘"*라고 요청하세요. 공식 스펙·lint 통과형으로, 가장 무난한 기본값.',
+    '**Google DESIGN.md** — Claude Code의 `/init` 직후, 또는 Cursor / Codex 채팅에 그대로 붙여넣고 *"이 지침을 따라 `DESIGN.md`를 생성해 줘"*라고 요청하세요. 공식 스펙·lint 통과형으로, 가장 무난한 기본값. 위 흐름 외에도 ChatGPT, Gemini 등 어느 AI 에디터/챗봇에든 붙여넣고 프로젝트 상황에 맞게 자유롭게 적용해도 됩니다.',
   'export.usage.richPrompt':
-    '**Rich Prompt** — 사용 흐름은 위와 동일하지만, AI가 OKLCH 원본 값과 각 결정의 *근거*까지 이해해야 하는 경우 이걸 고르세요. 단순 값 복사가 아니라 디자인 의도까지 추론하길 원하는 팀에 적합.',
+    '**Rich Prompt** — 사용 흐름은 위와 동일하지만, AI가 OKLCH 원본 값과 각 결정의 *근거*까지 이해해야 하는 경우 이걸 고르세요. 단순 값 복사가 아니라 디자인 의도까지 추론하길 원하는 팀에 적합. 위 흐름 외에도 ChatGPT, Gemini 등 어느 AI 에디터/챗봇에든 붙여넣고 프로젝트 상황에 맞게 자유롭게 적용해도 됩니다.',
   'export.usage.cssVars':
     '**CSS Variables** — `.css` 파일을 다운받아 stylesheet에 import하거나, `:root { … }` 블록을 그대로 붙여넣으세요. 마크다운 래퍼 없이 순수 custom property만 — AI 없이 즉시 적용 가능.',
   'export.usage.figmaTokens':
