@@ -8,45 +8,20 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  padding: 1.5rem;
+  padding: 1.25rem;
   height: 17rem;
   background: oklch(96% 0 0);
   color: oklch(14% 0 0);
   justify-content: center;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  overflow: hidden;
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.625rem;
-  padding: 0.875rem 1rem;
-  background: oklch(100% 0 0);
-  border: 1px solid oklch(90% 0 0);
-  border-radius: var(--_card);
-}
-
-.cardHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: oklch(16% 0 0);
-}
-
-.badge {
-  padding: 0.15rem 0.55rem;
-  background: oklch(26% 0 0);
-  color: oklch(96% 0 0);
-  font-size: 0.6875rem;
-  border-radius: var(--_badge);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
-
+/* ── Shared elements ── */
 .input {
-  padding: 0.45rem 0.7rem;
-  background: oklch(98% 0 0);
+  padding: 0.5rem 0.7rem;
+  background: oklch(100% 0 0);
   border: 1px solid oklch(85% 0 0);
   border-radius: var(--_input);
   font-size: 0.8125rem;
@@ -55,16 +30,325 @@
   width: 100%;
 }
 
-.btn {
-  align-self: flex-start;
-  padding: 0.45rem 0.9rem;
-  background: oklch(22% 0 0);
-  color: oklch(96% 0 0);
-  border-radius: var(--_btn);
+.btn,
+.btnGhost {
+  padding: 0.5rem 0.95rem;
   font-size: 0.8125rem;
   font-weight: 600;
-  border: none;
+  border-radius: var(--_btn);
   cursor: pointer;
+  white-space: nowrap;
+  font-family: inherit;
+  border: 1px solid transparent;
+}
+
+.btn {
+  background: oklch(22% 0 0);
+  color: oklch(96% 0 0);
+}
+
+.btnGhost {
+  background: transparent;
+  color: oklch(38% 0 0);
+  border-color: oklch(82% 0 0);
+}
+
+/* ── Tabs (sharp) ── */
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.tabBar {
+  display: flex;
+  gap: 2px;
+  border-bottom: 1px solid oklch(85% 0 0);
+}
+
+.tab {
+  padding: 0.5rem 0.85rem;
+  font-size: 0.8125rem;
+  color: oklch(45% 0 0);
+  border-radius: var(--_btn) var(--_btn) 0 0;
+  font-weight: 500;
+  background: transparent;
+}
+
+.tabActive {
+  color: oklch(14% 0 0);
+  background: oklch(100% 0 0);
+  border: 1px solid oklch(85% 0 0);
+  border-bottom: 1px solid oklch(100% 0 0);
+  margin-bottom: -1px;
+  font-weight: 600;
+}
+
+.tabPane {
+  background: oklch(100% 0 0);
+  border: 1px solid oklch(85% 0 0);
+  border-top: none;
+  border-radius: 0 0 var(--_card) var(--_card);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tabRow {
+  height: 0.55rem;
+  background: oklch(90% 0 0);
+  border-radius: var(--_input);
+}
+.tabRow:nth-child(1) { width: 100%; }
+.tabRow:nth-child(2) { width: 78%; }
+.tabRow:nth-child(3) { width: 60%; }
+
+/* ── Form (whisper) ── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1rem 1.05rem;
+  background: oklch(100% 0 0);
+  border: 1px solid oklch(88% 0 0);
+  border-radius: var(--_card);
+}
+
+.form .btn {
+  align-self: flex-start;
+  margin-top: 0.35rem;
+}
+
+.fieldLabel {
+  font-size: 0.6875rem;
+  color: oklch(45% 0 0);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+/* ── List (subtle) ── */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.listRow {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 0.75rem;
+  background: oklch(100% 0 0);
+  border: 1px solid oklch(90% 0 0);
+  border-radius: var(--_card);
+}
+
+.avatar {
+  width: 1.6rem;
+  height: 1.6rem;
+  background: linear-gradient(135deg, oklch(82% 0.04 230), oklch(72% 0.06 280));
+  border-radius: var(--_badge);
+  flex-shrink: 0;
+}
+
+.listText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.listWho {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: oklch(16% 0 0);
+}
+.listWhat {
+  font-size: 0.7rem;
+  color: oklch(50% 0 0);
+}
+
+/* ── Product card (soft) ── */
+.productCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.7rem;
+  background: oklch(100% 0 0);
+  border: 1px solid oklch(90% 0 0);
+  border-radius: var(--_card);
+}
+
+.productImage {
+  height: 4.25rem;
+  background: linear-gradient(135deg, oklch(82% 0.04 230), oklch(72% 0.06 280));
+  border-radius: var(--_input);
+}
+
+.productMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.15rem;
+}
+
+.productTitle {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  color: oklch(16% 0 0);
+}
+
+.productPrice {
+  font-size: 0.75rem;
+  color: oklch(45% 0 0);
+}
+
+.productCard .btn {
+  width: 100%;
+  text-align: center;
+}
+
+/* ── Dialog (rounded) ── */
+.dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1.1rem 1.15rem;
+  background: oklch(100% 0 0);
+  border: 1px solid oklch(90% 0 0);
+  border-radius: var(--_card);
+  box-shadow: 0 10px 28px -12px oklch(0% 0 0 / 0.22);
+}
+
+.dialogTitle {
+  font-weight: 700;
+  font-size: 1rem;
+  color: oklch(14% 0 0);
+}
+
+.dialogBody {
+  font-size: 0.8125rem;
+  color: oklch(45% 0 0);
+}
+
+.dialogActions {
+  display: flex;
+  gap: 0.45rem;
+  margin-top: 0.4rem;
+  justify-content: flex-end;
+}
+
+/* ── Chips (pill) ── */
+.chips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.chipRow {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.chip {
+  padding: 0.35rem 0.8rem;
+  background: oklch(100% 0 0);
+  border: 1px solid oklch(86% 0 0);
+  border-radius: var(--_badge);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: oklch(35% 0 0);
+}
+
+.chipOn {
+  background: oklch(22% 0 0);
+  border-color: oklch(22% 0 0);
+  color: oklch(96% 0 0);
+}
+
+/* ── Search (capsule) ── */
+.search {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1rem;
+  background: oklch(100% 0 0);
+  border: 1px solid oklch(86% 0 0);
+  border-radius: var(--_xl);
+}
+
+.searchIcon {
+  color: oklch(45% 0 0);
+  font-size: 1rem;
+}
+
+.searchPlaceholder {
+  flex: 1;
+  font-size: 0.8125rem;
+  color: oklch(55% 0 0);
+}
+
+.searchKbd {
+  font-family: var(--app-font-mono);
+  font-size: 0.7rem;
+  color: oklch(45% 0 0);
+  padding: 0.1rem 0.4rem;
+  background: oklch(94% 0 0);
+  border: 1px solid oklch(85% 0 0);
+  border-radius: var(--_sm);
+}
+
+/* ── Uniform grid (uniform-soft) ── */
+.uniformGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+}
+
+.uniformItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3.1rem;
+  background: oklch(100% 0 0);
+  border: 1px solid oklch(86% 0 0);
+  border-radius: var(--_md);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: oklch(35% 0 0);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ── Asymmetric hero ── */
+.asymCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 1.25rem 1.4rem;
+  background: oklch(100% 0 0);
+  border: 1px solid oklch(86% 0 0);
+  border-radius: var(--_card);
+  box-shadow: 0 8px 24px -14px oklch(0% 0 0 / 0.15);
+}
+
+.asymQuote {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: oklch(16% 0 0);
+  font-weight: 500;
+}
+
+.asymBy {
+  font-size: 0.72rem;
+  color: oklch(50% 0 0);
+  letter-spacing: 0.04em;
 }
 
 @media (max-width: 768px) {
