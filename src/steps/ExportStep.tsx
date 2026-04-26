@@ -1,6 +1,6 @@
 import { useMemo, useState, type ReactNode } from 'react';
-import clsx from 'clsx';
 import { StepLayout } from '../components/StepLayout';
+import { Tabs } from '../components/Tabs';
 import { Alert } from '../components/ui/Alert';
 import { useDesignStore, selectDecisions } from '../store/designStore';
 import {
@@ -163,20 +163,13 @@ export function ExportStep() {
       </section>
 
       <section className={styles.tabsBlock}>
-        <div className={styles.tabBar} role="tablist">
-          {TABS.map((tab) => (
-            <button
-              key={tab.id}
-              role="tab"
-              type="button"
-              aria-selected={activeId === tab.id}
-              className={clsx(styles.tab, activeId === tab.id && styles.tabActive)}
-              onClick={() => selectTab(tab.id)}
-            >
-              {t(tab.labelKey)}
-            </button>
-          ))}
-        </div>
+        <Tabs
+          items={TABS.map((tab) => ({ id: tab.id, label: t(tab.labelKey) }))}
+          activeId={activeId}
+          onChange={selectTab}
+          idPrefix="export"
+          ariaLabel={t('export.title')}
+        />
         <p className={styles.tabHint}>{t(activeTab.hintKey)}</p>
 
         <div className={styles.outputHead}>

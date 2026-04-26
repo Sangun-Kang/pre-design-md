@@ -1,0 +1,53 @@
+.tabBar {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  background: var(--app-surface-sunken);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-md);
+  align-self: flex-start;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabBar::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  padding: 0.5rem 0.875rem;
+  background: transparent;
+  color: var(--app-text-muted);
+  font-family: var(--app-font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  border-radius: calc(var(--app-radius-md) - 3px);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.tab:hover:not(.tabActive) {
+  color: var(--app-text);
+  background: var(--app-surface);
+}
+.tab:focus-visible {
+  outline: 2px solid var(--app-focus);
+  outline-offset: 2px;
+}
+.tabActive {
+  background: var(--app-surface) !important;
+  color: var(--app-text) !important;
+  box-shadow: var(--app-shadow-sm);
+}
+
+@media (max-width: 768px) {
+  .tabBar {
+    align-self: stretch;
+  }
+  .tab {
+    flex: 1;
+    text-align: center;
+    padding: 0.625rem 0.5rem;
+  }
+}
