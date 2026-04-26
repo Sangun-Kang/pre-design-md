@@ -86,7 +86,11 @@ function rationaleShadow(s: ShadowInput): string {
     layered: 'stacked-layer depth — close + mid + far blur composed for a Material-like elevation read',
   };
   const base = core[s.intensity];
-  const suffix = s.tintedPreferred ? ', with shadows tinted by the primary hue for cohesion' : '';
+  const suffix = s.tintedPreferred
+    ? s.primaryHue === undefined
+      ? ', with shadows intended to pick up the primary hue once color is decided'
+      : ', with shadows tinted by the primary hue for cohesion'
+    : '';
   return `${base}${suffix}.`;
 }
 
@@ -242,10 +246,16 @@ function shadowSection(s: ShadowInput): string {
   const tokenBlock = (Object.keys(tokens.tokens) as Array<keyof typeof tokens.tokens>)
     .map((k) => `--shadow-${k}: ${tokens.tokens[k]};`)
     .join('\n');
+  const tintLine =
+    s.tintedPreferred && s.primaryHue === undefined
+      ? 'pending — tint preferred, but primary hue is undecided; use neutral black until color exists'
+      : tokens.meta.tinted
+        ? `yes — tint color \`${tokens.meta.tintColor}\``
+        : 'no (neutral black)';
   return [
     '## Shadow / Elevation',
     `- Intensity: ${s.intensity}`,
-    `- Tinted: ${tokens.meta.tinted ? `yes — tint color \`${tokens.meta.tintColor}\`` : 'no (neutral black)'}`,
+    `- Tinted: ${tintLine}`,
     `- Rationale: ${rationaleShadow(s)}`,
     '',
     '### Shadow scale',
@@ -309,6 +319,11 @@ function colorSection(c: ColorInput): string {
     scaleBlock('neutral', palette.neutral),
     '```',
     '',
+    '### Semantic surface roles',
+    '```css',
+    semanticSurfaceRolesBlock(c),
+    '```',
+    '',
     '### Semantic colors',
     '```css',
     `--color-success-500: ${palette.semantic.success};`,
@@ -341,48 +356,166 @@ function colorSection(c: ColorInput): string {
   return lines.join('\n');
 }
 
+function semanticSurfaceRolesBlock(c: ColorInput): string {
+  if (c.category === 'neon-on-dark') {
+    return [
+      '--color-bg: var(--color-neutral-950);',
+      '--color-surface: var(--color-neutral-900);',
+      '--color-surface-raised: var(--color-neutral-800);',
+      '--color-text: var(--color-neutral-50);',
+      '--color-text-muted: var(--color-neutral-300);',
+      '--color-border: var(--color-neutral-700);',
+      '--color-border-strong: var(--color-neutral-600);',
+    ].join('\n');
+  }
+
+  return [
+    '--color-bg: var(--color-neutral-50);',
+    '--color-surface: var(--color-neutral-50);',
+    '--color-surface-raised: oklch(100% 0 0);',
+    '--color-text: var(--color-neutral-900);',
+    '--color-text-muted: var(--color-neutral-600);',
+    '--color-border: var(--color-neutral-200);',
+    '--color-border-strong: var(--color-neutral-300);',
+  ].join('\n');
+}
+
 // ──────────── Static blocks ────────────
 
-const USAGE_GUIDELINES = `## Usage guidelines
+function usageGuidelines(d: DesignDecisions): string {
+  const bullets: string[] = [];
 
-- Primary actions: \`var(--color-primary-500)\`; on hover \`var(--color-primary-600)\`; on active \`var(--color-primary-700)\`
-- Cards: \`var(--radius-card)\` with \`var(--shadow-md)\`
-- Buttons: \`var(--radius-button)\` with \`var(--shadow-sm)\` on the primary variant
-- Inputs: \`var(--radius-input)\`; focus ring uses the interaction-states spec
-- Body text: \`var(--font-size-base)\` with \`var(--line-height-normal)\`
-- Section spacing: \`var(--space-3xl)\` between major blocks
-- Stack spacing within a block: \`var(--space-md)\``;
+  if (d.color) {
+    bullets.push(
+      '- Primary actions: `var(--color-primary-500)`; on hover `var(--color-primary-600)`; on active `var(--color-primary-700)`',
+      '- Page background: `var(--color-bg)`; elevated panels use `var(--color-surface-raised)`; body copy uses `var(--color-text)`',
+    );
+  }
 
-// Bug 1 fix: dark-mode line is no longer a placeholder; it's resolved from
-// the actual decision and produces a real sentence (or is omitted).
-function notSection(d: DesignDecisions): string {
-  const supportsDark = d.color?.supportsDark ?? false;
-  const darkLine = supportsDark
-    ? '- Dark mode tokens: included — see the "Dark variants" block in the Color section.'
-    : '- Dark mode tokens: out of scope for v1 — light mode only.';
+  if (d.radius && d.shadow) {
+    bullets.push(
+      '- Cards: `var(--radius-card)` with `var(--shadow-md)`',
+      '- Buttons: `var(--radius-button)` with `var(--shadow-sm)` on the primary variant',
+    );
+  } else {
+    if (d.radius) {
+      bullets.push(
+        '- Cards: use `var(--radius-card)` for shape',
+        '- Buttons: use `var(--radius-button)` for shape',
+      );
+    }
+    if (d.shadow) {
+      bullets.push(
+        '- Cards: use `var(--shadow-md)` for elevation',
+        '- Primary buttons may use `var(--shadow-sm)` for subtle elevation',
+      );
+    }
+  }
+
+  if (d.radius && d.color) {
+    bullets.push('- Inputs: `var(--radius-input)`; focus ring uses the interaction-states spec');
+  } else if (d.radius) {
+    bullets.push('- Inputs: `var(--radius-input)` for shape');
+  } else if (d.color) {
+    bullets.push('- Inputs: focus ring uses the interaction-states spec');
+  }
+
+  if (d.typography) {
+    bullets.push('- Body text: `var(--font-size-base)` with `var(--line-height-normal)`');
+  }
+
+  if (d.spacing) {
+    bullets.push(
+      '- Section spacing: `var(--space-3xl)` between major blocks',
+      '- Stack spacing within a block: `var(--space-md)`',
+    );
+  }
+
+  if (bullets.length === 0) {
+    bullets.push('- No token-specific usage guidelines yet. Complete at least one decision step to generate usable guidance.');
+  }
+
+  return ['## Usage guidelines', '', ...bullets].join('\n');
+}
+
+function modeScopeSection(d: DesignDecisions): string | null {
+  if (!d.color) return null;
+
+  const line =
+    d.color.category === 'neon-on-dark'
+      ? '- Mode: dark presentation is the default; neon-on-dark always renders against dark neutrals.'
+      : d.color.supportsDark
+        ? '- Mode: light and dark tokens are included. Use the dark variants when implementing dark mode.'
+        : '- Mode: light mode only for v1; do not invent dark-mode tokens unless a later decision adds them.';
+
+  return ['## Mode scope', '', line].join('\n');
+}
+
+function notSection(): string {
   return [
     '## What this design system is NOT',
     '',
     '- Not a component library specification — tokens only',
     '- Not opinionated about responsive breakpoints',
     '- Extend these tokens via prefixed custom properties (`--color-brand-*`), do not replace',
-    darkLine,
   ].join('\n');
 }
 
-const AI_INSTRUCTIONS = `## Generation instructions for AI
+const CHANGE_MANAGEMENT = `## Change management
 
-When using this DESIGN.md:
-1. Treat the listed values as authoritative; do not re-derive from preference.
-2. When a component needs a value not listed here, pick the nearest available token.
-3. If a new decision is required, document it in an appended section and flag it clearly.
-4. Preserve the rationale comments — they encode design intent and should guide new decisions in unlisted contexts.
-5. Interaction states are derived rules, not hard-coded values — apply them procedurally.`;
+- Treat this file as v1 of the project's design source of truth.
+- Add new tokens only when the nearest existing token cannot represent the need.
+- Deprecate tokens by keeping the old token, documenting the replacement, migrating consumers, then removing it in a later change.
+- Record new base decisions in an appended "Decision log" section with context.`;
 
-const INTRO = `# Design System Source of Truth
+function aiInstructions(d: DesignDecisions): string {
+  const rules = [
+    'Treat the listed values as authoritative; do not re-derive from preference.',
+    'When a component needs a value not listed here, pick the nearest available token.',
+    'If a new decision is required, document it in an appended section and flag it clearly.',
+    'Preserve the rationale comments — they encode design intent and should guide new decisions in unlisted contexts.',
+  ];
 
-You are generating a DESIGN.md for a frontend project.
-The following decisions represent the design intent and MUST be preserved in the generated DESIGN.md. Use the values verbatim; elaborate on rationale in your own words where helpful.`;
+  if (d.color) {
+    rules.push(
+      'Interaction states are derived rules, not hard-coded values — apply them procedurally.',
+      'Use the semantic surface roles for layout-level color choices before reaching directly into numbered neutral tokens.',
+    );
+  }
+
+  return [
+    '## Generation instructions for AI',
+    '',
+    'When using this DESIGN.md:',
+    ...rules.map((rule, i) => `${i + 1}. ${rule}`),
+  ].join('\n');
+}
+
+const INTRO = `# Design System Source of Truth Prompt
+
+## Task
+
+Create or update \`/DESIGN.md\` for this frontend project.
+
+The final \`DESIGN.md\` must be a durable design source of truth for future AI and human contributors. It should not include this task wrapper, \`<design_decisions>\` tags, or notes about generating the file.
+
+## Output contract
+
+- Start the file with \`# Design System Source of Truth\`.
+- Preserve every listed token value exactly.
+- Do not convert color spaces, units, or shadow values unless the user explicitly asks for a target format that requires conversion.
+- Keep rationale lines near the values they explain.
+- Do not invent new base decisions. If the design is incomplete, omit undecided sections and mark them clearly.
+- Include the \`Generation instructions for AI\` section so future agents know how to use the file.
+
+<design_decisions>`;
+
+const OUTRO = `</design_decisions>
+
+## Execution instructions
+
+Generate \`/DESIGN.md\` from the content inside \`<design_decisions>\`.
+Do not copy the wrapper tags, this Task section, this Output contract, or these Execution instructions into the final file.`;
 
 // ──────────── Top-level ────────────
 
@@ -406,9 +539,28 @@ function overallIntent(d: DesignDecisions): string {
   return parts.length > 0 ? parts.join(', ') : 'to be determined';
 }
 
+function decisionDependencies(d: DesignDecisions): string | null {
+  const deps: string[] = [];
+
+  if (d.shadow?.tintedPreferred && d.color) {
+    deps.push('- Shadow tint depends on Color: the tint resolves from the decided primary hue.');
+  } else if (d.shadow?.tintedPreferred && !d.color) {
+    deps.push('- Shadow tint depends on Color: tinting is preferred, but no primary hue exists yet; use neutral black shadows until Color is decided.');
+  }
+
+  if (d.color?.category === 'neon-on-dark') {
+    deps.push('- Mode depends on Color category: neon-on-dark forces dark presentation regardless of the dark-mode toggle.');
+  }
+
+  if (deps.length === 0) return null;
+  return ['## Decision dependencies', '', ...deps].join('\n');
+}
+
 export function buildRichPrompt(d: DesignDecisions): string {
   const missing = missingDecisions(d);
   const sections: string[] = [INTRO, ''];
+  const deps = decisionDependencies(d);
+  const modeScope = modeScopeSection(d);
 
   if (missing.length > 0) {
     sections.push(
@@ -426,6 +578,7 @@ export function buildRichPrompt(d: DesignDecisions): string {
     '',
   );
 
+  if (deps) sections.push(deps, '');
   if (d.typography) sections.push(typographySection(d.typography), '');
   if (d.spacing) sections.push(spacingSection(d.spacing), '');
   if (d.radius) sections.push(radiusSection(d.radius), '');
@@ -438,7 +591,9 @@ export function buildRichPrompt(d: DesignDecisions): string {
   }
   if (d.color) sections.push(colorSection(d.color), '');
 
-  sections.push(USAGE_GUIDELINES, '', notSection(d), '', AI_INSTRUCTIONS);
+  sections.push(usageGuidelines(d), '');
+  if (modeScope) sections.push(modeScope, '');
+  sections.push(notSection(), '', CHANGE_MANAGEMENT, '', aiInstructions(d), '', OUTRO);
 
   return sections.join('\n');
 }

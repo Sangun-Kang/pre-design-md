@@ -7,6 +7,7 @@ import {
   buildGoogleSpec,
   buildRichPrompt,
   buildCssVariables,
+  buildFigmaTokens,
   type OutputFormat,
 } from '../lib/build';
 import { DECISION_STEPS } from '../types/design';
@@ -17,7 +18,10 @@ interface TabDef {
   id: OutputFormat;
   labelKey: string;
   hintKey: string;
+  usageKey: string;
   build: (d: Parameters<typeof buildGoogleSpec>[0]) => string;
+  downloadName: string;
+  mime: string;
 }
 
 const TABS: TabDef[] = [
@@ -25,19 +29,37 @@ const TABS: TabDef[] = [
     id: 'google-spec',
     labelKey: 'export.tab.googleSpec.label',
     hintKey: 'export.tab.googleSpec.hint',
+    usageKey: 'export.usage.googleSpec',
     build: buildGoogleSpec,
+    downloadName: 'DESIGN.md',
+    mime: 'text/markdown',
   },
   {
     id: 'rich-prompt',
     labelKey: 'export.tab.richPrompt.label',
     hintKey: 'export.tab.richPrompt.hint',
+    usageKey: 'export.usage.richPrompt',
     build: buildRichPrompt,
+    downloadName: 'DESIGN.md',
+    mime: 'text/markdown',
   },
   {
     id: 'css-vars',
     labelKey: 'export.tab.cssVars.label',
     hintKey: 'export.tab.cssVars.hint',
+    usageKey: 'export.usage.cssVars',
     build: buildCssVariables,
+    downloadName: 'design-tokens.css',
+    mime: 'text/css',
+  },
+  {
+    id: 'figma-tokens',
+    labelKey: 'export.tab.figmaTokens.label',
+    hintKey: 'export.tab.figmaTokens.hint',
+    usageKey: 'export.usage.figmaTokens',
+    build: buildFigmaTokens,
+    downloadName: 'design-tokens.json',
+    mime: 'application/json',
   },
 ];
 
@@ -47,12 +69,13 @@ export function ExportStep() {
   const [copied, setCopied] = useState(false);
   const t = useT();
 
-  // Pre-compute all three so switching tabs is instant.
+  // Pre-compute all formats so switching tabs is instant.
   const outputs = useMemo<Record<OutputFormat, string>>(
     () => ({
       'google-spec': buildGoogleSpec(decisions),
       'rich-prompt': buildRichPrompt(decisions),
       'css-vars': buildCssVariables(decisions),
+      'figma-tokens': buildFigmaTokens(decisions),
     }),
     [decisions],
   );
@@ -70,6 +93,18 @@ export function ExportStep() {
     } catch {
       setCopied(false);
     }
+  }
+
+  function onDownload() {
+    const blob = new Blob([activeOutput], { type: `${activeTab.mime};charset=utf-8` });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = activeTab.downloadName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   }
 
   // Reset "copied" state when switching tabs to avoid stale "Copied ✓".
@@ -145,6 +180,14 @@ export function ExportStep() {
         <p className={styles.tabHint}>{t(activeTab.hintKey)}</p>
 
         <div className={styles.outputHead}>
+          <button
+            type="button"
+            className={styles.downloadBtn}
+            onClick={onDownload}
+            title={activeTab.downloadName}
+          >
+            {t('export.downloadBtn', { name: activeTab.downloadName })}
+          </button>
           <button type="button" className={styles.copyBtn} onClick={onCopy}>
             {copied ? t('export.copied') : t('export.copyBtn')}
           </button>
@@ -161,11 +204,16 @@ export function ExportStep() {
 
       <section className={styles.usage}>
         <h2 className={styles.sectionTitle}>{t('export.usageTitle')}</h2>
-        <ol className={styles.steps}>
-          <li><Markdown>{t('export.usage.1')}</Markdown></li>
-          <li><Markdown>{t('export.usage.2')}</Markdown></li>
-          <li><Markdown>{t('export.usage.3')}</Markdown></li>
-        </ol>
+        <ul className={styles.usageList}>
+          {TABS.map((tab) => (
+            <li key={tab.id}>
+              <Markdown>{t(tab.usageKey)}</Markdown>
+            </li>
+          ))}
+        </ul>
+        <p className={styles.usageNote}>
+          <Markdown>{t('export.usageNote')}</Markdown>
+        </p>
       </section>
     </StepLayout>
   );
@@ -181,21 +229,26 @@ function Entry({ label, children }: { label: string; children: ReactNode }) {
 }
 
 /**
- * Minimal inline markdown renderer — only handles **bold** and `code`, which is
- * all we use in usage strings. Keeps the i18n files plain text without needing
- * a markdown library.
+ * Minimal inline markdown renderer — handles **bold**, *italic*, and `code`,
+ * which is all we use in usage strings. Keeps the i18n files plain text
+ * without needing a markdown library.
  */
 function Markdown({ children }: { children: string }) {
   const parts: ReactNode[] = [];
-  const re = /(\*\*[^*]+\*\*|`[^`]+`)/g;
+  const re = /(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/g;
   let last = 0;
   let key = 0;
   for (const m of children.matchAll(re)) {
     const idx = m.index ?? 0;
     if (idx > last) parts.push(children.slice(last, idx));
     const raw = m[0];
-    if (raw.startsWith('**')) parts.push(<strong key={key++}>{raw.slice(2, -2)}</strong>);
-    else parts.push(<code key={key++}>{raw.slice(1, -1)}</code>);
+    if (raw.startsWith('**')) {
+      parts.push(<strong key={key++}>{raw.slice(2, -2)}</strong>);
+    } else if (raw.startsWith('*')) {
+      parts.push(<em key={key++}>{raw.slice(1, -1)}</em>);
+    } else {
+      parts.push(<code key={key++}>{raw.slice(1, -1)}</code>);
+    }
     last = idx + raw.length;
   }
   if (last < children.length) parts.push(children.slice(last));

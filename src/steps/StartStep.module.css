@@ -21,20 +21,10 @@
   inset: 0;
   z-index: -1;
   background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent 0,
-      transparent 31px,
-      oklch(93% 0 0) 31px,
-      oklch(93% 0 0) 32px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent 0,
-      transparent 31px,
-      oklch(93% 0 0) 31px,
-      oklch(93% 0 0) 32px
-    );
+    linear-gradient(to right, oklch(93% 0 0) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(93% 0 0) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: 0 0;
   mask-image: radial-gradient(ellipse 75% 80% at 50% 50%, black, transparent 90%);
   -webkit-mask-image: radial-gradient(ellipse 75% 80% at 50% 50%, black, transparent 90%);
   pointer-events: none;
@@ -306,12 +296,51 @@
   margin: 0;
 }
 
-.infoCta {
-  margin-top: var(--app-space-xl);
-  padding: var(--app-space-2xl);
-  border-radius: var(--app-radius-xl);
-  background: var(--app-surface-sunken);
-  border: 1px solid var(--app-border);
+/* ── Outro CTA: full-bleed band where the hero grid restarts and fades in ── */
+.outro {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  padding: clamp(5rem, 12vw, 9rem) var(--app-space-3xl) clamp(4rem, 9vw, 7rem);
+  display: flex;
+  justify-content: center;
+}
+
+.outro::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(to right, oklch(93% 0 0) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(93% 0 0) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: 0 0;
+  /* The grid restarts at the top, fades in over the upper half, then fades out
+     softly at the bottom — so the band reads as a fresh extension of the hero
+     pattern rather than a hard rectangle. */
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    oklch(0% 0 0 / 0.4) 30%,
+    black 60%,
+    black 88%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    oklch(0% 0 0 / 0.4) 30%,
+    black 60%,
+    black 88%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.outroInner {
+  max-width: 44rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -319,19 +348,21 @@
   text-align: center;
 }
 
-.infoCtaTitle {
+.outroTitle {
   font-family: var(--app-font-sans);
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
   color: var(--app-text);
   margin: 0;
 }
 
-.infoCtaBody {
-  font-size: 0.9375rem;
+.outroBody {
+  font-size: 1rem;
   color: var(--app-text-muted);
-  margin: 0 0 var(--app-space-md);
+  line-height: 1.55;
+  margin: 0 0 var(--app-space-lg);
 }
 
 @keyframes fadeInUp {

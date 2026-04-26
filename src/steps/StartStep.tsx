@@ -78,10 +78,12 @@ export function StartStep() {
             <p className={styles.infoCardBody}>{t('start.info.getBody')}</p>
           </article>
         </div>
+      </section>
 
-        <div className={styles.infoCta}>
-          <h3 className={styles.infoCtaTitle}>{t('start.info.ctaTitle')}</h3>
-          <p className={styles.infoCtaBody}>{t('start.info.ctaBody')}</p>
+      <section className={styles.outro}>
+        <div className={styles.outroInner}>
+          <h3 className={styles.outroTitle}>{t('start.info.ctaTitle')}</h3>
+          <p className={styles.outroBody}>{t('start.info.ctaBody')}</p>
           <button type="button" className={styles.primaryCta} onClick={onBegin}>
             {t('start.startBtn')} →
           </button>

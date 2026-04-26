@@ -98,13 +98,18 @@ export const ja: Messages = {
   'export.promptTitle': 'DESIGN.md プロンプト',
   'export.copyBtn': 'クリップボードにコピー',
   'export.copied': 'コピーしました ✓',
-  'export.usageTitle': '使い方',
-  'export.usage.1':
-    '**Claude Code**: 新規プロジェクトで `/init` を実行した直後に、このプロンプトを貼り付けます。`DESIGN.md` がリポジトリ直下に生成されます。',
-  'export.usage.2':
-    '**Cursor / Codex**: プロジェクト開始時にチャットへ貼り付け、「これに従って `DESIGN.md` を生成して」と依頼します。',
-  'export.usage.3':
-    '生成された `DESIGN.md` は、チームで共有するデザイン決定の source of truth になります。以降、AI が新しいコンポーネントを作るたびにこのファイルを参照します。',
+  'export.downloadBtn': '{name} をダウンロード',
+  'export.usageTitle': 'フォーマット別の使い方',
+  'export.usage.googleSpec':
+    '**Google DESIGN.md** — Claude Code の `/init` 直後、または Cursor / Codex のチャットにそのまま貼り付け、*「これに従って `DESIGN.md` を生成して」* と依頼します。公式仕様・lint 互換で、いちばん無難な既定値。',
+  'export.usage.richPrompt':
+    '**Rich Prompt** — 使い方は上と同じですが、AI に OKLCH の元値と各決定の*根拠*まで理解させたいときに選びます。値の写しではなく、デザイン意図まで推論してほしいチーム向け。',
+  'export.usage.cssVars':
+    '**CSS Variables** — `.css` ファイルをダウンロードし、スタイルシートに import するか、`:root { … }` ブロックをそのまま貼り付けます。マークダウンのラッパー無し、純粋な custom property のみ — AI なしで即適用可能。',
+  'export.usage.figmaTokens':
+    '**Figma Tokens** — `.json` をダウンロード後、Figma で **Tokens Studio** プラグインを起動 → **Tools → Load** からファイルを選択します。カラー（hover/active を事前計算済み）、タイポグラフィ、spacing、radius、shadow が variables と styles として一気に取り込まれます。',
+  'export.usageNote':
+    'どのフォーマットを選んでも、生成された DESIGN.md はチームの source of truth となり、以降 AI が新しいコンポーネントを作るたびにこのファイルを参照します。',
 
   'decisions.undecided': '— 未定',
 
@@ -201,6 +206,9 @@ export const ja: Messages = {
   'export.tab.richPrompt.hint': 'OKLCH そのまま、根拠も全部。AI エージェントに渡す文脈が最も豊富。',
   'export.tab.cssVars.label': 'CSS Variables',
   'export.tab.cssVars.hint': 'スタイルシートに貼るだけ。マークダウンもプロンプトも無し。',
+  'export.tab.figmaTokens.label': 'Figma Tokens',
+  'export.tab.figmaTokens.hint':
+    'Tokens Studio JSON。Figma → Tokens Studio プラグイン → Tools → Load から色・タイポ・spacing・radius・shadow を一括 import。',
 
   'radius.desc.sharp': '0px · uniform — 鋭く正確、技術的な印象',
   'radius.desc.whisper': '2px · scaled — ほぼ気づかない、プロ向けエディタ調',

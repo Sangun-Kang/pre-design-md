@@ -98,13 +98,18 @@ export const en: Messages = {
   'export.promptTitle': 'DESIGN.md prompt',
   'export.copyBtn': 'Copy to clipboard',
   'export.copied': 'Copied ✓',
-  'export.usageTitle': 'How to use',
-  'export.usage.1':
-    '**Claude Code**: in a new project, run `/init`, then paste this prompt. A `DESIGN.md` will be generated at the repo root.',
-  'export.usage.2':
-    '**Cursor / Codex**: paste into the chat at project start and ask it to "follow this and generate `DESIGN.md`."',
-  'export.usage.3':
-    'The generated `DESIGN.md` becomes the team’s source of truth — AI tools will refer to it every time they build a new component.',
+  'export.downloadBtn': 'Download {name}',
+  'export.usageTitle': 'How to use each format',
+  'export.usage.googleSpec':
+    '**Google DESIGN.md** — Paste into Claude Code right after `/init`, or into Cursor / Codex at project start. Ask the agent to *"follow this and generate `DESIGN.md`."* The official, lint-compatible spec — the safest default.',
+  'export.usage.richPrompt':
+    '**Rich Prompt** — Same flow as Google DESIGN.md, but pick this when you want the AI to keep OKLCH source values and the rationale behind each decision. Best for teams that want their AI to reason about design intent, not just copy values.',
+  'export.usage.cssVars':
+    '**CSS Variables** — Download the `.css` file and import it (or paste the `:root { … }` block) into your stylesheet. Plain custom properties — no markdown wrapper, no AI required.',
+  'export.usage.figmaTokens':
+    '**Figma Tokens** — Download the `.json`, then in Figma open the **Tokens Studio** plugin → **Tools → Load** and select the file. Brings colors (with hover/active states pre-resolved), typography, spacing, radius, and shadows in as variables and styles.',
+  'export.usageNote':
+    'Whichever you pick, the generated DESIGN.md becomes the team’s source of truth — AI tools will refer to it every time they build a new component.',
 
   'decisions.undecided': '— not yet',
 
@@ -201,6 +206,9 @@ export const en: Messages = {
   'export.tab.richPrompt.hint': 'OKLCH preserved, full rationale. Maximum context for AI agents.',
   'export.tab.cssVars.label': 'CSS Variables',
   'export.tab.cssVars.hint': 'Drop into your stylesheet. No markdown, no prompt.',
+  'export.tab.figmaTokens.label': 'Figma Tokens',
+  'export.tab.figmaTokens.hint':
+    'Tokens Studio JSON. Open Figma → Tokens Studio plugin → Tools → Load to import colors, typography, spacing, radius, and shadows.',
 
   'radius.desc.sharp': '0px · uniform — crisp right angles, technical feel',
   'radius.desc.whisper': '2px · scaled — barely-there softness, pro-editor tone',

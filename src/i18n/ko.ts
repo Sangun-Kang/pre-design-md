@@ -98,13 +98,18 @@ export const ko: Messages = {
   'export.promptTitle': 'DESIGN.md 프롬프트',
   'export.copyBtn': '클립보드에 복사',
   'export.copied': '복사됨 ✓',
-  'export.usageTitle': '사용 방법',
-  'export.usage.1':
-    '**Claude Code**: 새 프로젝트에서 `/init` 직후 이 프롬프트를 붙여넣으세요. 프로젝트 루트에 `DESIGN.md`가 생성됩니다.',
-  'export.usage.2':
-    '**Cursor / Codex**: 프로젝트 시작 시 채팅창에 붙여넣고 "이 지침을 따라 `DESIGN.md`를 생성해 줘"라고 요청하세요.',
-  'export.usage.3':
-    '생성된 `DESIGN.md`는 팀이 공유하는 디자인 결정의 source of truth가 됩니다. 이후 AI가 새 컴포넌트를 만들 때마다 이 파일을 참조해요.',
+  'export.downloadBtn': '{name} 다운로드',
+  'export.usageTitle': '포맷별 사용법',
+  'export.usage.googleSpec':
+    '**Google DESIGN.md** — Claude Code의 `/init` 직후, 또는 Cursor / Codex 채팅에 그대로 붙여넣고 *"이 지침을 따라 `DESIGN.md`를 생성해 줘"*라고 요청하세요. 공식 스펙·lint 통과형으로, 가장 무난한 기본값.',
+  'export.usage.richPrompt':
+    '**Rich Prompt** — 사용 흐름은 위와 동일하지만, AI가 OKLCH 원본 값과 각 결정의 *근거*까지 이해해야 하는 경우 이걸 고르세요. 단순 값 복사가 아니라 디자인 의도까지 추론하길 원하는 팀에 적합.',
+  'export.usage.cssVars':
+    '**CSS Variables** — `.css` 파일을 다운받아 stylesheet에 import하거나, `:root { … }` 블록을 그대로 붙여넣으세요. 마크다운 래퍼 없이 순수 custom property만 — AI 없이 즉시 적용 가능.',
+  'export.usage.figmaTokens':
+    '**Figma Tokens** — `.json`을 다운받은 뒤 Figma에서 **Tokens Studio** 플러그인을 실행 → **Tools → Load**로 파일을 선택하세요. 색상(hover/active 상태 사전 계산 포함), 타이포그래피, spacing, radius, shadow가 variables와 styles로 그대로 들어옵니다.',
+  'export.usageNote':
+    '어떤 포맷을 고르든 생성된 DESIGN.md는 팀의 source of truth가 되고, 이후 AI가 새 컴포넌트를 만들 때마다 이 파일을 참조하게 됩니다.',
 
   'decisions.undecided': '— 아직 없음',
 
@@ -201,6 +206,9 @@ export const ko: Messages = {
   'export.tab.richPrompt.hint': 'OKLCH 그대로, 근거 전부. AI 에이전트에 줄 맥락이 가장 풍부해요.',
   'export.tab.cssVars.label': 'CSS Variables',
   'export.tab.cssVars.hint': '스타일시트에 바로 붙여넣기. 마크다운도 프롬프트도 없어요.',
+  'export.tab.figmaTokens.label': 'Figma Tokens',
+  'export.tab.figmaTokens.hint':
+    'Tokens Studio JSON. Figma → Tokens Studio 플러그인 → Tools → Load 로 색상·타이포·spacing·radius·shadow를 한번에 import.',
 
   'radius.desc.sharp': '0px · uniform — 정밀한 직각, 기술적인 인상',
   'radius.desc.whisper': '2px · scaled — 거의 모르게 살짝, 프로용 에디터 톤',
