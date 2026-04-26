@@ -19,16 +19,23 @@ const PRESETS: Array<{
   { id: 'layered', label: 'Layered', descriptionKey: 'shadow.desc.layered' },
 ];
 
+const LEVELS: Array<{ key: 'sm' | 'md' | 'lg' | 'xl'; role: string }> = [
+  { key: 'sm', role: 'dropdown' },
+  { key: 'md', role: 'card' },
+  { key: 'lg', role: 'modal' },
+  { key: 'xl', role: 'toast' },
+];
+
 function ShadowPreview({ intensity, tinted, hue }: { intensity: ShadowIntensity; tinted: boolean; hue: number }) {
   const tokens = buildShadowTokens({ intensity, tintedPreferred: tinted, primaryHue: hue });
-  const LEVELS: Array<keyof typeof tokens.tokens> = ['sm', 'md', 'lg', 'xl'];
 
   return (
     <div className={styles.preview}>
       <div className={styles.stage}>
-        {LEVELS.map((lvl) => (
-          <div key={lvl} className={styles.card} style={{ boxShadow: tokens.tokens[lvl] }}>
-            <span className={styles.cardLabel}>{lvl}</span>
+        {LEVELS.map(({ key, role }) => (
+          <div key={key} className={styles.cell}>
+            <div className={styles.card} style={{ boxShadow: tokens.tokens[key] }} />
+            <span className={styles.cardLabel}>{role}</span>
           </div>
         ))}
       </div>

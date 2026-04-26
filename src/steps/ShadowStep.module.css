@@ -22,7 +22,7 @@
 }
 
 .preview {
-  background: oklch(93% 0 0);
+  background: oklch(100% 0 0);
   height: 17rem;
   display: flex;
   align-items: center;
@@ -32,30 +32,47 @@
 
 .stage {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.25rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.9rem;
   width: 100%;
-  padding: 0 var(--app-space-sm);
+  align-items: end;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
 }
 
 .card {
-  aspect-ratio: 1 / 1.15;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   background: oklch(100% 0 0);
+  border: 1px solid oklch(93% 0 0);
   border-radius: 0.625rem;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 0.5rem;
-  transition: box-shadow 0.35s ease;
+  transition:
+    transform 0.32s cubic-bezier(0.3, 1.2, 0.5, 1),
+    box-shadow 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
 }
 
 .cardLabel {
   font-family: var(--app-font-mono);
   font-size: 0.625rem;
-  color: oklch(38% 0 0);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  color: oklch(40% 0 0);
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  text-align: center;
 }
 
 /* ── Tinted row ── */
