@@ -160,7 +160,8 @@
     grid-template-columns: 1fr;
   }
   .pairingCardContent {
-    min-height: 11rem;
+    /* Keep matching PresetCard.preview floor so the gray parent never peeks. */
+    min-height: 13rem;
     padding: var(--app-space-md);
   }
 }
