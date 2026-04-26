@@ -32,17 +32,11 @@ export const en: Messages = {
   'typography.eyebrow': 'STEP 1 · TYPOGRAPHY',
   'typography.title': 'The frame, first.',
   'typography.description':
-    'Pick a font pairing to set the foundation. Fine-tune base size and scale ratio in the panel below.',
+    'Pick a base size, ratio, and pairing — every card below previews all three together.',
+  'typography.scaleControls': 'Scale controls',
   'typography.pairingsHeading': 'Font pairing',
-  'typography.dockToggleOpen': 'Scale settings',
-  'typography.dockToggleClose': 'Hide scale settings',
   'typography.baseSize': 'Base size',
   'typography.ratio': 'Ratio',
-  'typography.livePreview': 'Current scale',
-  'typography.sampleHeading': 'make it look nice.',
-  'typography.sampleBody':
-    'How letters sit on the page decides the personality of the screen — same words, different weight of attention.',
-  'typography.sampleCaption': '— caption · metadata · subtle annotations',
   'typography.pairingHeading': 'make it look nice',
   'typography.pairingBody':
     'Pack my box with five dozen liquor jugs. The letterforms carry the mood of every decision made in this system.',

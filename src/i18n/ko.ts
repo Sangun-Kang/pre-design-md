@@ -32,17 +32,11 @@ export const ko: Messages = {
   'typography.eyebrow': 'STEP 1 · TYPOGRAPHY',
   'typography.title': '뼈대를 먼저.',
   'typography.description':
-    '폰트 페어링을 고르면 기본이 잡힙니다. 기본 크기와 비율은 하단 패널에서 조정해요.',
+    '기본 크기·비율·페어링을 고르면 아래 카드가 세 결정을 한꺼번에 미리보여줍니다.',
+  'typography.scaleControls': '스케일 컨트롤',
   'typography.pairingsHeading': '폰트 페어링',
-  'typography.dockToggleOpen': '스케일 설정 열기',
-  'typography.dockToggleClose': '스케일 설정 닫기',
   'typography.baseSize': '기본 크기',
   'typography.ratio': '스케일 비율',
-  'typography.livePreview': '현재 스케일',
-  'typography.sampleHeading': '"느낌"을 "결정"으로.',
-  'typography.sampleBody':
-    '글자가 페이지에 놓이는 방식이 화면의 성격을 만듭니다. 같은 단어라도 시선이 머무는 무게가 달라져요.',
-  'typography.sampleCaption': '— 캡션 · 메타데이터 · 부가 설명',
   'typography.pairingHeading': '"느낌"을 "결정"으로.',
   'typography.pairingBody':
     '다람쥐 헌 쳇바퀴에 타고파. 글자의 결은 이 시스템에서 내리는 모든 결정의 분위기를 실어 나릅니다.',

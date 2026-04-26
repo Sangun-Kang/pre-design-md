@@ -32,17 +32,11 @@ export const ja: Messages = {
   'typography.eyebrow': 'STEP 1 · TYPOGRAPHY',
   'typography.title': 'まずは骨組みから。',
   'typography.description':
-    'フォントペアリングを選ぶと土台が決まります。ベースサイズと比率は下のパネルで微調整できます。',
+    'ベースサイズ・比率・ペアリングを選ぶと、下のカードが三つの決定をまとめてプレビューします。',
+  'typography.scaleControls': 'スケール設定',
   'typography.pairingsHeading': 'フォントペアリング',
-  'typography.dockToggleOpen': 'スケール設定を開く',
-  'typography.dockToggleClose': 'スケール設定を閉じる',
   'typography.baseSize': 'ベースサイズ',
   'typography.ratio': 'スケール比',
-  'typography.livePreview': '現在のスケール',
-  'typography.sampleHeading': '"いい感じ” を、決定に変える',
-  'typography.sampleBody':
-    '文字がページに並ぶ姿で、画面の性格が決まります。同じ言葉でも、目に留まる重さが変わる。',
-  'typography.sampleCaption': '— キャプション · メタデータ · 補足',
   'typography.pairingHeading': '"いい感じ” を、決定に変える',
   'typography.pairingBody':
     'いろはにほへと ちりぬるを。文字のかたちは、このシステムで下すすべての決定の空気を運びます。',
