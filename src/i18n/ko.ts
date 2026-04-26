@@ -37,9 +37,11 @@ export const ko: Messages = {
   'typography.pairingsHeading': '폰트 페어링',
   'typography.baseSize': '기본 크기',
   'typography.ratio': '스케일 비율',
+  'typography.pairingEyebrow': '이슈 · 04',
   'typography.pairingHeading': '"느낌"을 "결정"으로.',
   'typography.pairingBody':
     '다람쥐 헌 쳇바퀴에 타고파. 글자의 결은 이 시스템에서 내리는 모든 결정의 분위기를 실어 나릅니다.',
+  'typography.pairingCaption': '4분 읽기 · 2026년 4월',
 
   'spacing.eyebrow': 'STEP 2 · SPACING',
   'spacing.title': '간격의 리듬.',

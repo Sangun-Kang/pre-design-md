@@ -86,11 +86,22 @@ export function TypographyStep() {
               >
                 <div className={styles.pairingCardContent}>
                   <div
+                    className={styles.pairingEyebrow}
+                    style={{
+                      fontFamily: p.body,
+                      fontWeight: p.weights.bodyStrong,
+                      fontSize: tokens.sizes.xs,
+                      lineHeight: tokens.lineHeights.tight,
+                    }}
+                  >
+                    {t('typography.pairingEyebrow')}
+                  </div>
+                  <div
                     className={styles.pairingHeading}
                     style={{
                       fontFamily: p.heading,
                       fontWeight: p.weights.heading,
-                      fontSize: tokens.sizes.xl,
+                      fontSize: tokens.sizes['2xl'],
                       lineHeight: tokens.lineHeights.tight,
                     }}
                   >
@@ -106,6 +117,17 @@ export function TypographyStep() {
                     }}
                   >
                     {t('typography.pairingBody')}
+                  </div>
+                  <div
+                    className={styles.pairingCaption}
+                    style={{
+                      fontFamily: p.body,
+                      fontWeight: p.weights.body,
+                      fontSize: tokens.sizes.sm,
+                      lineHeight: tokens.lineHeights.normal,
+                    }}
+                  >
+                    {t('typography.pairingCaption')}
                   </div>
                 </div>
               </PresetCard>

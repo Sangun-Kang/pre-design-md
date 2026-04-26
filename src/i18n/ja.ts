@@ -37,9 +37,11 @@ export const ja: Messages = {
   'typography.pairingsHeading': 'フォントペアリング',
   'typography.baseSize': 'ベースサイズ',
   'typography.ratio': 'スケール比',
+  'typography.pairingEyebrow': 'Issue · 04',
   'typography.pairingHeading': '"いい感じ” を、決定に変える',
   'typography.pairingBody':
     'いろはにほへと ちりぬるを。文字のかたちは、このシステムで下すすべての決定の空気を運びます。',
+  'typography.pairingCaption': '4分で読了 · 2026年4月',
 
   'spacing.eyebrow': 'STEP 2 · SPACING',
   'spacing.title': '間隔のリズム。',

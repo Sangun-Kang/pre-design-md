@@ -37,9 +37,11 @@ export const en: Messages = {
   'typography.pairingsHeading': 'Font pairing',
   'typography.baseSize': 'Base size',
   'typography.ratio': 'Ratio',
+  'typography.pairingEyebrow': 'ISSUE · 04',
   'typography.pairingHeading': 'make it look nice',
   'typography.pairingBody':
     'Pack my box with five dozen liquor jugs. The letterforms carry the mood of every decision made in this system.',
+  'typography.pairingCaption': '4 min read · April 2026',
 
   'spacing.eyebrow': 'STEP 2 · SPACING',
   'spacing.title': 'The rhythm of space.',

@@ -30,8 +30,9 @@
   font-family: var(--app-font-mono);
   font-size: 0.6875rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   color: var(--app-text-subtle);
+  font-weight: 600;
 }
 
 .seg {
@@ -67,6 +68,11 @@
 .segBtn:hover {
   color: var(--app-text);
   background: var(--app-surface);
+}
+
+.segBtn:focus-visible {
+  outline: 2px solid var(--app-focus);
+  outline-offset: 2px;
 }
 
 .segBtnActive {
@@ -113,35 +119,48 @@
 .pairingCardContent {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: var(--app-space-md);
+  gap: var(--app-space-sm);
   padding: var(--app-space-lg);
-  min-height: 13rem;
+  height: 17rem;
   width: 100%;
   background: oklch(100% 0 0);
   color: oklch(14% 0 0);
   overflow: hidden;
 }
 
+.pairingEyebrow {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: oklch(50% 0 0);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .pairingHeading {
   letter-spacing: -0.02em;
   color: oklch(14% 0 0);
-  /* Avoid horizontal overflow on long words at the largest base × ratio. */
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  /* Heading dominates a single row; cap to two lines so the card doesn't run
-     away vertically at 20px × 1.5 (xl ≈ 45px → ~50px tall). */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  /* 2xl heading is the dramatic rung — single line with ellipsis keeps
+     the card from running away vertically at 20px × 1.5 (2xl ≈ 67px). */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pairingBody {
-  color: oklch(42% 0 0);
+  color: oklch(38% 0 0);
   overflow-wrap: anywhere;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pairingCaption {
+  color: oklch(50% 0 0);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ── Mobile ── */
@@ -160,8 +179,9 @@
     grid-template-columns: 1fr;
   }
   .pairingCardContent {
-    /* Keep matching PresetCard.preview floor so the gray parent never peeks. */
-    min-height: 13rem;
+    /* Keep cards a uniform fixed height so PresetCard meta below doesn't
+       jitter when one pairing's heading wraps wider than another's. */
+    height: 17rem;
     padding: var(--app-space-md);
   }
 }
