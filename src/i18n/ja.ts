@@ -69,7 +69,7 @@ export const ja: Messages = {
   'color.chroma': '彩度',
   'color.neutralStyle': 'ニュートラル',
   'color.darkMode': 'ダークモード対応',
-  'color.darkModeHint': ' — ダークモード用のカラーも DESIGN.md に含まれます。',
+  'color.darkModeHint': ' — ダークモード用のカラーもアウトプットに含まれます。',
   'color.derived.primary': 'hue と彩度から派生',
   'color.derived.neutral': 'ニュートラルスタイルから派生',
   'color.derived.semantic': '彩度に合わせて自動派生 · semantic hue は固定',
@@ -84,14 +84,14 @@ export const ja: Messages = {
   'preview.banner.tokensApplied': 'ライブプレビュー — 決定したトークンが標準コンポーネントに反映されています',
 
   'export.eyebrow': 'STEP 7 · EXPORT',
-  'export.title': 'DESIGN.md プロンプト',
+  'export.title': 'アウトプットを作成',
   'export.description':
-    '下のプロンプトをコピーして、Claude Code の /init 直後、または Cursor・Codex のプロジェクト開始時に貼り付けると DESIGN.md が生成されます。',
+    '完成した決定を、使う場所に合った形式でコピーまたはダウンロードできます。AI エージェント、コード、Figma が同じ意図と値を共有します。',
   'export.incompleteTitle': 'まだ決まっていないステップがあります',
   'export.incompleteBody':
-    '未決定のステップ({missing})はプロンプトから省かれ、先頭に WARNING ブロックが追加されます。戻って仕上げれば、より充実した DESIGN.md になります。',
+    '未決定のステップ({missing})はアウトプットから省かれ、必要な形式には WARNING ブロックが追加されます。戻って仕上げれば、より充実したアウトプットになります。',
   'export.summaryTitle': '決定の要約',
-  'export.promptTitle': 'DESIGN.md プロンプト',
+  'export.promptTitle': 'アウトプット',
   'export.copyBtn': 'クリップボードにコピー',
   'export.copied': 'コピーしました ✓',
   'export.downloadBtn': '{name} をダウンロード',
@@ -105,7 +105,7 @@ export const ja: Messages = {
   'export.usage.figmaTokens':
     '**Figma Tokens** — `.json` をダウンロード後、Figma で **Tokens Studio** プラグインを起動 → **Tools → Load** からファイルを選択します。カラー（hover/active を事前計算済み）、タイポグラフィ、spacing、radius、shadow が variables と styles として一気に取り込まれます。',
   'export.usageNote':
-    'どのフォーマットを選んでも、生成された DESIGN.md はチームの source of truth となり、以降 AI が新しいコンポーネントを作るたびにこのファイルを参照します。',
+    'すべての形式は同じ決定からコンパイルされます。Google DESIGN.md と Rich Prompt は AI の判断を支え、CSS Variables と Figma Tokens は同じ値をコードとデザインツールへ運びます。',
 
   'decisions.undecided': '— 未定',
 
@@ -121,9 +121,9 @@ export const ja: Messages = {
   'start.info.doBody':
     'Typography → Spacing → Radius → Shadow → Color。各ステップで決めることは最小限。残りのトークンは自動で派生します。',
   'start.info.getLabel': '得られるもの',
-  'start.info.getTitle': '1 枚の DESIGN.md プロンプト',
+  'start.info.getTitle': '1 つの決定セット、複数のアウトプット',
   'start.info.getBody':
-    'Claude Code・Cursor・Codex に貼り付けると、プロジェクト全体の source of truth になります。これからつくるコンポーネントも、同じ仕様に揃います。',
+    'AI エージェント向けの Google DESIGN.md と Rich Prompt、コード向けの CSS variables、Figma 向けの token JSON として書き出せます。',
   'start.info.ctaTitle': '2 分あれば終わります。',
   'start.info.ctaBody': '登録も保存も不要 — ステップを 5 つ進めるだけ。',
 
@@ -168,13 +168,13 @@ export const ja: Messages = {
   'landing.nav.cta': 'はじめる',
   'landing.hero.badge': 'v2.0 · 明日ローンチ',
   'landing.hero.lede':
-    'Pre-design-md は、チームのビジュアル言語を、AI ツールが実際に従える 1 枚のマークダウンに変換します。以降のコンポーネントも同じ調子で揃います。',
+    'Pre-design-md は、チームの視覚的な決定を AI ガイド、実行時 CSS、Figma 向けトークンへ変換します。どの環境でも同じ調子を保てます。',
   'landing.hero.ctaPrimary': '無料ではじめる',
   'landing.hero.ctaSecondary': 'デモを見る ↗',
   'landing.hero.trustedBy': 'このデザインチームが採用しています',
   'landing.stats.steps': 'ステップ',
   'landing.stats.palette': 'パレットの段階',
-  'landing.stats.time': 'DESIGN.md まで',
+  'landing.stats.time': 'アウトプットまで',
   'landing.features.eyebrow': '仕組み',
   'landing.features.title': '3 つの原則、1 つの成果物。',
   'landing.feature.1.title': '決定の数を減らす',
@@ -183,11 +183,11 @@ export const ja: Messages = {
   'landing.feature.2.title': '意図を保持',
   'landing.feature.2.body':
     'CSS の値だけでなく「なぜその選択なのか」まで残るので、AI は未掲載の文脈でも判断できます。',
-  'landing.feature.3.title': 'エージェント対応',
+  'landing.feature.3.title': '環境ごとに使える',
   'landing.feature.3.body':
-    '成果物は 1 枚のマークダウン。Claude Code・Cursor・Codex が source of truth として解釈します。',
+    'AI エージェント、コード、Figma それぞれに合ったアウトプットを用意します。同じ決定を各環境が理解できる形で渡せます。',
   'landing.cta.title': '一貫したシステムを出荷する準備は?',
-  'landing.cta.lede': '5 つの質問、1 枚のマークダウン、追加の会議はゼロ。',
+  'landing.cta.lede': '5 つの質問、4 つのアウトプット、追加の会議はゼロ。',
   'landing.cta.primary': '無料ではじめる',
   'landing.cta.secondary': '問い合わせる',
   'landing.footer.tag': 'AI ツール時代向けにエンコードされたデザインの意図。',

@@ -69,7 +69,7 @@ export const ko: Messages = {
   'color.chroma': '채도',
   'color.neutralStyle': '중립 계열',
   'color.darkMode': '다크 모드 지원',
-  'color.darkModeHint': ' — 다크 모드용 색도 DESIGN.md에 함께 포함됩니다.',
+  'color.darkModeHint': ' — 다크 모드용 색도 아웃풋에 함께 포함됩니다.',
   'color.derived.primary': 'hue · 채도 결정에서 파생',
   'color.derived.neutral': '중립 계열 결정에서 파생',
   'color.derived.semantic': '채도에 맞춰 자동 파생 · semantic hue는 고정',
@@ -84,14 +84,14 @@ export const ko: Messages = {
   'preview.banner.tokensApplied': '라이브 프리뷰 — 결정한 토큰이 표준 컴포넌트에 적용된 모습',
 
   'export.eyebrow': 'STEP 7 · EXPORT',
-  'export.title': 'DESIGN.md 프롬프트',
+  'export.title': '아웃풋 만들기',
   'export.description':
-    '아래 프롬프트를 복사해 Claude Code의 /init 직후, 또는 Cursor·Codex의 프로젝트 시작 시 붙여넣으면 DESIGN.md가 생성됩니다.',
+    '완성한 결정을 쓸 곳에 맞는 포맷으로 복사하거나 다운로드하세요. AI 에이전트, 코드, Figma가 같은 의도와 값을 공유합니다.',
   'export.incompleteTitle': '아직 결정하지 않은 단계가 있어요',
   'export.incompleteBody':
-    '미결정 단계({missing})는 프롬프트에서 빠지고 상단에 WARNING 블록이 붙습니다. 돌아가서 마저 정하면 더 충실한 DESIGN.md가 나와요.',
+    '미결정 단계({missing})는 아웃풋에서 빠지고 필요한 곳에는 WARNING 블록이 붙습니다. 돌아가서 마저 정하면 더 충실한 아웃풋이 나와요.',
   'export.summaryTitle': '결정 요약',
-  'export.promptTitle': 'DESIGN.md 프롬프트',
+  'export.promptTitle': '아웃풋',
   'export.copyBtn': '클립보드에 복사',
   'export.copied': '복사됨 ✓',
   'export.downloadBtn': '{name} 다운로드',
@@ -105,7 +105,7 @@ export const ko: Messages = {
   'export.usage.figmaTokens':
     '**Figma Tokens** — `.json`을 다운받은 뒤 Figma에서 **Tokens Studio** 플러그인을 실행 → **Tools → Load**로 파일을 선택하세요. 색상(hover/active 상태 사전 계산 포함), 타이포그래피, spacing, radius, shadow가 variables와 styles로 그대로 들어옵니다.',
   'export.usageNote':
-    '어떤 포맷을 고르든 생성된 DESIGN.md는 팀의 source of truth가 되고, 이후 AI가 새 컴포넌트를 만들 때마다 이 파일을 참조하게 됩니다.',
+    '모든 포맷은 같은 결정에서 컴파일됩니다. Google DESIGN.md와 Rich Prompt는 AI의 판단을 묶고, CSS Variables와 Figma Tokens는 같은 값을 코드와 디자인 도구로 옮깁니다.',
 
   'decisions.undecided': '— 아직 없음',
 
@@ -121,9 +121,9 @@ export const ko: Messages = {
   'start.info.doBody':
     'Typography → Spacing → Radius → Shadow → Color. 각 단계에서 핵심 결정만 내리면, 나머지 디자인 토큰은 자동으로 파생됩니다.',
   'start.info.getLabel': '무엇이 나오나',
-  'start.info.getTitle': 'DESIGN.md 프롬프트 하나',
+  'start.info.getTitle': '하나의 결정, 여러 아웃풋',
   'start.info.getBody':
-    'Claude Code · Cursor · Codex에 붙여넣으면, 프로젝트 전체에서 참조하는 source of truth가 됩니다. 이후 새 컴포넌트도 같은 스펙을 따라가요.',
+    'AI 에이전트를 위한 Google DESIGN.md와 Rich Prompt, 코드에 바로 쓰는 CSS variables, Figma용 token JSON으로 내보냅니다.',
   'start.info.ctaTitle': '채 2분이면 충분합니다.',
   'start.info.ctaBody': '가입도, 저장 절차도 없어요 — 다섯 단계면 끝.',
 
@@ -168,13 +168,13 @@ export const ko: Messages = {
   'landing.nav.cta': '시작하기',
   'landing.hero.badge': 'v2.0 · 내일 출시',
   'landing.hero.lede':
-    'Pre-design-md은 팀의 비주얼 언어를, AI 툴이 실제로 따라갈 수 있는 한 장의 마크다운으로 바꿉니다. 이후 새 컴포넌트도 같은 톤을 유지해요.',
+    'Pre-design-md은 팀의 시각적 결정을 AI 지침, 런타임 CSS, Figma용 토큰으로 바꿉니다. 어떤 환경에서도 같은 톤을 유지해요.',
   'landing.hero.ctaPrimary': '무료로 시작',
   'landing.hero.ctaSecondary': '데모 보기 ↗',
   'landing.hero.trustedBy': '이 디자인 팀들이 함께합니다',
   'landing.stats.steps': '단계',
   'landing.stats.palette': '팔레트 단계',
-  'landing.stats.time': 'DESIGN.md까지',
+  'landing.stats.time': '아웃풋까지',
   'landing.features.eyebrow': '이렇게 동작해요',
   'landing.features.title': '세 가지 원칙, 하나의 산출물.',
   'landing.feature.1.title': '결정의 수를 줄이기',
@@ -183,11 +183,11 @@ export const ko: Messages = {
   'landing.feature.2.title': '의도 보존',
   'landing.feature.2.body':
     'CSS 값만이 아니라 "왜 이 선택인지”까지 담겨, AI가 명시되지 않은 맥락에서도 일관되게 판단합니다.',
-  'landing.feature.3.title': '에이전트 레디',
+  'landing.feature.3.title': '환경별로 준비됨',
   'landing.feature.3.body':
-    '결과물은 마크다운 파일 하나. Claude Code · Cursor · Codex 모두 이를 source of truth로 해석해요.',
+    'AI 에이전트, 코드, Figma에 맞는 아웃풋을 제공합니다. 같은 결정을 각 환경이 이해하는 형태로 전달해요.',
   'landing.cta.title': '일관된 시스템을 출시할 준비, 됐나요?',
-  'landing.cta.lede': '다섯 질문. 마크다운 하나. 추가 회의 제로.',
+  'landing.cta.lede': '다섯 질문. 네 가지 아웃풋. 추가 회의 제로.',
   'landing.cta.primary': '무료로 시작',
   'landing.cta.secondary': '문의하기',
   'landing.footer.tag': 'AI 툴 시대에 맞게 인코딩된 디자인 의도.',

@@ -1,6 +1,6 @@
 # pre-design-md
 
-> Decide your design tokens visually. Export as DESIGN.md, AI prompt, or CSS.
+> Decide your design tokens visually. Compile them into AI guidance, CSS, and Figma-ready tokens.
 
 <p align="center">
   <img src="./images/cover.png" alt="pre-design-md cover" width="640" />
@@ -20,14 +20,14 @@ The paradox: a design system *is* a harness. Tokens, spacing rules, component de
 
 ## What this is
 
-A tool that produces the input to your AI coding agent, not the output.
+A tool that produces structured inputs for AI coding agents, code, and design tools.
 
-You make five structural decisions visually (typography → spacing → radius → shadow → color). The app turns those decisions into a prompt that Claude Code, Cursor, or Codex can read and reproduce consistently. The artifact isn't code — it's **intent + values**, paired so the agent has both the rationale and the numbers.
+You make five structural decisions visually (typography → spacing → radius → shadow → color). The app turns those decisions into AI-readable guidance, runtime CSS variables, and Figma token JSON. The artifact is **intent + values**, paired so each environment gets both the rationale and the numbers.
 
 ## What this isn't
 
-- Not a design system builder. If you need Figma Tokens or Style Dictionary, use those.
-- Not another theme builder. A theme builder outputs CSS. This outputs context for an LLM.
+- Not a full design system management suite. It exports Figma-ready tokens, but it does not replace Tokens Studio or Style Dictionary.
+- Not another theme builder. A theme builder outputs CSS. This outputs decision context for AI plus implementation-ready token formats.
 - Not a component library. There's nothing to install in your project.
 
 ## How it works
@@ -44,19 +44,20 @@ The order is bones → form → surface → mood:
 
 You preview each decision applied to real components, not abstract swatches.
 
-## Three exports
+## Four outputs
 
 | Tab | When to use |
 |-----|-------------|
 | **Google DESIGN.md** | Spec compatibility with Google's official `DESIGN.md` format. Lint-passing, hex colors. |
 | **Rich Prompt** | When you want the AI to know *why*. Includes OKLCH values and per-decision rationale. |
 | **CSS Variables** | Tokens only, no prose. |
+| **Figma Tokens** | Tokens Studio-compatible JSON for bringing the same decisions into Figma. |
 
-Default is Google DESIGN.md. The Rich Prompt is where this tool's actual value lives — it's designed for an AI agent to read and reason from, not just paste.
+Default is Google DESIGN.md: the safest final spec. Rich Prompt is the intent harness for AI reasoning. CSS Variables and Figma Tokens carry the same decisions into code and design tooling.
 
 ## Try it
 
-Hosted at **[pre-design-md.dev](https://pre-design-md.dev)** — five steps, no signup, ~2 minutes from start to a finished prompt.
+Hosted at **[pre-design-md.dev](https://pre-design-md.dev)** — five steps, no signup, ~2 minutes from start to finished exports.
 
 ## Run locally
 
@@ -67,7 +68,7 @@ npm install
 npm run dev
 ```
 
-Make your decisions, copy the export, paste it into your AI coding agent's context (a `DESIGN.md` at the repo root works for most agents). That's it.
+Make your decisions, copy or download the output you need, and pass it to the environment that will use it. A `DESIGN.md` at the repo root works for most agents; CSS variables and Figma token JSON are ready for their own pipelines.
 
 ## Design decisions
 

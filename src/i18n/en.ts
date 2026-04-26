@@ -69,7 +69,7 @@ export const en: Messages = {
   'color.chroma': 'Chroma',
   'color.neutralStyle': 'Neutral style',
   'color.darkMode': 'Support dark mode',
-  'color.darkModeHint': ' — dark variants will be included in DESIGN.md.',
+  'color.darkModeHint': ' — dark variants will be included in the exports.',
   'color.derived.primary': 'derived from your hue + chroma',
   'color.derived.neutral': 'derived from your neutral style',
   'color.derived.semantic': 'auto-derived from chroma · fixed semantic hues',
@@ -84,14 +84,14 @@ export const en: Messages = {
   'preview.banner.tokensApplied': 'Live preview — your tokens applied to standard components',
 
   'export.eyebrow': 'STEP 7 · EXPORT',
-  'export.title': 'DESIGN.md prompt',
+  'export.title': 'Design outputs',
   'export.description':
-    'Copy the prompt below and paste it into Claude Code (right after /init), or into your AI editor of choice, to generate the project’s DESIGN.md.',
+    'Copy or download the format that fits where these decisions will be used: AI agents, code, or Figma.',
   'export.incompleteTitle': 'Some steps are undecided',
   'export.incompleteBody':
-    'Undecided steps ({missing}) are omitted from the prompt and a WARNING block is added at the top. Go back and finish them for a richer DESIGN.md.',
+    'Undecided steps ({missing}) are omitted from the outputs and a WARNING block is added where relevant. Go back and finish them for richer exports.',
   'export.summaryTitle': 'Decision summary',
-  'export.promptTitle': 'DESIGN.md prompt',
+  'export.promptTitle': 'Output',
   'export.copyBtn': 'Copy to clipboard',
   'export.copied': 'Copied ✓',
   'export.downloadBtn': 'Download {name}',
@@ -105,7 +105,7 @@ export const en: Messages = {
   'export.usage.figmaTokens':
     '**Figma Tokens** — Download the `.json`, then in Figma open the **Tokens Studio** plugin → **Tools → Load** and select the file. Brings colors (with hover/active states pre-resolved), typography, spacing, radius, and shadows in as variables and styles.',
   'export.usageNote':
-    'Whichever you pick, the generated DESIGN.md becomes the team’s source of truth — AI tools will refer to it every time they build a new component.',
+    'Every format is compiled from the same decisions. Google DESIGN.md and Rich Prompt guide AI judgment; CSS Variables and Figma Tokens carry the same values into code and design tools.',
 
   'decisions.undecided': '— not yet',
 
@@ -121,9 +121,9 @@ export const en: Messages = {
   'start.info.doBody':
     'Typography → Spacing → Radius → Shadow → Color. Each step asks for just the base decisions; the full token system is derived for you.',
   'start.info.getLabel': 'WHAT YOU GET',
-  'start.info.getTitle': 'A single DESIGN.md prompt',
+  'start.info.getTitle': 'One decision set, several outputs',
   'start.info.getBody':
-    'Paste it into Claude Code, Cursor, or Codex. They treat it as the source of truth for the whole project — every future component stays in tune.',
+    'Export Google DESIGN.md and Rich Prompt for AI agents, CSS variables for code, and Figma token JSON for design tools.',
   'start.info.ctaTitle': 'Ready in about two minutes.',
   'start.info.ctaBody': 'No signup, no saving — just five steps.',
 
@@ -168,13 +168,13 @@ export const en: Messages = {
   'landing.nav.cta': 'Get started',
   'landing.hero.badge': 'v2.0 · shipping tomorrow',
   'landing.hero.lede':
-    "Pre-design-md turns your team's visual language into a single markdown file your AI tools can actually follow — so every new component stays in tune.",
+    "Pre-design-md turns your team's visual decisions into AI guidance, runtime CSS, and Figma-ready tokens — so every environment stays in tune.",
   'landing.hero.ctaPrimary': 'Start free',
   'landing.hero.ctaSecondary': 'Watch demo ↗',
   'landing.hero.trustedBy': 'Trusted by design teams at',
   'landing.stats.steps': 'Steps',
   'landing.stats.palette': 'Palette stops',
-  'landing.stats.time': 'To DESIGN.md',
+  'landing.stats.time': 'To export',
   'landing.features.eyebrow': 'How it works',
   'landing.features.title': 'Three principles, one output.',
   'landing.feature.1.title': 'Fewer decisions',
@@ -183,11 +183,11 @@ export const en: Messages = {
   'landing.feature.2.title': 'Intent preserved',
   'landing.feature.2.body':
     'Not just CSS values — the why behind each choice is captured so your AI tools can judge unlisted contexts too.',
-  'landing.feature.3.title': 'Agent-ready',
+  'landing.feature.3.title': 'Environment-ready',
   'landing.feature.3.body':
-    'Output is a single markdown file. Claude Code, Cursor, and Codex all parse it as design-system source of truth.',
+    'Outputs cover AI agents, code, and Figma. Each format carries the same decisions in the shape that environment expects.',
   'landing.cta.title': 'Ready to ship a coherent system?',
-  'landing.cta.lede': 'Five questions. One markdown file. Zero follow-up meetings.',
+  'landing.cta.lede': 'Five questions. Four outputs. Zero follow-up meetings.',
   'landing.cta.primary': 'Start free',
   'landing.cta.secondary': 'Talk to us',
   'landing.footer.tag': 'Design intent, encoded for the age of AI tooling.',
