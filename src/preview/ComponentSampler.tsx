@@ -21,11 +21,11 @@ export function ComponentSampler() {
 
   return (
     <div className={styles.root}>
-      <Block title={t('sampler.block.nav')}>
+      <Block title={t('sampler.block.nav')} tokens="radius-md · shadow-sm · neutral-50">
         <Navbar />
       </Block>
 
-      <Block title={t('sampler.block.buttons')}>
+      <Block title={t('sampler.block.buttons')} tokens="radius-button · primary · shadow-sm">
         <div className={styles.row}>
           <Button variant="primary" size="sm">
             Primary SM
@@ -47,7 +47,7 @@ export function ComponentSampler() {
         </div>
       </Block>
 
-      <Block title={t('sampler.block.inputs')}>
+      <Block title={t('sampler.block.inputs')} tokens="radius-input · neutral-200 border">
         <div className={styles.formCol}>
           <Input placeholder={t('sampler.emailPlaceholder')} />
           <Select defaultValue="">
@@ -67,7 +67,7 @@ export function ComponentSampler() {
         </div>
       </Block>
 
-      <Block title={t('sampler.block.cards')}>
+      <Block title={t('sampler.block.cards')} tokens="radius-card · shadow-md · space-md">
         <div className={styles.cards}>
           <Card>
             {heroImage && <CardImage src={heroImage.url} alt={heroImage.alt} />}
@@ -109,7 +109,7 @@ export function ComponentSampler() {
         </div>
       </Block>
 
-      <Block title={t('sampler.block.badges')}>
+      <Block title={t('sampler.block.badges')} tokens="radius-badge · semantic-500">
         <div className={styles.row}>
           <Badge tone="neutral">neutral</Badge>
           <Badge tone="info">info</Badge>
@@ -119,7 +119,7 @@ export function ComponentSampler() {
         </div>
       </Block>
 
-      <Block title={t('sampler.block.alerts')}>
+      <Block title={t('sampler.block.alerts')} tokens="radius-md · semantic-50 bg · semantic-700 text">
         <div className={styles.alertStack}>
           <Alert tone="info" title={t('sampler.alert.new.title')}>
             {t('sampler.alert.new.body')}
@@ -139,10 +139,21 @@ export function ComponentSampler() {
   );
 }
 
-function Block({ title, children }: { title: string; children: React.ReactNode }) {
+function Block({
+  title,
+  tokens,
+  children,
+}: {
+  title: string;
+  tokens?: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className={styles.block}>
-      <h3 className={styles.blockTitle}>{title}</h3>
+      <div className={styles.blockHead}>
+        <h3 className={styles.blockTitle}>{title}</h3>
+        {tokens && <span className={styles.blockTokens}>{tokens}</span>}
+      </div>
       <div className={styles.blockBody}>{children}</div>
     </div>
   );

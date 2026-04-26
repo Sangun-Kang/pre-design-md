@@ -14,6 +14,13 @@
   gap: var(--space-sm);
 }
 
+.blockHead {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
 .blockTitle {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
@@ -21,6 +28,14 @@
   letter-spacing: 0.08em;
   color: var(--color-text-muted);
   margin: 0;
+}
+
+.blockTokens {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0;
+  color: var(--color-text-muted);
+  opacity: 0.55;
 }
 
 .blockBody {

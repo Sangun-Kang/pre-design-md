@@ -234,8 +234,9 @@
   font-family: var(--app-font-mono);
   font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   color: var(--app-text-subtle);
+  font-weight: 600;
 }
 
 .infoTitle {
@@ -272,10 +273,10 @@
 
 .infoCardNum {
   font-family: var(--app-font-mono);
-  font-size: 0.7rem;
+  font-size: 0.6875rem;
   font-weight: 600;
   color: var(--app-text-subtle);
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
