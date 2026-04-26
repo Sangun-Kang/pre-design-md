@@ -12,20 +12,10 @@
   padding: var(--_gap);
   background-color: oklch(99% 0 0);
   background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent 0,
-      transparent calc(var(--_grid) - 1px),
-      oklch(91% 0 0) calc(var(--_grid) - 1px),
-      oklch(91% 0 0) var(--_grid)
-    ),
-    repeating-linear-gradient(
-      90deg,
-      transparent 0,
-      transparent calc(var(--_grid) - 1px),
-      oklch(91% 0 0) calc(var(--_grid) - 1px),
-      oklch(91% 0 0) var(--_grid)
-    );
+    linear-gradient(to right, oklch(91% 0 0) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(91% 0 0) 1px, transparent 1px);
+  background-size: var(--_grid) var(--_grid);
+  background-position: 0 0;
   color: oklch(14% 0 0);
   overflow: hidden;
   font-family: var(--app-font-sans);
