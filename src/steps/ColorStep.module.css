@@ -58,6 +58,11 @@
   box-shadow: 0 0 0 2px var(--app-surface), 0 0 0 4px var(--app-text);
 }
 
+.hueChip:focus-visible {
+  outline: 2px solid var(--app-focus);
+  outline-offset: 3px;
+}
+
 .sliderLabel {
   display: flex;
   flex-direction: column;
@@ -70,6 +75,12 @@
 .slider {
   width: 100%;
   accent-color: var(--app-accent);
+}
+
+.slider:focus-visible {
+  outline: 2px solid var(--app-focus);
+  outline-offset: 4px;
+  border-radius: 2px;
 }
 
 .radioGroup {
@@ -110,6 +121,11 @@
 .chipBtnActive {
   background: var(--app-accent) !important;
   color: var(--app-accent-text) !important;
+}
+
+.chipBtn:focus-visible {
+  outline: 2px solid var(--app-focus);
+  outline-offset: 2px;
 }
 
 .toggleRow {
@@ -274,9 +290,10 @@
 .swatchLabel {
   font-family: var(--app-font-mono);
   font-size: 0.6875rem;
-  color: var(--color-text-muted, oklch(55% 0 0));
+  color: var(--app-text-subtle);
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  font-weight: 600;
 }
 
 .swatchHint {

@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import clsx from 'clsx';
 import { useDesignStore } from '../store/designStore';
 import { StepLayout } from '../components/StepLayout';
@@ -82,15 +83,20 @@ export function ColorStep() {
     updateColor(next);
   }
 
-  const palette = buildColorPalette(current);
+  const palette = useMemo(() => buildColorPalette(current), [current]);
 
   // Each category card shows a peek of its primary-500 — preserve the user's
-  // current tunables so the swatch reflects what they'd actually get.
-  function categorySwatch(cat: ColorCategory): string {
-    const peek: ColorInput = { ...current, category: cat };
-    if (cat === 'neon-on-dark') peek.supportsDark = true;
-    return buildColorPalette(peek).primary['500'];
-  }
+  // current tunables so the swatch reflects what they'd actually get. Computed
+  // once per tunables change instead of per category card render.
+  const categorySwatches = useMemo(() => {
+    const map = {} as Record<ColorCategory, string>;
+    for (const cat of COLOR_CATEGORIES_PRIMARY) {
+      const peek: ColorInput = { ...current, category: cat };
+      if (cat === 'neon-on-dark') peek.supportsDark = true;
+      map[cat] = buildColorPalette(peek).primary['500'];
+    }
+    return map;
+  }, [current]);
 
   return (
     <StepLayout
@@ -109,7 +115,7 @@ export function ColorStep() {
                 key={cat}
                 category={cat}
                 active={current.category === cat}
-                swatch={categorySwatch(cat)}
+                swatch={categorySwatches[cat]}
                 onClick={() => selectCategory(cat)}
                 t={t}
               />
@@ -299,6 +305,7 @@ function HueControl({
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
           className={styles.slider}
+          aria-label={label}
         />
       </label>
     </section>
@@ -361,6 +368,7 @@ function WarmthSlider({
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
           className={styles.slider}
+          aria-label={t('color.warmth')}
         />
       </label>
     </section>
