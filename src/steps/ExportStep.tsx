@@ -40,7 +40,7 @@ const TABS: TabDef[] = [
     hintKey: 'export.tab.richPrompt.hint',
     usageKey: 'export.usage.richPrompt',
     build: buildRichPrompt,
-    downloadName: 'DESIGN.md',
+    downloadName: 'DESIGN_PROMPT.md',
     mime: 'text/markdown',
   },
   {
