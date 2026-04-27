@@ -23,6 +23,54 @@
   max-width: none;
 }
 
+.globalFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--app-space-md);
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding: var(--app-space-lg) var(--app-space-3xl);
+  border-top: 1px solid var(--app-border);
+  color: var(--app-text-muted);
+  font-size: 0.8125rem;
+  flex-wrap: wrap;
+}
+
+.githubLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--app-space-xs);
+  min-height: 2.25rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-full);
+  background: var(--app-surface-raised);
+  color: var(--app-text);
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: var(--app-shadow-sm);
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+
+.githubLink:hover {
+  border-color: var(--app-accent);
+  background: var(--app-accent-soft);
+  transform: translateY(-1px);
+}
+
+.githubLink:focus-visible {
+  outline: 2px solid var(--app-focus);
+  outline-offset: 2px;
+}
+
+.githubLink svg {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
 @keyframes stepIn {
   from {
     opacity: 0;
@@ -43,5 +91,8 @@
 @media (max-width: 768px) {
   .main {
     padding: var(--app-space-lg) var(--app-space-md);
+  }
+  .globalFooter {
+    padding: var(--app-space-md);
   }
 }

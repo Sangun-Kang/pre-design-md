@@ -552,9 +552,17 @@
   text-decoration: none;
   transition: border-color 0.15s ease, background 0.15s ease;
 }
+.footerSocial svg {
+  width: 1rem;
+  height: 1rem;
+}
 .footerSocial a:hover {
   border-color: var(--color-primary-400);
   background: var(--color-primary-50);
+}
+.footerSocial a:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
 }
 
 @media (max-width: 768px) {

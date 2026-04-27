@@ -10,6 +10,7 @@ import { ColorStep } from '../steps/ColorStep';
 import { PreviewStep } from '../steps/PreviewStep';
 import { ExportStep } from '../steps/ExportStep';
 import { StepNav } from './StepNav';
+import { GitHubIcon, GITHUB_REPOSITORY_URL } from './GitHubIcon';
 import styles from './Wizard.module.css';
 
 export function Wizard() {
@@ -39,6 +40,19 @@ export function Wizard() {
         {currentStep === 'preview' && <PreviewStep />}
         {currentStep === 'export' && <ExportStep />}
       </main>
+      <footer className={styles.globalFooter}>
+        <span>© 2026 Sangun Kang</span>
+        <a
+          href={GITHUB_REPOSITORY_URL}
+          target="_blank"
+          rel="noreferrer"
+          className={styles.githubLink}
+          aria-label="pre-design-md repository on GitHub"
+        >
+          <GitHubIcon />
+          <span>GitHub</span>
+        </a>
+      </footer>
     </div>
   );
 }

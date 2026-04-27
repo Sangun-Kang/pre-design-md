@@ -5,6 +5,7 @@ import { effectiveAccentHue } from '../lib/colorPalette';
 import { IMAGE_POOL } from '../assets/preview-images';
 import { useDesignStore } from '../store/designStore';
 import { useT } from '../i18n';
+import { GitHubIcon, GITHUB_REPOSITORY_URL } from '../components/GitHubIcon';
 import styles from './LandingSection.module.css';
 
 export function LandingSection() {
@@ -147,8 +148,9 @@ export function LandingSection() {
         <div className={styles.footerBottom}>
           <div className={styles.copy}>{t('landing.footer.copy')}</div>
           <div className={styles.footerSocial}>
-            <a href="#" aria-label="GitHub">GH</a>
-            <a href="#" aria-label="Twitter">TW</a>
+            <a href={GITHUB_REPOSITORY_URL} target="_blank" rel="noreferrer" aria-label="pre-design-md repository on GitHub">
+              <GitHubIcon />
+            </a>
           </div>
         </div>
       </footer>
