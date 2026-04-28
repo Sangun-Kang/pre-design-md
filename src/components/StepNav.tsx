@@ -31,9 +31,6 @@ export function StepNav() {
     <nav className={styles.nav} aria-label="Progress">
       <div className={styles.brand}>
         <span>pre-design-md</span>
-        <span className={styles.ratio} aria-label={`Step ${currentIdx + 1} of ${total}`}>
-          {currentIdx + 1}/{total}
-        </span>
       </div>
       <ol className={styles.list}>
         {STEP_ORDER.map((step, i) => {
