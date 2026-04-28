@@ -299,10 +299,6 @@
           white-space: nowrap;
         }
 
-        [data-toggle="spec"] .toggle-btn[data-value="google"] {
-          font-size: 0.6875rem;
-        }
-
         .links {
           justify-self: end;
         }
@@ -359,11 +355,11 @@
           </div>
         </div>
 
-        <div class="toggle" role="group" aria-label="Spec">
-          <span class="toggle-label">Spec</span>
-          <div class="toggle-group" data-toggle="spec">
-            <button type="button" class="toggle-btn is-active" data-value="rich">Rich</button>
-            <button type="button" class="toggle-btn" data-value="google">Google DESIGN.md</button>
+        <div class="toggle" role="group" aria-label="Agent">
+          <span class="toggle-label">Agent</span>
+          <div class="toggle-group" data-toggle="agent">
+            <button type="button" class="toggle-btn is-active" data-value="claude">Claude</button>
+            <button type="button" class="toggle-btn" data-value="codex">Codex</button>
           </div>
         </div>
       </div>
@@ -374,20 +370,20 @@
     </header>
 
     <main class="frames">
-      <section class="panel" aria-label="Codex demo">
+      <section class="panel" aria-label="Google DESIGN.md demo">
         <div class="panel-title">
-          <span>Codex</span>
-          <a id="codex-open" href="codex/kelvin-rich.html">Open full page ↗</a>
+          <span>Google DESIGN.md</span>
+          <a id="google-open" href="claude/kelvin-google.html">Open full page ↗</a>
         </div>
-        <iframe id="codex-frame" title="Codex demo" src="codex/kelvin-rich.html?embed=1"></iframe>
+        <iframe id="google-frame" title="Google DESIGN.md demo" src="claude/kelvin-google.html?embed=1"></iframe>
       </section>
 
-      <section class="panel" aria-label="Claude demo">
+      <section class="panel" aria-label="Rich Prompt demo">
         <div class="panel-title">
-          <span>Claude</span>
-          <a id="claude-open" href="claude/kelvin-rich.html">Open full page ↗</a>
+          <span>Rich Prompt</span>
+          <a id="rich-open" href="claude/kelvin-rich.html">Open full page ↗</a>
         </div>
-        <iframe id="claude-frame" title="Claude demo" src="claude/kelvin-rich.html?embed=1"></iframe>
+        <iframe id="rich-frame" title="Rich Prompt demo" src="claude/kelvin-rich.html?embed=1"></iframe>
       </section>
     </main>
 
@@ -395,27 +391,25 @@
       const labels = {
         kelvin: 'Kelvin',
         halftone: 'Halftone',
-        rich: 'Rich Prompt',
-        google: 'Google DESIGN.md',
+        codex: 'Codex',
+        claude: 'Claude',
       };
 
       const state = {
         project: 'kelvin',
-        spec: 'rich',
+        agent: 'claude',
       };
 
       const groups = document.querySelectorAll('[data-toggle]');
       const summary = document.querySelector('#summary');
-      const codexFrame = document.querySelector('#codex-frame');
-      const claudeFrame = document.querySelector('#claude-frame');
-      const codexLink = document.querySelector('#codex-link');
-      const claudeLink = document.querySelector('#claude-link');
-      const codexOpen = document.querySelector('#codex-open');
-      const claudeOpen = document.querySelector('#claude-open');
+      const richFrame = document.querySelector('#rich-frame');
+      const googleFrame = document.querySelector('#google-frame');
+      const richOpen = document.querySelector('#rich-open');
+      const googleOpen = document.querySelector('#google-open');
 
       const params = new URLSearchParams(window.location.search);
       if (params.get('project') === 'halftone') state.project = 'halftone';
-      if (params.get('spec') === 'google') state.spec = 'google';
+      if (params.get('agent') === 'codex') state.agent = 'codex';
 
       function syncActive() {
         groups.forEach((group) => {
@@ -426,26 +420,24 @@
         });
       }
 
-      function path(agent) {
-        return `${agent}/${state.project}-${state.spec}.html`;
+      function path(spec) {
+        return `${state.agent}/${state.project}-${spec}.html`;
       }
 
       function update() {
         syncActive();
 
-        const codex = path('codex');
-        const claude = path('claude');
-        codexFrame.src = `${codex}?embed=1`;
-        claudeFrame.src = `${claude}?embed=1`;
-        if (codexLink) codexLink.href = codex;
-        if (claudeLink) claudeLink.href = claude;
-        codexOpen.href = codex;
-        claudeOpen.href = claude;
-        if (summary) summary.textContent = `${labels[state.project]} · ${labels[state.spec]}`;
+        const rich = path('rich');
+        const google = path('google');
+        richFrame.src = `${rich}?embed=1`;
+        googleFrame.src = `${google}?embed=1`;
+        richOpen.href = rich;
+        googleOpen.href = google;
+        if (summary) summary.textContent = `${labels[state.project]} · ${labels[state.agent]}`;
 
         const next = new URLSearchParams({
           project: state.project,
-          spec: state.spec,
+          agent: state.agent,
         });
         window.history.replaceState(null, '', `?${next.toString()}`);
       }

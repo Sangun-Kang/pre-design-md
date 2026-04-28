@@ -249,7 +249,7 @@
       ${linkGroup(ui.spec, specs, 'spec')}
     </div>
     <div class="pdm-switcher-links">
-      <a class="pdm-switcher-link" href="../compare.html?project=${current.project}&spec=${current.spec}">${ui.compare}</a>
+      <a class="pdm-switcher-link" href="../compare.html?project=${current.project}&agent=${current.agent}">${ui.compare}</a>
       <a class="pdm-switcher-link" href="../../">${ui.app}</a>
     </div>
   `;
