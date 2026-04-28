@@ -297,6 +297,162 @@
   margin: 0;
 }
 
+/* ── Demo compare entry ── */
+.demo {
+  padding: clamp(3rem, 8vw, 6rem) var(--app-space-3xl);
+  max-width: 80rem;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-2xl);
+  scroll-margin-top: 4.5rem;
+}
+
+.demoHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-xs);
+  max-width: 44rem;
+}
+
+.demoLead {
+  margin: var(--app-space-xs) 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--app-text-muted);
+}
+
+.demoPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--app-space-2xl);
+  align-items: center;
+  padding: var(--app-space-xl);
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-lg);
+}
+
+.demoMatrix {
+  display: grid;
+  grid-template-columns: minmax(4rem, auto) repeat(2, minmax(0, 1fr));
+  gap: var(--app-space-xs) var(--app-space-sm);
+  align-items: center;
+}
+
+.demoMatrixCorner {
+  /* spacer for top-left of matrix */
+}
+
+.demoMatrixColLabel,
+.demoMatrixRowLabel {
+  font-family: var(--app-font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--app-text-subtle);
+}
+
+.demoMatrixColLabel {
+  text-align: center;
+  padding-bottom: var(--app-space-2xs);
+}
+
+.demoMatrixRowLabel {
+  text-align: right;
+  padding-right: var(--app-space-xs);
+  color: var(--app-text-muted);
+}
+
+.demoMatrixCell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: var(--app-space-sm) var(--app-space-xs);
+  background: var(--app-surface-sunken);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-md);
+}
+
+.demoMatrixChip {
+  font-family: var(--app-font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  color: var(--app-text);
+  padding: 0.375rem 0.5rem;
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius-sm);
+}
+
+.demoCopy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--app-space-sm);
+}
+
+.demoActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--app-space-sm);
+  margin-top: var(--app-space-sm);
+}
+
+.demoPrimary,
+.demoSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--app-space-xs);
+  padding: 0.75rem 1.25rem;
+  font-family: var(--app-font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border-radius: var(--app-radius-md);
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.12s ease;
+}
+
+.demoPrimary {
+  background: var(--app-accent);
+  color: var(--app-accent-text);
+  border-color: var(--app-accent);
+  box-shadow: var(--app-shadow-sm);
+}
+.demoPrimary:hover {
+  background: var(--app-accent-hover);
+  border-color: var(--app-accent-hover);
+  transform: translateY(-1px);
+}
+.demoPrimary:active {
+  transform: translateY(0);
+}
+
+.demoSecondary {
+  background: var(--app-surface);
+  color: var(--app-text);
+  border-color: var(--app-border);
+}
+.demoSecondary:hover {
+  border-color: var(--app-border-strong);
+  background: var(--app-surface-sunken);
+  transform: translateY(-1px);
+}
+.demoSecondary:active {
+  transform: translateY(0);
+}
+
+.demoPrimary:focus-visible,
+.demoSecondary:focus-visible {
+  outline: 2px solid var(--app-focus);
+  outline-offset: 2px;
+}
+
 /* ── Outro CTA: full-bleed band where the hero grid restarts and fades in ── */
 .outro {
   position: relative;
@@ -378,8 +534,14 @@
 }
 
 @media (max-width: 900px) {
-  .info {
+  .info,
+  .demo {
     padding: var(--app-space-2xl) var(--app-space-lg);
+  }
+  .demoPanel {
+    grid-template-columns: 1fr;
+    gap: var(--app-space-xl);
+    padding: var(--app-space-lg);
   }
 }
 
@@ -399,5 +561,21 @@
   }
   .hero {
     padding: var(--app-space-lg) var(--app-space-md);
+  }
+  .demo {
+    padding-inline: var(--app-space-md);
+  }
+  .demoPanel {
+    padding: var(--app-space-md);
+  }
+  .demoMatrix {
+    grid-template-columns: minmax(3.5rem, auto) repeat(2, minmax(0, 1fr));
+  }
+  .demoMatrixCell {
+    padding: var(--app-space-xs);
+  }
+  .demoMatrixChip {
+    font-size: 0.6875rem;
+    padding: 0.3125rem 0.375rem;
   }
 }

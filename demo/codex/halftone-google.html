@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Halftone — Brand & Art Direction Studio</title>
+    <meta
+      name="description"
+      content="Halftone is an editorial-leaning brand and art direction studio working between Tokyo and Berlin."
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    >
+    <style>
+      :root {
+        /* Purple-led, vivid, dramatic depth. */
+        --primary: #756aff;
+        --primary-50: #f6f8ff;
+        --primary-100: #e9eeff;
+        --primary-200: #cfd5ff;
+        --primary-300: #b1b4ff;
+        --primary-400: #928eff;
+        --primary-500: #756aff;
+        --primary-600: #5b4cdb;
+        --primary-700: #4335a8;
+        --primary-800: #2b1f78;
+        --primary-900: #160e46;
+        --primary-950: #09032a;
+        --neutral-50: #fafafa;
+        --neutral-100: #f2f2f2;
+        --neutral-200: #dedede;
+        --neutral-300: #c4c4c4;
+        --neutral-400: #a4a4a4;
+        --neutral-500: #868686;
+        --neutral-600: #696969;
+        --neutral-700: #4d4d4d;
+        --neutral-800: #333333;
+        --neutral-900: #1b1b1b;
+        --neutral-950: #0b0b0b;
+        --success: #009e12;
+        --warning: #e78f00;
+        --danger: #e23539;
+        --info: #0088ee;
+
+        /* IBM Plex Sans — precise, institutional, reliable. */
+        --font-body: "IBM Plex Sans", system-ui, sans-serif;
+        --font-size-h1: 3.0518rem;
+        --font-size-h2: 2.4414rem;
+        --font-size-h3: 1.9531rem;
+        --font-size-h4: 1.5625rem;
+        --font-size-body: 1rem;
+        --font-size-caption: 0.8rem;
+        --line-height-heading: 1.275;
+        --line-height-body: 1.58;
+        --weight-regular: 400;
+        --weight-bold: 700;
+
+        /* Half-step grid — uncommon grain, fits editorial apps. */
+        --space-2xs: 3px;
+        --space-xs: 6px;
+        --space-sm: 9px;
+        --space-md: 12px;
+        --space-lg: 18px;
+        --space-xl: 24px;
+        --space-2xl: 36px;
+        --space-3xl: 48px;
+        --space-4xl: 72px;
+        --space-5xl: 96px;
+
+        /* A single, uniform radius across components. */
+        --rounded-none: 0;
+        --rounded-sm: 4px;
+        --rounded-md: 8px;
+        --rounded-lg: 12px;
+        --rounded-xl: 16px;
+        --rounded-full: 9999px;
+        --button-rounded: var(--rounded-md);
+        --card-rounded: var(--rounded-md);
+        --input-rounded: var(--rounded-md);
+        --badge-rounded: var(--rounded-full);
+
+        --shadow-sm: 0 2px 3px -1px oklch(0% 0 0 / 0.18);
+        --shadow-md: 0 4px 6px -2px oklch(0% 0 0 / 0.28), 0 2px 3px -1px oklch(0% 0 0 / 0.28);
+        --shadow-lg: 0 8px 12px -3px oklch(0% 0 0 / 0.38), 0 3px 5px -2px oklch(0% 0 0 / 0.38);
+        --shadow-xl: 0 14px 18px -4px oklch(0% 0 0 / 0.5), 0 6px 8px -4px oklch(0% 0 0 / 0.5);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--neutral-50);
+        color: var(--neutral-900);
+        font-family: var(--font-body);
+        font-size: var(--font-size-body);
+        font-weight: var(--weight-regular);
+        line-height: var(--line-height-body);
+        letter-spacing: 0;
+      }
+
+      body::selection {
+        background: var(--primary-200);
+        color: var(--primary-950);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      p {
+        margin: 0;
+        overflow-wrap: break-word;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: var(--font-body);
+        font-weight: var(--weight-bold);
+        line-height: var(--line-height-heading);
+        letter-spacing: 0;
+        overflow-wrap: break-word;
+      }
+
+      h1 {
+        font-size: var(--font-size-h1);
+      }
+
+      h2 {
+        font-size: var(--font-size-h2);
+      }
+
+      h3 {
+        font-size: var(--font-size-h3);
+      }
+
+      h4 {
+        font-size: var(--font-size-h4);
+      }
+
+      .page {
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        border-bottom: 1px solid var(--neutral-200);
+        background: color-mix(in srgb, var(--neutral-50) 92%, transparent);
+        backdrop-filter: blur(18px);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-xl);
+        width: min(calc(100% - var(--space-3xl)), 1188px);
+        margin: 0 auto;
+        padding: var(--space-md) 0;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-sm);
+        color: var(--neutral-950);
+        font-weight: var(--weight-bold);
+        text-decoration: none;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: var(--space-2xl);
+        height: var(--space-2xl);
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-2xs);
+        padding: var(--space-2xs);
+        border: 1px solid var(--neutral-900);
+        border-radius: var(--rounded-md);
+        background: var(--neutral-50);
+      }
+
+      .brand-mark span {
+        border-radius: var(--rounded-full);
+        background: var(--primary);
+      }
+
+      .brand-mark span:nth-child(even) {
+        background: var(--neutral-900);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: var(--space-lg);
+      }
+
+      .nav-link {
+        color: var(--neutral-700);
+        font-size: var(--font-size-caption);
+        line-height: var(--line-height-body);
+        text-decoration: none;
+      }
+
+      .nav-link:hover {
+        color: var(--primary-600);
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: var(--space-3xl);
+        padding: var(--space-md) var(--space-xl);
+        border: 1px solid transparent;
+        border-radius: var(--button-rounded);
+        font-family: var(--font-body);
+        font-size: var(--font-size-body);
+        font-weight: var(--weight-bold);
+        line-height: var(--line-height-body);
+        text-align: center;
+        text-decoration: none;
+        transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+      }
+
+      .button:hover {
+        transform: translateY(-1px);
+      }
+
+      .button:active {
+        transform: translateY(0);
+      }
+
+      .button-primary {
+        background: var(--primary);
+        box-shadow: var(--shadow-sm);
+        color: var(--neutral-50);
+      }
+
+      .button-primary:hover {
+        background: var(--primary-600);
+      }
+
+      .button-primary:active {
+        background: var(--primary-700);
+      }
+
+      .button-secondary {
+        border-color: var(--neutral-300);
+        background: color-mix(in srgb, var(--neutral-50) 72%, transparent);
+        color: var(--neutral-950);
+      }
+
+      .button-secondary:hover {
+        border-color: var(--primary-300);
+        background: var(--primary-50);
+        color: var(--primary-700);
+      }
+
+      .hero {
+        position: relative;
+        isolation: isolate;
+        min-height: 71svh;
+        overflow: hidden;
+        background: var(--primary-950);
+        color: var(--neutral-50);
+      }
+
+      .hero-canvas {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+        width: 100%;
+        height: 100%;
+      }
+
+      .hero::after {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        content: "";
+        background: linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--primary-950) 83%, transparent),
+          color-mix(in srgb, var(--neutral-950) 46%, transparent)
+        );
+      }
+
+      .hero-inner {
+        display: grid;
+        align-content: center;
+        width: min(calc(100% - var(--space-3xl)), 1188px);
+        min-height: 71svh;
+        margin: 0 auto;
+        padding: var(--space-4xl) 0;
+      }
+
+      .hero-copy {
+        display: grid;
+        width: 100%;
+        max-width: 696px;
+        gap: var(--space-md);
+        min-width: 0;
+      }
+
+      .eyebrow,
+      .caption {
+        font-size: var(--font-size-caption);
+        line-height: var(--line-height-body);
+      }
+
+      .mobile-break {
+        display: none;
+      }
+
+      .title-line {
+        display: inline;
+      }
+
+      .eyebrow {
+        color: var(--primary-200);
+        font-weight: var(--weight-bold);
+        text-transform: uppercase;
+      }
+
+      .hero-copy p {
+        max-width: 588px;
+        color: var(--primary-100);
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-md);
+        padding-top: var(--space-md);
+      }
+
+      main > section + section {
+        margin-top: var(--space-3xl);
+      }
+
+      .section {
+        width: min(calc(100% - var(--space-3xl)), 1188px);
+        margin-inline: auto;
+      }
+
+      .section-header {
+        display: grid;
+        grid-template-columns: minmax(0, 0.82fr) minmax(252px, 0.38fr);
+        gap: var(--space-xl);
+        align-items: end;
+        margin-bottom: var(--space-xl);
+      }
+
+      .section-header > *,
+      .manifesto-copy,
+      .cta-copy,
+      .project-card,
+      .service-card {
+        min-width: 0;
+      }
+
+      .section-header p {
+        color: var(--neutral-600);
+      }
+
+      .work-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: var(--space-lg);
+      }
+
+      .project-card,
+      .service-card {
+        border: 1px solid var(--neutral-200);
+        border-radius: var(--card-rounded);
+        background: var(--neutral-50);
+        box-shadow: var(--shadow-md);
+        overflow: hidden;
+      }
+
+      .project-card {
+        display: grid;
+      }
+
+      .project-plate {
+        position: relative;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 18% 22%, var(--primary-300) 0 var(--space-xs), transparent var(--space-xs) var(--space-md)),
+          linear-gradient(135deg, var(--primary-50), var(--neutral-100));
+        background-size: var(--space-xl) var(--space-xl), auto;
+      }
+
+      .project-plate::before,
+      .project-plate::after {
+        position: absolute;
+        content: "";
+      }
+
+      .project-plate::before {
+        inset: var(--space-lg);
+        border: 1px solid var(--neutral-900);
+        border-radius: var(--rounded-md);
+        background:
+          repeating-linear-gradient(
+            90deg,
+            var(--neutral-900) 0 var(--space-2xs),
+            transparent var(--space-2xs) var(--space-sm)
+          );
+        opacity: 0.88;
+      }
+
+      .project-plate::after {
+        right: var(--space-xl);
+        bottom: var(--space-xl);
+        width: var(--space-4xl);
+        height: var(--space-4xl);
+        border-radius: var(--rounded-full);
+        background: var(--primary);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .project-card:nth-child(2) .project-plate {
+        background:
+          linear-gradient(90deg, var(--neutral-900) 0 var(--space-2xs), transparent var(--space-2xs) var(--space-md)),
+          var(--primary-100);
+        background-size: var(--space-md) 100%, auto;
+      }
+
+      .project-card:nth-child(2) .project-plate::before {
+        inset: var(--space-xl) var(--space-lg);
+        background:
+          radial-gradient(circle, var(--neutral-50) 0 var(--space-2xs), transparent var(--space-2xs) var(--space-md)),
+          var(--primary-800);
+        background-size: var(--space-md) var(--space-md), auto;
+      }
+
+      .project-card:nth-child(3) .project-plate {
+        background:
+          repeating-linear-gradient(
+            0deg,
+            var(--primary-200) 0 var(--space-xs),
+            var(--neutral-50) var(--space-xs) var(--space-lg)
+          );
+      }
+
+      .project-card:nth-child(3) .project-plate::before {
+        inset: var(--space-xl);
+        border-color: var(--primary-700);
+        background: var(--neutral-950);
+      }
+
+      .project-card:nth-child(4) .project-plate {
+        background:
+          radial-gradient(circle at 50% 50%, var(--primary) 0 var(--space-2xs), transparent var(--space-2xs) var(--space-sm)),
+          var(--neutral-900);
+        background-size: var(--space-sm) var(--space-sm), auto;
+      }
+
+      .project-card:nth-child(4) .project-plate::before {
+        inset: var(--space-lg) var(--space-2xl);
+        border-color: var(--neutral-50);
+        background: var(--primary-50);
+      }
+
+      .project-body {
+        display: grid;
+        gap: var(--space-md);
+        padding: var(--space-lg);
+      }
+
+      .project-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-xs);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        min-height: var(--space-xl);
+        padding: var(--space-2xs) var(--space-md);
+        border: 1px solid var(--neutral-200);
+        border-radius: var(--badge-rounded);
+        color: var(--neutral-700);
+        font-size: var(--font-size-caption);
+        line-height: var(--line-height-body);
+      }
+
+      .project-body h3,
+      .service-card h3 {
+        font-size: var(--font-size-h4);
+      }
+
+      .project-body p,
+      .service-card p,
+      .manifesto p {
+        color: var(--neutral-700);
+      }
+
+      .services-band {
+        padding: var(--space-3xl) 0;
+        background: var(--primary-50);
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-lg);
+      }
+
+      .service-card {
+        display: grid;
+        gap: var(--space-md);
+        padding: var(--space-xl);
+      }
+
+      .service-number {
+        display: inline-grid;
+        place-items: center;
+        width: var(--space-2xl);
+        height: var(--space-2xl);
+        border-radius: var(--rounded-full);
+        background: var(--primary-100);
+        color: var(--primary-700);
+        font-size: var(--font-size-caption);
+        font-weight: var(--weight-bold);
+        line-height: var(--line-height-body);
+      }
+
+      .manifesto {
+        display: grid;
+        grid-template-columns: minmax(0, 0.66fr) minmax(270px, 0.34fr);
+        gap: var(--space-3xl);
+        align-items: start;
+      }
+
+      .manifesto-copy {
+        display: grid;
+        gap: var(--space-md);
+      }
+
+      .manifesto-copy p:first-of-type {
+        color: var(--neutral-900);
+        font-size: var(--font-size-h4);
+        font-weight: var(--weight-bold);
+        line-height: var(--line-height-heading);
+      }
+
+      .facts {
+        display: grid;
+        gap: var(--space-md);
+        border-top: 1px solid var(--neutral-200);
+      }
+
+      .fact {
+        display: grid;
+        grid-template-columns: 108px 1fr;
+        gap: var(--space-lg);
+        padding-top: var(--space-md);
+        border-top: 1px solid var(--neutral-200);
+      }
+
+      .fact:first-child {
+        border-top: 0;
+      }
+
+      .fact dt {
+        margin: 0;
+        color: var(--neutral-500);
+        font-size: var(--font-size-caption);
+        line-height: var(--line-height-body);
+      }
+
+      .fact dd {
+        margin: 0;
+        color: var(--neutral-900);
+        font-weight: var(--weight-bold);
+      }
+
+      .cta-band {
+        background: var(--neutral-900);
+        color: var(--neutral-50);
+      }
+
+      .cta-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 0.72fr) auto;
+        gap: var(--space-xl);
+        align-items: center;
+        width: min(calc(100% - var(--space-3xl)), 1188px);
+        margin: 0 auto;
+        padding: var(--space-3xl) 0;
+      }
+
+      .cta-copy {
+        display: grid;
+        gap: var(--space-md);
+      }
+
+      .cta-copy p {
+        max-width: 588px;
+        color: var(--neutral-300);
+      }
+
+      .site-footer {
+        margin-top: var(--space-3xl);
+        border-top: 1px solid var(--neutral-200);
+        background: var(--neutral-50);
+      }
+
+      .footer-inner {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--space-xl);
+        width: min(calc(100% - var(--space-3xl)), 1188px);
+        margin: 0 auto;
+        padding: var(--space-xl) 0;
+        color: var(--neutral-600);
+        font-size: var(--font-size-caption);
+        line-height: var(--line-height-body);
+      }
+
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-lg);
+      }
+
+      .footer-links a {
+        text-decoration: none;
+      }
+
+      .footer-links a:hover {
+        color: var(--primary-600);
+      }
+
+      @media (max-width: 980px) {
+        .section-header,
+        .manifesto,
+        .cta-inner {
+          grid-template-columns: 1fr;
+        }
+
+        .work-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .services-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .nav,
+        .section,
+        .hero-inner,
+        .cta-inner,
+        .footer-inner {
+          width: 100%;
+          padding-right: var(--space-md);
+          padding-left: var(--space-md);
+        }
+
+        .mobile-break,
+        .title-line {
+          display: block;
+        }
+
+        .hero-copy,
+        .hero-actions,
+        .section-header {
+          max-width: calc(100vw - var(--space-xl));
+        }
+
+        .nav-links .nav-link {
+          display: none;
+        }
+
+        .button {
+          width: auto;
+          max-width: 100%;
+        }
+
+        .hero-actions {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr);
+          width: 100%;
+          padding-right: var(--space-md);
+        }
+
+        .nav .button {
+          width: auto;
+          min-height: var(--space-2xl);
+          padding: var(--space-sm) var(--space-md);
+          font-size: var(--font-size-caption);
+        }
+
+        .hero,
+        .hero-inner {
+          min-height: 66svh;
+        }
+
+        .hero-copy p {
+          max-width: 32ch;
+        }
+
+        .work-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .fact {
+          grid-template-columns: 1fr;
+          gap: var(--space-xs);
+        }
+
+        .footer-inner {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-header">
+        <nav class="nav" aria-label="Primary navigation">
+          <a class="brand" href="#top" aria-label="Halftone home">
+            <span class="brand-mark" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+            <span>Halftone</span>
+          </a>
+          <div class="nav-links">
+            <a class="nav-link" href="#work">Work</a>
+            <a class="nav-link" href="#services">Services</a>
+            <a class="nav-link" href="#studio">Studio</a>
+            <a class="button button-primary" href="#contact">Start a brief</a>
+          </div>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="hero" aria-labelledby="hero-title">
+          <canvas class="hero-canvas" aria-hidden="true"></canvas>
+          <div class="hero-inner">
+            <div class="hero-copy">
+              <p class="eyebrow">Tokyo / Berlin · Founded 2019</p>
+              <h1 id="hero-title">Halftone</h1>
+              <p>
+                Editorial brand and art direction for cultural<br class="mobile-break"> institutions, independent fashion houses,
+                <br class="mobile-break">and small publishers. Work that ages well, without asking for applause.
+              </p>
+              <div class="hero-actions" aria-label="Hero actions">
+                <a class="button button-primary" href="#work">View selected work</a>
+                <a class="button button-secondary" href="#contact">Discuss a commission</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="work" aria-labelledby="work-title">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Selected work</p>
+              <h2 id="work-title"><span class="title-line">Quiet systems,</span> <span class="title-line">exacting surfaces.</span></h2>
+            </div>
+            <p>
+              Four recent commissions across identity, print, editorial, and direction. None of them
+              required a launch slogan.
+            </p>
+          </div>
+
+          <div class="work-grid">
+            <article class="project-card">
+              <div class="project-plate" aria-hidden="true"></div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span class="badge">Cultural</span>
+                  <span class="badge">Identity</span>
+                </div>
+                <h3>Setagaya Archive</h3>
+                <p>A visual system for a public archive: severe enough for records, flexible enough for posters.</p>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-plate" aria-hidden="true"></div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span class="badge">Publisher</span>
+                  <span class="badge">Editorial</span>
+                </div>
+                <h3>Mauer Review 12</h3>
+                <p>Issue design, pacing, and typographic rules for a small Berlin publisher with a long memory.</p>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-plate" aria-hidden="true"></div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span class="badge">Fashion</span>
+                  <span class="badge">Art direction</span>
+                </div>
+                <h3>House Notes</h3>
+                <p>Seasonal direction for an independent label, held back from becoming seasonal noise.</p>
+              </div>
+            </article>
+
+            <article class="project-card">
+              <div class="project-plate" aria-hidden="true"></div>
+              <div class="project-body">
+                <div class="project-meta">
+                  <span class="badge">Institution</span>
+                  <span class="badge">Print</span>
+                </div>
+                <h3>North Annex</h3>
+                <p>Exhibition matter, wall texts, and printed fragments for a museum wing reopening.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="services-band" id="services" aria-labelledby="services-title">
+          <div class="section">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Services</p>
+                <h2 id="services-title">The useful parts of taste.</h2>
+              </div>
+              <p>
+                Halftone works where visual judgment meets repeated use: names, pages, objects, rooms,
+                and the rules that keep them from drifting.
+              </p>
+            </div>
+
+            <div class="services-grid">
+              <article class="service-card">
+                <span class="service-number">01</span>
+                <h3>Brand identity</h3>
+                <p>Positioning, visual systems, marks, type direction, and guidelines that survive real deadlines.</p>
+              </article>
+              <article class="service-card">
+                <span class="service-number">02</span>
+                <h3>Print & editorial</h3>
+                <p>Books, catalogues, magazines, editions, campaign matter, and the rhythm between pages.</p>
+              </article>
+              <article class="service-card">
+                <span class="service-number">03</span>
+                <h3>Art direction</h3>
+                <p>Image strategy, shoots, exhibition language, launch systems, and restraint when restraint helps.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section manifesto" id="studio" aria-labelledby="studio-title">
+          <div class="manifesto-copy">
+            <p class="eyebrow">Studio / manifesto</p>
+            <h2 id="studio-title">Small by design. Slow on purpose.</h2>
+            <p>
+              Halftone is six people working between Tokyo and Berlin. We are not built for churn,
+              trend uptake, or the comforting theatre of infinite options.
+            </p>
+            <p>
+              We prefer durable systems, printed proof, considered silence, and the sort of art direction
+              that still looks awake after the opening week has passed.
+            </p>
+          </div>
+
+          <dl class="facts" aria-label="Studio facts">
+            <div class="fact">
+              <dt>Founded</dt>
+              <dd>2019</dd>
+            </div>
+            <div class="fact">
+              <dt>People</dt>
+              <dd>6</dd>
+            </div>
+            <div class="fact">
+              <dt>Locations</dt>
+              <dd>Tokyo / Berlin</dd>
+            </div>
+            <div class="fact">
+              <dt>Posture</dt>
+              <dd>Anti-trend, pro-memory</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="cta-band" id="contact" aria-labelledby="cta-title">
+          <div class="cta-inner">
+            <div class="cta-copy">
+              <p class="eyebrow">Commissions</p>
+              <h2 id="cta-title">Bring the brief. Leave the spectacle.</h2>
+              <p>
+                We take on a small number of brand, editorial, and art direction projects each year.
+                The first conversation is direct, useful, and usually better without a deck.
+              </p>
+            </div>
+            <a class="button button-primary" href="mailto:studio@halftone.example">studio@halftone.example</a>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-inner">
+          <p>© 2026 Halftone. Brand & art direction, Tokyo / Berlin.</p>
+          <div class="footer-links" aria-label="Footer links">
+            <a href="#work">Work</a>
+            <a href="#services">Services</a>
+            <a href="mailto:studio@halftone.example">Contact</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const canvas = document.querySelector(".hero-canvas");
+      const ctx = canvas.getContext("2d");
+
+      function token(name) {
+        return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+      }
+
+      function drawHero() {
+        const ratio = window.devicePixelRatio || 1;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = Math.max(1, Math.floor(rect.width * ratio));
+        canvas.height = Math.max(1, Math.floor(rect.height * ratio));
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+        const width = rect.width;
+        const height = rect.height;
+        const primary = token("--primary");
+        const primary200 = token("--primary-200");
+        const primary700 = token("--primary-700");
+        const primary950 = token("--primary-950");
+        const neutral50 = token("--neutral-50");
+        const neutral900 = token("--neutral-900");
+
+        ctx.fillStyle = primary950;
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.fillStyle = primary700;
+        ctx.fillRect(width * 0.52, 0, width * 0.48, height);
+
+        ctx.fillStyle = neutral900;
+        ctx.fillRect(width * 0.62, height * 0.14, width * 0.24, height * 0.72);
+
+        ctx.fillStyle = primary200;
+        ctx.fillRect(width * 0.74, height * 0.18, width * 0.08, height * 0.64);
+
+        const dot = Math.max(3, Math.min(9, width / 150));
+        const step = dot * 3;
+        for (let y = -step; y < height + step; y += step) {
+          for (let x = width * 0.42; x < width + step; x += step) {
+            const wave = Math.sin((x + y) * 0.014) * 0.5 + 0.5;
+            ctx.beginPath();
+            ctx.fillStyle = wave > 0.55 ? primary : neutral50;
+            ctx.globalAlpha = 0.34 + wave * 0.42;
+            ctx.arc(x, y, dot * (0.7 + wave * 0.7), 0, Math.PI * 2);
+            ctx.fill();
+          }
+        }
+
+        ctx.globalAlpha = 1;
+        ctx.strokeStyle = neutral50;
+        ctx.lineWidth = 1;
+        for (let i = 0; i < 8; i += 1) {
+          const offset = i * step * 2;
+          ctx.beginPath();
+          ctx.moveTo(width * 0.5 + offset, 0);
+          ctx.lineTo(width * 0.28 + offset, height);
+          ctx.stroke();
+        }
+      }
+
+      drawHero();
+      window.addEventListener("resize", drawHero);
+    </script>
+    <script src="../demo-switcher.js" defer></script>
+</body>
+</html>

@@ -13,6 +13,8 @@ const CHAIN_KEYS = [
 export function StartStep() {
   const setStep = useDesignStore((s) => s.setStep);
   const t = useT();
+  const demoHref = `${import.meta.env.BASE_URL}demo/`;
+  const compareHref = `${import.meta.env.BASE_URL}demo/compare.html`;
 
   function onBegin() {
     setStep('typography');
@@ -77,6 +79,58 @@ export function StartStep() {
             <h3 className={styles.infoCardTitle}>{t('start.info.getTitle')}</h3>
             <p className={styles.infoCardBody}>{t('start.info.getBody')}</p>
           </article>
+        </div>
+      </section>
+
+      <section id="demos" className={styles.demo} aria-labelledby="demo-title">
+        <header className={styles.demoHeader}>
+          <span className={styles.infoEyebrow}>{t('start.demo.eyebrow')}</span>
+          <h2 className={styles.infoTitle} id="demo-title">
+            {t('start.demo.title')}
+          </h2>
+          <p className={styles.demoLead}>{t('start.demo.body')}</p>
+        </header>
+
+        <div className={styles.demoPanel}>
+          <div className={styles.demoMatrix} aria-hidden="true">
+            <span className={styles.demoMatrixCorner} />
+            <span className={styles.demoMatrixColLabel}>Codex</span>
+            <span className={styles.demoMatrixColLabel}>Claude</span>
+
+            <span className={styles.demoMatrixRowLabel}>Kelvin</span>
+            <div className={styles.demoMatrixCell}>
+              <span className={styles.demoMatrixChip}>Rich</span>
+              <span className={styles.demoMatrixChip}>Google</span>
+            </div>
+            <div className={styles.demoMatrixCell}>
+              <span className={styles.demoMatrixChip}>Rich</span>
+              <span className={styles.demoMatrixChip}>Google</span>
+            </div>
+
+            <span className={styles.demoMatrixRowLabel}>Halftone</span>
+            <div className={styles.demoMatrixCell}>
+              <span className={styles.demoMatrixChip}>Rich</span>
+              <span className={styles.demoMatrixChip}>Google</span>
+            </div>
+            <div className={styles.demoMatrixCell}>
+              <span className={styles.demoMatrixChip}>Rich</span>
+              <span className={styles.demoMatrixChip}>Google</span>
+            </div>
+          </div>
+
+          <div className={styles.demoCopy}>
+            <span className={styles.infoCardNum}>{t('start.demo.label')}</span>
+            <h3 className={styles.infoCardTitle}>{t('start.demo.cardTitle')}</h3>
+            <p className={styles.infoCardBody}>{t('start.demo.cardBody')}</p>
+            <div className={styles.demoActions}>
+              <a className={styles.demoPrimary} href={compareHref}>
+                {t('start.demo.compareBtn')} →
+              </a>
+              <a className={styles.demoSecondary} href={demoHref}>
+                {t('start.demo.galleryBtn')}
+              </a>
+            </div>
+          </div>
         </div>
       </section>
 

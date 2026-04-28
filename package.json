@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && npm run copy:demo",
+    "copy:demo": "node scripts/copy-demo-assets.mjs",
     "preview": "npm run build && wrangler dev",
     "typecheck": "tsc --noEmit",
     "deploy": "npm run build && wrangler deploy"

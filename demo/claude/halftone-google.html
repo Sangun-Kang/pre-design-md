@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Halftone — Brand &amp; Art Direction Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&display=swap" rel="stylesheet">
+<style>
+/* Tokens from Google DESIGN.md (hex + YAML) ---------------------- */
+:root {
+  /* Colors */
+  --color-primary: #888684;
+  --color-primary-50: #fafafa;
+  --color-primary-100: #f2f1f1;
+  --color-primary-200: #dfdedd;
+  --color-primary-300: #c5c4c2;
+  --color-primary-400: #a6a4a2;
+  --color-primary-500: #888684;
+  --color-primary-600: #6a6867;
+  --color-primary-700: #4e4d4b;
+  --color-primary-800: #343332;
+  --color-primary-900: #1b1a1a;
+  --color-primary-950: #0c0b0b;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f2f1f1;
+  --color-neutral-200: #dfdedd;
+  --color-neutral-300: #c5c4c2;
+  --color-neutral-400: #a6a4a2;
+  --color-neutral-500: #888684;
+  --color-neutral-600: #6a6867;
+  --color-neutral-700: #4e4d4b;
+  --color-neutral-800: #343332;
+  --color-neutral-900: #1b1a1a;
+  --color-neutral-950: #0c0b0b;
+  --color-success: #6b8a6b;
+  --color-warning: #b8a17c;
+  --color-danger: #a0736f;
+  --color-info: #61859f;
+
+  /* Typography */
+  --font-family-heading: 'Source Serif 4', Georgia, serif;
+  --font-family-body: 'Source Sans 3', system-ui, sans-serif;
+  --font-size-xs: 0.8rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5625rem;
+  --font-size-2xl: 1.9531rem;
+  --font-size-3xl: 2.4414rem;
+  --font-size-4xl: 3.0518rem;
+  --line-height-tight: 1.275;
+  --line-height-normal: 1.58;
+
+  /* Spacing */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+  --space-5xl: 128px;
+
+  /* Rounded */
+  --rounded-none: 0;
+  --rounded-sm: 4px;
+  --rounded-md: 8px;
+  --rounded-lg: 12px;
+  --rounded-xl: 16px;
+  --rounded-full: 9999px;
+
+  /* Shadow */
+  --shadow-sm: 0 2px 3px -1px oklch(0% 0 0 / 0.18);
+  --shadow-md: 0 4px 6px -2px oklch(0% 0 0 / 0.28), 0 2px 3px -1px oklch(0% 0 0 / 0.28);
+  --shadow-lg: 0 8px 12px -3px oklch(0% 0 0 / 0.38), 0 3px 5px -2px oklch(0% 0 0 / 0.38);
+  --shadow-xl: 0 14px 18px -4px oklch(0% 0 0 / 0.5), 0 6px 8px -4px oklch(0% 0 0 / 0.5);
+}
+
+/* Base ----------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  line-height: var(--line-height-normal);
+  color: var(--color-neutral-900);
+  background: var(--color-neutral-50);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+.wrap { width: 100%; max-width: 1200px; margin-inline: auto; padding-inline: var(--space-lg); }
+
+/* Nav ------------------------------------------------------------ */
+.nav {
+  border-bottom: 1px solid var(--color-neutral-200);
+  background: var(--color-neutral-50);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: var(--space-md);
+}
+.brand {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.nav-links {
+  display: flex;
+  gap: var(--space-xl);
+  font-size: var(--font-size-base);
+  color: var(--color-neutral-700);
+}
+.nav-links a:hover { color: var(--color-neutral-900); }
+.nav-cta {
+  background: var(--color-neutral-900);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: var(--rounded-md);
+  font-size: var(--font-size-base);
+  box-shadow: var(--shadow-sm);
+}
+@media (max-width: 720px) { .nav-links { display: none; } }
+
+/* Hero ----------------------------------------------------------- */
+.hero {
+  padding-block: var(--space-5xl) var(--space-4xl);
+}
+.hero h1 {
+  font-size: clamp(var(--font-size-3xl), 6vw, var(--font-size-4xl));
+  max-width: 18ch;
+  margin-bottom: var(--space-lg);
+}
+.hero p {
+  font-size: var(--font-size-lg);
+  color: var(--color-neutral-700);
+  max-width: 56ch;
+  margin-bottom: var(--space-2xl);
+}
+.hero-cta {
+  display: inline-flex;
+  gap: var(--space-md);
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 12px 20px;
+  border-radius: var(--rounded-md);
+  font-size: var(--font-size-base);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 150ms;
+}
+.btn-primary {
+  background: var(--color-neutral-900);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary:hover { background: var(--color-neutral-800); }
+.btn-ghost {
+  background: transparent;
+  color: var(--color-neutral-900);
+  border-color: var(--color-neutral-300);
+}
+.btn-ghost:hover { background: var(--color-neutral-100); }
+
+/* Work showcase -------------------------------------------------- */
+.section { padding-block: var(--space-3xl); }
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-bottom: var(--space-2xl);
+  border-bottom: 1px solid var(--color-neutral-200);
+  padding-bottom: var(--space-md);
+}
+.section-head h2 {
+  font-size: var(--font-size-2xl);
+}
+.eyebrow {
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-neutral-600);
+  margin-bottom: var(--space-xs);
+}
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xl);
+}
+@media (max-width: 720px) { .work-grid { grid-template-columns: 1fr; } }
+.work-card {
+  background: #fff;
+  border-radius: var(--rounded-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: transform 200ms, box-shadow 200ms;
+}
+.work-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.work-image {
+  aspect-ratio: 4/3;
+  background: var(--color-neutral-200);
+  position: relative;
+  overflow: hidden;
+}
+.work-image-1 {
+  background:
+    linear-gradient(135deg, var(--color-neutral-300) 0%, var(--color-neutral-200) 100%);
+}
+.work-image-1::before {
+  content: '';
+  position: absolute;
+  inset: 20% 30%;
+  background: var(--color-neutral-800);
+  border-radius: var(--rounded-full);
+}
+.work-image-2 {
+  background: var(--color-neutral-100);
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+}
+.work-image-2 div {
+  background: var(--color-neutral-800);
+  opacity: var(--opa, 0.1);
+}
+.work-image-3 {
+  background: var(--color-neutral-800);
+  display: grid;
+  place-items: center;
+}
+.work-image-3::after {
+  content: 'H';
+  font-family: var(--font-family-heading);
+  font-size: 200px;
+  color: var(--color-neutral-50);
+  font-weight: 700;
+  line-height: 1;
+  font-style: italic;
+}
+.work-image-4 {
+  background:
+    repeating-linear-gradient(45deg, var(--color-neutral-300) 0 4px, var(--color-neutral-200) 4px 8px);
+}
+.work-meta {
+  padding: var(--space-lg);
+}
+.work-tag {
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-neutral-600);
+  margin-bottom: var(--space-xs);
+}
+.work-title {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-2xs);
+}
+.work-client {
+  color: var(--color-neutral-700);
+}
+
+/* Services ------------------------------------------------------- */
+.services {
+  background: var(--color-neutral-100);
+  padding-block: var(--space-4xl);
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-2xl);
+}
+@media (max-width: 720px) { .services-grid { grid-template-columns: 1fr; } }
+.service-card {
+  background: #fff;
+  padding: var(--space-xl);
+  border-radius: var(--rounded-lg);
+  box-shadow: var(--shadow-sm);
+}
+.service-num {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-3xl);
+  color: var(--color-neutral-400);
+  margin-bottom: var(--space-md);
+}
+.service-card h3 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-sm);
+}
+.service-card p {
+  color: var(--color-neutral-700);
+}
+
+/* Manifesto ------------------------------------------------------ */
+.manifesto {
+  padding-block: var(--space-4xl);
+}
+.manifesto h2 {
+  font-size: var(--font-size-3xl);
+  max-width: 22ch;
+  margin-bottom: var(--space-xl);
+}
+.manifesto p {
+  font-size: var(--font-size-lg);
+  color: var(--color-neutral-700);
+  max-width: 60ch;
+  margin-bottom: var(--space-md);
+}
+
+/* CTA ------------------------------------------------------------ */
+.cta {
+  background: var(--color-neutral-900);
+  color: #fff;
+  padding: var(--space-4xl) var(--space-xl);
+  border-radius: var(--rounded-xl);
+  text-align: center;
+  box-shadow: var(--shadow-xl);
+  margin-block: var(--space-3xl);
+}
+.cta h2 {
+  font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-3xl));
+  margin-bottom: var(--space-md);
+  color: #fff;
+}
+.cta p {
+  color: var(--color-neutral-300);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-xl);
+}
+.cta .btn-primary {
+  background: #fff;
+  color: var(--color-neutral-900);
+}
+
+/* Footer --------------------------------------------------------- */
+footer {
+  border-top: 1px solid var(--color-neutral-200);
+  padding-block: var(--space-2xl);
+  font-size: var(--font-size-base);
+  color: var(--color-neutral-600);
+}
+.foot-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+@media (max-width: 720px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+.foot-grid h4 {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-neutral-700);
+  margin-bottom: var(--space-md);
+}
+.foot-grid ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-xs); }
+.foot-bottom {
+  display: flex;
+  justify-content: space-between;
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-neutral-200);
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="#" class="brand">Halftone</a>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#about">Studio</a>
+      <a href="#journal">Journal</a>
+    </div>
+    <a href="#" class="nav-cta">Start a project</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Brand &amp; Art Direction · Tokyo · Berlin</p>
+    <h1>A studio for ideas that need a long shelf life.</h1>
+    <p>Halftone is an independent brand and art direction studio. We work with cultural institutions, independent fashion houses, and small publishers on identity, print, and editorial systems. We make work that ages well.</p>
+    <div class="hero-cta">
+      <a href="#work" class="btn btn-primary">See selected work</a>
+      <a href="#about" class="btn btn-ghost">About the studio</a>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Selected Work · 2022—2026</p>
+        <h2>Recent projects</h2>
+      </div>
+      <a href="#" style="color: var(--color-neutral-700);">View archive →</a>
+    </div>
+
+    <div class="work-grid">
+      <article class="work-card">
+        <div class="work-image work-image-1"></div>
+        <div class="work-meta">
+          <p class="work-tag">Identity · Print · 2025</p>
+          <h3 class="work-title">Maison Aubade</h3>
+          <p class="work-client">Independent perfume house, Paris</p>
+        </div>
+      </article>
+
+      <article class="work-card">
+        <div class="work-image work-image-2">
+          <div style="--opa: 0.9"></div><div style="--opa: 0.1"></div><div style="--opa: 0.4"></div><div style="--opa: 0.7"></div><div style="--opa: 0.2"></div><div style="--opa: 0.8"></div><div style="--opa: 0.1"></div><div style="--opa: 0.5"></div>
+          <div style="--opa: 0.3"></div><div style="--opa: 0.6"></div><div style="--opa: 0.9"></div><div style="--opa: 0.2"></div><div style="--opa: 0.7"></div><div style="--opa: 0.4"></div><div style="--opa: 0.8"></div><div style="--opa: 0.1"></div>
+          <div style="--opa: 0.5"></div><div style="--opa: 0.8"></div><div style="--opa: 0.3"></div><div style="--opa: 0.7"></div><div style="--opa: 0.1"></div><div style="--opa: 0.9"></div><div style="--opa: 0.4"></div><div style="--opa: 0.6"></div>
+          <div style="--opa: 0.7"></div><div style="--opa: 0.2"></div><div style="--opa: 0.6"></div><div style="--opa: 0.9"></div><div style="--opa: 0.3"></div><div style="--opa: 0.5"></div><div style="--opa: 0.7"></div><div style="--opa: 0.2"></div>
+          <div style="--opa: 0.1"></div><div style="--opa: 0.7"></div><div style="--opa: 0.4"></div><div style="--opa: 0.2"></div><div style="--opa: 0.8"></div><div style="--opa: 0.3"></div><div style="--opa: 0.6"></div><div style="--opa: 0.9"></div>
+          <div style="--opa: 0.6"></div><div style="--opa: 0.3"></div><div style="--opa: 0.8"></div><div style="--opa: 0.5"></div><div style="--opa: 0.1"></div><div style="--opa: 0.7"></div><div style="--opa: 0.2"></div><div style="--opa: 0.4"></div>
+        </div>
+        <div class="work-meta">
+          <p class="work-tag">Editorial · Web · 2025</p>
+          <h3 class="work-title">Field Notes Quarterly</h3>
+          <p class="work-client">Independent journal, Issue 14—17</p>
+        </div>
+      </article>
+
+      <article class="work-card">
+        <div class="work-image work-image-3"></div>
+        <div class="work-meta">
+          <p class="work-tag">Identity · Wayfinding · 2024</p>
+          <h3 class="work-title">Heliograph Museum</h3>
+          <p class="work-client">Photography archive, Kyoto</p>
+        </div>
+      </article>
+
+      <article class="work-card">
+        <div class="work-image work-image-4"></div>
+        <div class="work-meta">
+          <p class="work-tag">Art Direction · Campaign · 2024</p>
+          <h3 class="work-title">Atelier Verte SS25</h3>
+          <p class="work-client">Knitwear label, Berlin</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head" style="border-color: var(--color-neutral-200);">
+      <div>
+        <p class="eyebrow">What we do</p>
+        <h2>Services</h2>
+      </div>
+    </div>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>Brand Identity</h3>
+        <p>Logos, marks, type systems, and the documents that hold them together. Built to outlast a rebrand cycle.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>Print &amp; Editorial</h3>
+        <p>Books, catalogues, journals, and exhibition material. We still go to press checks.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>Art Direction</h3>
+        <p>Campaign concepts, photography direction, and seasonal systems for fashion and cultural clients.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="manifesto" id="about">
+  <div class="wrap">
+    <p class="eyebrow">The studio</p>
+    <h2>We don't do trends. We do work that's still readable in ten years.</h2>
+    <p>Halftone was started in 2019 by two designers who met at a print fair and disagreed productively for the next four years. The studio is intentionally small — six people, two cities, one shared archive.</p>
+    <p>We take on roughly twelve projects a year. We write our own copy. We answer our own emails. If you want a deck within 24 hours, we are not the right studio.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta">
+      <h2>Working on something patient?</h2>
+      <p>We're booking projects for late 2026 onward.</p>
+      <a href="#" class="btn btn-primary">Tell us about it</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Halftone</h4>
+        <p>An independent brand and art direction studio.<br>Tokyo · Berlin · Since 2019.</p>
+      </div>
+      <div>
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Process</a></li>
+          <li><a href="#">Journal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Work</h4>
+        <ul>
+          <li><a href="#">Selected</a></li>
+          <li><a href="#">Archive</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">studio@halftone.co</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Are.na</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Halftone Studio</span>
+      <span>Made with care, not haste.</span>
+    </div>
+  </div>
+</footer>
+
+  <script src="../demo-switcher.js" defer></script>
+</body>
+</html>

@@ -124,6 +124,16 @@ export const ko: Messages = {
   'start.info.getTitle': '하나의 결정, 여러 아웃풋',
   'start.info.getBody':
     'AI 에이전트를 위한 Google DESIGN.md와 Rich Prompt, 코드에 바로 쓰는 CSS variables, Figma용 token JSON으로 내보냅니다.',
+  'start.demo.eyebrow': 'DEMOS',
+  'start.demo.title': 'Codex와 Claude를 나란히 비교.',
+  'start.demo.body':
+    '같은 스펙을 완성 페이지로 렌더한 결과입니다. 각 에이전트가 디자인 의도를 어떻게 해석했는지 바로 비교할 수 있어요.',
+  'start.demo.label': 'COMPARE',
+  'start.demo.cardTitle': '8개 정적 데모, 하나의 스위처',
+  'start.demo.cardBody':
+    'Kelvin과 Halftone 페이지 어디에서든 Codex, Claude, Rich Prompt, Google DESIGN.md 버전으로 바로 이동할 수 있습니다.',
+  'start.demo.compareBtn': '비교 화면 열기',
+  'start.demo.galleryBtn': '전체 데모 보기',
   'start.info.ctaTitle': '채 2분이면 충분합니다.',
   'start.info.ctaBody': '가입도, 저장 절차도 없어요 — 다섯 단계면 끝.',
 

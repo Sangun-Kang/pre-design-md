@@ -124,6 +124,16 @@ export const ja: Messages = {
   'start.info.getTitle': '1 つの決定セット、複数のアウトプット',
   'start.info.getBody':
     'AI エージェント向けの Google DESIGN.md と Rich Prompt、コード向けの CSS variables、Figma 向けの token JSON として書き出せます。',
+  'start.demo.eyebrow': 'DEMOS',
+  'start.demo.title': 'Codex と Claude を並べて比較。',
+  'start.demo.body':
+    '同じ仕様から生成された完成ページです。各エージェントがデザイン意図をどう解釈したかを見比べられます。',
+  'start.demo.label': 'COMPARE',
+  'start.demo.cardTitle': '8 つの静的デモ、1 つのスイッチャー',
+  'start.demo.cardBody':
+    'Kelvin と Halftone のどのページからでも、Codex・Claude・Rich Prompt・Google DESIGN.md の版へすぐ移動できます。',
+  'start.demo.compareBtn': '比較画面を開く',
+  'start.demo.galleryBtn': 'すべてのデモを見る',
   'start.info.ctaTitle': '2 分あれば終わります。',
   'start.info.ctaBody': '登録も保存も不要 — ステップを 5 つ進めるだけ。',
 

@@ -4,7 +4,10 @@ import path from 'node:path';
 
 import { cloudflare } from "@cloudflare/vite-plugin";
 
+const base = process.env.VITE_BASE_PATH ?? (process.env.GITHUB_PAGES === 'true' ? '/pre-design-md/' : '/');
+
 export default defineConfig({
+  base,
   plugins: [react(), cloudflare()],
   resolve: {
     alias: {

@@ -1,0 +1,1483 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kelvin | Warehouse-native BI</title>
+    <meta
+      name="description"
+      content="Kelvin is warehouse-native BI for teams that define metrics in dbt and query Snowflake, BigQuery, Redshift, and Databricks directly."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* Brand intent: grayscale with green accent. */
+        /* Grayscale interface with a single green accent -- neutrals carry structure, the accent earns attention. */
+        --color-primary: #3c9d55;
+        --color-primary-50: #f1fef3;
+        --color-primary-100: #dffae3;
+        --color-primary-200: #bbedc3;
+        --color-primary-300: #8fd99c;
+        --color-primary-400: #63bb75;
+        --color-primary-500: #3c9d55;
+        --color-primary-600: #1d7d3b;
+        --color-primary-700: #0c5d28;
+        --color-primary-800: #003f16;
+        --color-primary-900: #002208;
+        --color-primary-950: #001002;
+        --color-neutral-50: #fafafa;
+        --color-neutral-100: #f2f2f2;
+        --color-neutral-200: #dedede;
+        --color-neutral-300: #c4c4c4;
+        --color-neutral-400: #a4a4a4;
+        --color-neutral-500: #868686;
+        --color-neutral-600: #696969;
+        --color-neutral-700: #4d4d4d;
+        --color-neutral-800: #333333;
+        --color-neutral-900: #1b1b1b;
+        --color-neutral-950: #0b0b0b;
+        --color-success: #6b8a6b;
+        --color-warning: #b8a17c;
+        --color-danger: #a0736f;
+        --color-info: #61859f;
+        --font-family-base: "Inter", system-ui, -apple-system, sans-serif;
+        --font-size-h1: 3.0518rem;
+        --font-size-h2: 2.4414rem;
+        --font-size-h3: 1.9531rem;
+        --font-size-h4: 1.5625rem;
+        --font-size-body: 1rem;
+        --font-size-caption: 0.8rem;
+        --font-weight-regular: 400;
+        --font-weight-semibold: 600;
+        --font-weight-bold: 700;
+        --line-height-heading: 1.275;
+        --line-height-body: 1.58;
+        --space-2xs: 2px;
+        --space-xs: 4px;
+        --space-sm: 8px;
+        --space-md: 12px;
+        --space-lg: 16px;
+        --space-xl: 24px;
+        --space-2xl: 32px;
+        --space-3xl: 48px;
+        --space-4xl: 64px;
+        --space-5xl: 96px;
+        --radius-none: 0;
+        --radius-sm: 1px;
+        --radius-md: 2px;
+        --radius-lg: 3px;
+        --radius-xl: 4px;
+        --radius-full: 9999px;
+        --radius-button: var(--radius-md);
+        --radius-card: var(--radius-lg);
+        --radius-input: var(--radius-sm);
+        --radius-badge: var(--radius-full);
+        --shadow-sm: 0 1px 2px 0 oklch(0% 0 0 / 0.09);
+        --shadow-md: 0 4px 6px -1px oklch(0% 0 0 / 0.13), 0 2px 4px -2px oklch(0% 0 0 / 0.13);
+        --shadow-lg: 0 10px 15px -3px oklch(0% 0 0 / 0.18), 0 4px 6px -4px oklch(0% 0 0 / 0.18);
+        --shadow-xl: 0 20px 25px -5px oklch(0% 0 0 / 0.22), 0 8px 10px -6px oklch(0% 0 0 / 0.22);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        color: var(--color-neutral-900);
+        background: var(--color-neutral-50);
+        font-family: var(--font-family-base);
+        font-size: 16px;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--color-neutral-800);
+        background:
+          linear-gradient(180deg, var(--color-primary-50) 0, var(--color-neutral-50) 360px),
+          var(--color-neutral-50);
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-body);
+        font-weight: var(--font-weight-regular);
+        line-height: var(--line-height-body);
+        overflow-x: hidden;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button,
+      a {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+      }
+
+      .page {
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .container {
+        width: min(1120px, calc(100% - var(--space-2xl)));
+        margin: 0 auto;
+      }
+
+      .hero__copy,
+      .hero__panel,
+      .query-card,
+      .query-window,
+      .dashboard,
+      .dashboard__main,
+      .chart-card,
+      .code-block,
+      .feature-card,
+      .pricing-card {
+        min-width: 0;
+      }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        border-bottom: 1px solid var(--color-neutral-200);
+        background: var(--color-neutral-50);
+      }
+
+      .nav__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: var(--space-4xl);
+        gap: var(--space-lg);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-sm);
+        color: var(--color-neutral-950);
+        font-weight: var(--font-weight-bold);
+      }
+
+      .brand__mark {
+        display: grid;
+        width: var(--space-2xl);
+        height: var(--space-2xl);
+        place-items: center;
+        border: 1px solid var(--color-primary-600);
+        border-radius: var(--radius-card);
+        background: var(--color-primary-500);
+        color: var(--color-neutral-50);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .brand__mark span {
+        display: block;
+        width: var(--space-md);
+        height: var(--space-md);
+        border-top: var(--space-xs) solid currentColor;
+        border-right: var(--space-xs) solid currentColor;
+        transform: rotate(45deg);
+      }
+
+      .nav__actions {
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+      }
+
+      .nav__link {
+        color: var(--color-neutral-700);
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-semibold);
+      }
+
+      .nav__link:hover {
+        color: var(--color-neutral-900);
+      }
+
+      .btn {
+        display: inline-flex;
+        min-height: var(--space-3xl);
+        align-items: center;
+        justify-content: center;
+        gap: var(--space-sm);
+        border: 1px solid transparent;
+        border-radius: var(--radius-button);
+        padding: var(--space-md) var(--space-xl);
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-body);
+        font-weight: var(--font-weight-semibold);
+        line-height: var(--line-height-body);
+        white-space: nowrap;
+        transition:
+          background-color 160ms ease,
+          border-color 160ms ease,
+          color 160ms ease,
+          box-shadow 160ms ease,
+          transform 160ms ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .btn--primary {
+        border-color: var(--color-primary-600);
+        background: var(--color-primary-500);
+        color: var(--color-neutral-50);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .btn--primary:hover {
+        border-color: var(--color-primary-700);
+        background: var(--color-primary-600);
+      }
+
+      .btn--primary:active {
+        border-color: var(--color-primary-800);
+        background: var(--color-primary-700);
+      }
+
+      .btn--secondary {
+        border-color: var(--color-neutral-300);
+        background: var(--color-neutral-50);
+        color: var(--color-neutral-900);
+      }
+
+      .btn--secondary:hover {
+        border-color: var(--color-neutral-400);
+        background: var(--color-neutral-100);
+      }
+
+      .btn--secondary:active {
+        border-color: var(--color-neutral-500);
+        background: var(--color-neutral-200);
+      }
+
+      .btn--nav {
+        min-height: auto;
+        padding: var(--space-sm) var(--space-lg);
+        font-size: var(--font-size-caption);
+      }
+
+      .section {
+        padding: var(--space-3xl) 0;
+      }
+
+      .hero {
+        padding: var(--space-4xl) 0 var(--space-3xl);
+      }
+
+      .hero__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.02fr) minmax(360px, 0.98fr);
+        align-items: center;
+        gap: var(--space-3xl);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        justify-self: start;
+        gap: var(--space-sm);
+        width: fit-content;
+        max-width: 100%;
+        border: 1px solid var(--color-primary-200);
+        border-radius: var(--radius-badge);
+        padding: var(--space-xs) var(--space-md);
+        background: var(--color-primary-50);
+        color: var(--color-primary-800);
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-semibold);
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: var(--space-sm);
+        height: var(--space-sm);
+        border-radius: var(--radius-full);
+        background: var(--color-primary-500);
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      p {
+        margin: 0;
+        overflow-wrap: break-word;
+      }
+
+      h1 {
+        max-width: 820px;
+        margin-top: var(--space-xl);
+        color: var(--color-neutral-950);
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-h1);
+        font-weight: var(--font-weight-bold);
+        letter-spacing: 0;
+        line-height: var(--line-height-heading);
+      }
+
+      h2 {
+        color: var(--color-neutral-950);
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-h2);
+        font-weight: var(--font-weight-bold);
+        letter-spacing: 0;
+        line-height: var(--line-height-heading);
+      }
+
+      h3 {
+        color: var(--color-neutral-950);
+        font-family: var(--font-family-base);
+        font-size: var(--font-size-h4);
+        font-weight: var(--font-weight-bold);
+        letter-spacing: 0;
+        line-height: var(--line-height-heading);
+      }
+
+      .hero__copy {
+        max-width: 700px;
+      }
+
+      .hero__subhead {
+        max-width: 650px;
+        margin-top: var(--space-lg);
+        color: var(--color-neutral-700);
+        font-size: var(--font-size-body);
+        line-height: var(--line-height-body);
+      }
+
+      .hero__actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-md);
+        margin-top: var(--space-2xl);
+      }
+
+      .trust-line {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-sm) var(--space-lg);
+        margin-top: var(--space-xl);
+        color: var(--color-neutral-600);
+        font-size: var(--font-size-caption);
+      }
+
+      .trust-line span {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-sm);
+      }
+
+      .trust-line span::before {
+        content: "";
+        width: var(--space-sm);
+        height: var(--space-sm);
+        border: 1px solid var(--color-primary-500);
+        border-radius: var(--radius-full);
+        background: var(--color-primary-100);
+      }
+
+      .hero__panel {
+        align-self: stretch;
+        border: 1px solid var(--color-neutral-200);
+        border-radius: var(--radius-card);
+        background: var(--color-neutral-50);
+        box-shadow: var(--shadow-md);
+        padding: var(--space-xl);
+      }
+
+      .query-card {
+        display: grid;
+        gap: var(--space-md);
+      }
+
+      .query-card__head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-lg);
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--space-sm);
+        border-radius: var(--radius-badge);
+        color: var(--color-success);
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-semibold);
+      }
+
+      .status::before {
+        content: "";
+        width: var(--space-sm);
+        height: var(--space-sm);
+        border-radius: var(--radius-full);
+        background: var(--color-success);
+      }
+
+      .query-card__title {
+        color: var(--color-neutral-950);
+        font-size: var(--font-size-h4);
+        font-weight: var(--font-weight-bold);
+        line-height: var(--line-height-heading);
+      }
+
+      .query-card__meta {
+        color: var(--color-neutral-600);
+        font-size: var(--font-size-caption);
+      }
+
+      .warehouse-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-sm);
+        margin-top: var(--space-sm);
+      }
+
+      .warehouse-pill {
+        border: 1px solid var(--color-neutral-200);
+        border-radius: var(--radius-badge);
+        padding: var(--space-sm) var(--space-md);
+        color: var(--color-neutral-700);
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-semibold);
+        text-align: center;
+      }
+
+      .query-window {
+        overflow: hidden;
+        border: 1px solid var(--color-neutral-200);
+        border-radius: var(--radius-card);
+        background: var(--color-neutral-950);
+        color: var(--color-neutral-50);
+      }
+
+      .query-window__bar {
+        display: flex;
+        gap: var(--space-xs);
+        border-bottom: 1px solid var(--color-neutral-800);
+        padding: var(--space-sm);
+      }
+
+      .query-window__bar span {
+        width: var(--space-sm);
+        height: var(--space-sm);
+        border-radius: var(--radius-full);
+        background: var(--color-neutral-600);
+      }
+
+      .query-window pre {
+        overflow-x: auto;
+        margin: 0;
+        padding: var(--space-lg);
+        color: var(--color-neutral-100);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: var(--font-size-caption);
+        line-height: var(--line-height-body);
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+
+      .query-window .green {
+        color: var(--color-primary-300);
+      }
+
+      .preview {
+        padding-top: 0;
+      }
+
+      .dashboard {
+        overflow: hidden;
+        border: 1px solid var(--color-neutral-200);
+        border-radius: var(--radius-card);
+        background: var(--color-neutral-50);
+        box-shadow: var(--shadow-md);
+      }
+
+      .dashboard__top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-lg);
+        border-bottom: 1px solid var(--color-neutral-200);
+        padding: var(--space-lg) var(--space-xl);
+      }
+
+      .window-controls {
+        display: flex;
+        gap: var(--space-xs);
+      }
+
+      .window-controls span {
+        width: var(--space-sm);
+        height: var(--space-sm);
+        border-radius: var(--radius-full);
+        background: var(--color-neutral-300);
+      }
+
+      .dashboard__label {
+        color: var(--color-neutral-600);
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-semibold);
+      }
+
+      .dashboard__body {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        min-height: 520px;
+      }
+
+      .sidebar {
+        border-right: 1px solid var(--color-neutral-200);
+        background: var(--color-neutral-100);
+        padding: var(--space-xl);
+      }
+
+      .sidebar__title {
+        color: var(--color-neutral-900);
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-bold);
+      }
+
+      .sidebar__nav {
+        display: grid;
+        gap: var(--space-sm);
+        margin-top: var(--space-lg);
+      }
+
+      .sidebar__item {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+        border-radius: var(--radius-card);
+        padding: var(--space-sm);
+        color: var(--color-neutral-700);
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-semibold);
+      }
+
+      .sidebar__item::before {
+        content: "";
+        width: var(--space-sm);
+        height: var(--space-sm);
+        border-radius: var(--radius-sm);
+        background: var(--color-neutral-400);
+      }
+
+      .sidebar__item.is-active {
+        background: var(--color-primary-50);
+        color: var(--color-primary-800);
+      }
+
+      .sidebar__item.is-active::before {
+        background: var(--color-primary-500);
+      }
+
+      .dashboard__main {
+        padding: var(--space-xl);
+      }
+
+      .dashboard__headline {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        justify-content: space-between;
+        gap: var(--space-lg);
+      }
+
+      .dashboard__headline p {
+        color: var(--color-neutral-600);
+        font-size: var(--font-size-caption);
+      }
+
+      .kpis {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-md);
+        margin-top: var(--space-xl);
+      }
+
+      .kpi {
+        border: 1px solid var(--color-neutral-200);
+        border-radius: var(--radius-card);
+        background: var(--color-neutral-50);
+        padding: var(--space-lg);
+      }
+
+      .kpi__label {
+        color: var(--color-neutral-600);
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-semibold);
+      }
+
+      .kpi__value {
+        margin-top: var(--space-xs);
+        color: var(--color-neutral-950);
+        font-size: var(--font-size-h4);
+        font-weight: var(--font-weight-bold);
+        line-height: var(--line-height-heading);
+      }
+
+      .kpi__delta {
+        margin-top: var(--space-xs);
+        color: var(--color-success);
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-semibold);
+      }
+
+      .chart-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 220px;
+        gap: var(--space-xl);
+        margin-top: var(--space-md);
+        border: 1px solid var(--color-neutral-200);
+        border-radius: var(--radius-card);
+        background: var(--color-neutral-50);
+        padding: var(--space-xl);
+      }
+
+      .chart-card__head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-lg);
+      }
+
+      .chart-card__head p {
+        color: var(--color-neutral-600);
+        font-size: var(--font-size-caption);
+      }
+
+      .chart {
+        position: relative;
+        display: grid;
+        height: 260px;
+        grid-template-columns: repeat(12, minmax(12px, 1fr));
+        align-items: end;
+        gap: var(--space-sm);
+        margin-top: var(--space-xl);
+        border-bottom: 1px solid var(--color-neutral-300);
+        background:
+          linear-gradient(to top, transparent calc(25% - 1px), var(--color-neutral-100) 25%, transparent calc(25% + 1px)),
+          linear-gradient(to top, transparent calc(50% - 1px), var(--color-neutral-100) 50%, transparent calc(50% + 1px)),
+          linear-gradient(to top, transparent calc(75% - 1px), var(--color-neutral-100) 75%, transparent calc(75% + 1px));
+      }
+
+      .chart span {
+        display: block;
+        min-height: var(--space-xl);
+        border-radius: var(--radius-sm) var(--radius-sm) var(--radius-none) var(--radius-none);
+        background: var(--color-primary-500);
+      }
+
+      .chart span:nth-child(2n) {
+        background: var(--color-primary-300);
+      }
+
+      .chart span:nth-child(3n) {
+        background: var(--color-primary-600);
+      }
+
+      .chart-side {
+        display: grid;
+        align-content: start;
+        gap: var(--space-md);
+      }
+
+      .metric-note {
+        border-left: var(--space-xs) solid var(--color-primary-500);
+        padding-left: var(--space-md);
+      }
+
+      .metric-note strong {
+        display: block;
+        color: var(--color-neutral-950);
+        font-size: var(--font-size-body);
+      }
+
+      .metric-note span {
+        display: block;
+        margin-top: var(--space-xs);
+        color: var(--color-neutral-600);
+        font-size: var(--font-size-caption);
+      }
+
+      .logos {
+        border-block: 1px solid var(--color-neutral-200);
+        background: var(--color-neutral-100);
+      }
+
+      .logos__inner {
+        display: grid;
+        grid-template-columns: 1.2fr repeat(5, minmax(96px, 1fr));
+        align-items: center;
+        gap: var(--space-xl);
+        padding: var(--space-xl) 0;
+      }
+
+      .logos__intro {
+        color: var(--color-neutral-600);
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-semibold);
+      }
+
+      .logo-word {
+        color: var(--color-neutral-700);
+        font-size: var(--font-size-body);
+        font-weight: var(--font-weight-bold);
+        text-align: center;
+      }
+
+      .section-header {
+        display: grid;
+        gap: var(--space-md);
+        max-width: 760px;
+      }
+
+      .section-header--center {
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .section-header--center .eyebrow {
+        justify-self: center;
+      }
+
+      .section-header p {
+        color: var(--color-neutral-700);
+        font-size: var(--font-size-body);
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-md);
+        margin-top: var(--space-3xl);
+      }
+
+      .feature-card {
+        border: 1px solid var(--color-neutral-200);
+        border-radius: var(--radius-card);
+        background: var(--color-neutral-50);
+        box-shadow: var(--shadow-md);
+        padding: var(--space-xl);
+      }
+
+      .feature-card__icon {
+        display: grid;
+        width: var(--space-3xl);
+        height: var(--space-3xl);
+        place-items: center;
+        border: 1px solid var(--color-primary-200);
+        border-radius: var(--radius-card);
+        background: var(--color-primary-50);
+        color: var(--color-primary-700);
+        font-weight: var(--font-weight-bold);
+      }
+
+      .feature-card h3 {
+        margin-top: var(--space-xl);
+      }
+
+      .feature-card p {
+        margin-top: var(--space-md);
+        color: var(--color-neutral-700);
+      }
+
+      .workflow {
+        background: var(--color-neutral-100);
+      }
+
+      .workflow__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.88fr) minmax(360px, 1.12fr);
+        gap: var(--space-3xl);
+        align-items: start;
+      }
+
+      .steps {
+        display: grid;
+        gap: var(--space-md);
+        margin-top: var(--space-2xl);
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: var(--space-3xl) minmax(0, 1fr);
+        gap: var(--space-lg);
+        border: 1px solid var(--color-neutral-200);
+        border-radius: var(--radius-card);
+        background: var(--color-neutral-50);
+        padding: var(--space-lg);
+      }
+
+      .step__number {
+        display: grid;
+        width: var(--space-3xl);
+        height: var(--space-3xl);
+        place-items: center;
+        border-radius: var(--radius-card);
+        background: var(--color-primary-500);
+        color: var(--color-neutral-50);
+        font-weight: var(--font-weight-bold);
+      }
+
+      .step h3 {
+        font-size: var(--font-size-body);
+      }
+
+      .step p {
+        margin-top: var(--space-xs);
+        color: var(--color-neutral-700);
+        font-size: var(--font-size-caption);
+      }
+
+      .code-block {
+        overflow: hidden;
+        border: 1px solid var(--color-neutral-800);
+        border-radius: var(--radius-card);
+        background: var(--color-neutral-950);
+        box-shadow: var(--shadow-md);
+      }
+
+      .code-block__head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-lg);
+        border-bottom: 1px solid var(--color-neutral-800);
+        padding: var(--space-md) var(--space-lg);
+        color: var(--color-neutral-400);
+        font-size: var(--font-size-caption);
+      }
+
+      .code-block pre {
+        overflow-x: auto;
+        margin: 0;
+        padding: var(--space-xl);
+        color: var(--color-neutral-100);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: var(--font-size-caption);
+        line-height: var(--line-height-body);
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+
+      .code-block .muted {
+        color: var(--color-neutral-500);
+      }
+
+      .code-block .accent {
+        color: var(--color-primary-300);
+      }
+
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-md);
+        margin-top: var(--space-3xl);
+      }
+
+      .pricing-card {
+        display: grid;
+        gap: var(--space-lg);
+        border: 1px solid var(--color-neutral-200);
+        border-radius: var(--radius-card);
+        background: var(--color-neutral-50);
+        box-shadow: var(--shadow-md);
+        padding: var(--space-xl);
+      }
+
+      .pricing-card.is-featured {
+        border-color: var(--color-primary-500);
+        box-shadow: var(--shadow-md);
+      }
+
+      .pricing-card__badge {
+        justify-self: start;
+        border-radius: var(--radius-badge);
+        background: var(--color-primary-50);
+        color: var(--color-primary-800);
+        padding: var(--space-xs) var(--space-md);
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-semibold);
+      }
+
+      .price {
+        color: var(--color-neutral-950);
+        font-size: var(--font-size-h3);
+        font-weight: var(--font-weight-bold);
+        line-height: var(--line-height-heading);
+      }
+
+      .price span {
+        color: var(--color-neutral-600);
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-regular);
+      }
+
+      .pricing-card p {
+        color: var(--color-neutral-700);
+      }
+
+      .pricing-card ul {
+        display: grid;
+        gap: var(--space-sm);
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .pricing-card li {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--space-sm);
+        color: var(--color-neutral-700);
+        font-size: var(--font-size-caption);
+      }
+
+      .pricing-card li::before {
+        content: "";
+        flex: 0 0 auto;
+        width: var(--space-sm);
+        height: var(--space-sm);
+        margin-top: var(--space-sm);
+        border-radius: var(--radius-full);
+        background: var(--color-primary-500);
+      }
+
+      .cta {
+        padding: var(--space-3xl) 0 var(--space-4xl);
+      }
+
+      .cta__block {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: var(--space-xl);
+        align-items: center;
+        border: 1px solid var(--color-primary-200);
+        border-radius: var(--radius-card);
+        background: var(--color-primary-50);
+        box-shadow: var(--shadow-md);
+        padding: var(--space-2xl);
+      }
+
+      .cta__block p {
+        margin-top: var(--space-md);
+        color: var(--color-neutral-700);
+      }
+
+      .footer {
+        border-top: 1px solid var(--color-neutral-200);
+        background: var(--color-neutral-950);
+        color: var(--color-neutral-100);
+      }
+
+      .footer__inner {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--space-xl);
+        align-items: start;
+        padding: var(--space-2xl) 0;
+      }
+
+      .footer .brand {
+        color: var(--color-neutral-50);
+      }
+
+      .footer p {
+        max-width: 520px;
+        margin-top: var(--space-md);
+        color: var(--color-neutral-400);
+        font-size: var(--font-size-caption);
+      }
+
+      .footer__links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: end;
+        gap: var(--space-md) var(--space-xl);
+        color: var(--color-neutral-300);
+        font-size: var(--font-size-caption);
+        font-weight: var(--font-weight-semibold);
+      }
+
+      .footer__links a:hover {
+        color: var(--color-neutral-50);
+      }
+
+      @media (max-width: 900px) {
+        .hero__grid,
+        .workflow__grid,
+        .chart-card,
+        .cta__block,
+        .footer__inner {
+          grid-template-columns: 1fr;
+        }
+
+        .hero__panel {
+          align-self: auto;
+        }
+
+        .dashboard__body {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          border-right: 0;
+          border-bottom: 1px solid var(--color-neutral-200);
+        }
+
+        .sidebar__nav {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .feature-grid,
+        .pricing-grid,
+        .kpis {
+          grid-template-columns: 1fr;
+        }
+
+        .logos__inner {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .logos__intro {
+          grid-column: 1 / -1;
+          text-align: center;
+        }
+
+        .footer__links {
+          justify-content: start;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .container {
+          width: min(1120px, calc(100% - var(--space-xl)));
+        }
+
+        .nav__inner {
+          min-height: var(--space-3xl);
+        }
+
+        .nav__link {
+          display: none;
+        }
+
+        .btn {
+          width: 100%;
+        }
+
+        .btn--nav {
+          width: auto;
+          padding: var(--space-sm) var(--space-md);
+        }
+
+        .hero {
+          padding-top: var(--space-3xl);
+        }
+
+        h1 {
+          font-size: var(--font-size-h2);
+        }
+
+        h2 {
+          font-size: var(--font-size-h3);
+        }
+
+        .hero__subhead {
+          font-size: var(--font-size-body);
+        }
+
+        .hero__actions {
+          display: grid;
+        }
+
+        .warehouse-list,
+        .sidebar__nav,
+        .logos__inner {
+          grid-template-columns: 1fr;
+        }
+
+        .dashboard__top,
+        .dashboard__headline,
+        .chart-card__head {
+          align-items: start;
+          flex-direction: column;
+        }
+
+        .dashboard__main,
+        .sidebar,
+        .hero__panel,
+        .feature-card,
+        .pricing-card,
+        .cta__block {
+          padding: var(--space-lg);
+        }
+
+        .chart {
+          height: 220px;
+          gap: var(--space-xs);
+        }
+
+        .step {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <nav class="nav" aria-label="Primary">
+        <div class="container nav__inner">
+          <a class="brand" href="#" aria-label="Kelvin home">
+            <span class="brand__mark" aria-hidden="true"><span></span></span>
+            Kelvin
+          </a>
+          <div class="nav__actions">
+            <a class="nav__link" href="#pricing">Sign in</a>
+            <a class="btn btn--primary btn--nav" href="#demo">Book demo</a>
+          </div>
+        </div>
+      </nav>
+
+      <main>
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="container hero__grid">
+            <div class="hero__copy">
+              <span class="eyebrow">SOC 2 Type II warehouse-native BI</span>
+              <h1 id="hero-title">Analytics for teams that take numbers seriously.</h1>
+              <p class="hero__subhead">
+                Kelvin queries Snowflake, BigQuery, Redshift, and Databricks directly, using dbt models as the source of truth for every metric.
+              </p>
+              <div class="hero__actions" id="demo">
+                <a class="btn btn--primary" href="#pricing">Start with usage pricing</a>
+                <a class="btn btn--secondary" href="#workflow">See how it works</a>
+              </div>
+              <div class="trust-line" aria-label="Trust indicators">
+                <span>No extracts or sync jobs</span>
+                <span>Metrics defined in dbt</span>
+                <span>Per-query pricing</span>
+              </div>
+            </div>
+
+            <aside class="hero__panel" aria-label="Kelvin query execution summary">
+              <div class="query-card">
+                <div class="query-card__head">
+                  <div>
+                    <p class="query-card__meta">Live warehouse query</p>
+                    <p class="query-card__title">Revenue variance by region</p>
+                  </div>
+                  <span class="status">Verified</span>
+                </div>
+                <div class="query-window">
+                  <div class="query-window__bar" aria-hidden="true"><span></span><span></span><span></span></div>
+                  <pre><code><span class="green">select</span> metric_date, region, net_revenue
+<span class="green">from</span> dbt_marts.finance.revenue
+<span class="green">where</span> metric_date >= current_date - 30
+<span class="green">order by</span> metric_date desc;</code></pre>
+                </div>
+                <p class="query-card__meta">Runs against your warehouse in place. Kelvin stores definitions, permissions, and audit context.</p>
+                <div class="warehouse-list" aria-label="Supported warehouses">
+                  <span class="warehouse-pill">Snowflake</span>
+                  <span class="warehouse-pill">BigQuery</span>
+                  <span class="warehouse-pill">Redshift</span>
+                  <span class="warehouse-pill">Databricks</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="section preview" aria-labelledby="preview-title">
+          <div class="container">
+            <div class="dashboard">
+              <div class="dashboard__top">
+                <div class="window-controls" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="dashboard__label">Kelvin operational board / live from warehouse</span>
+              </div>
+              <div class="dashboard__body">
+                <aside class="sidebar" aria-label="Dashboard navigation">
+                  <p class="sidebar__title">Boards</p>
+                  <div class="sidebar__nav">
+                    <span class="sidebar__item is-active">Revenue</span>
+                    <span class="sidebar__item">Retention</span>
+                    <span class="sidebar__item">Margin</span>
+                    <span class="sidebar__item">Forecast</span>
+                    <span class="sidebar__item">Ops health</span>
+                  </div>
+                </aside>
+                <div class="dashboard__main">
+                  <div class="dashboard__headline">
+                    <div>
+                      <h2 id="preview-title">Revenue command center</h2>
+                      <p>Last refreshed from warehouse: 4 minutes ago</p>
+                    </div>
+                    <span class="eyebrow">dbt metric: finance.net_revenue</span>
+                  </div>
+                  <div class="kpis" aria-label="Key performance indicators">
+                    <article class="kpi">
+                      <p class="kpi__label">Net revenue</p>
+                      <p class="kpi__value">$8.42M</p>
+                      <p class="kpi__delta">+12.8% vs plan</p>
+                    </article>
+                    <article class="kpi">
+                      <p class="kpi__label">Gross margin</p>
+                      <p class="kpi__value">71.4%</p>
+                      <p class="kpi__delta">+3.1 pts</p>
+                    </article>
+                    <article class="kpi">
+                      <p class="kpi__label">Query spend</p>
+                      <p class="kpi__value">$284</p>
+                      <p class="kpi__delta">per 1,000 runs</p>
+                    </article>
+                  </div>
+                  <div class="chart-card">
+                    <div>
+                      <div class="chart-card__head">
+                        <div>
+                          <h3>Revenue by week</h3>
+                          <p>Warehouse result set, not a cached extract</p>
+                        </div>
+                        <span class="status">Fresh</span>
+                      </div>
+                      <div class="chart" aria-label="Bar chart showing revenue rising over twelve weeks">
+                        <span style="height: 42%"></span>
+                        <span style="height: 48%"></span>
+                        <span style="height: 44%"></span>
+                        <span style="height: 56%"></span>
+                        <span style="height: 61%"></span>
+                        <span style="height: 66%"></span>
+                        <span style="height: 58%"></span>
+                        <span style="height: 72%"></span>
+                        <span style="height: 78%"></span>
+                        <span style="height: 74%"></span>
+                        <span style="height: 86%"></span>
+                        <span style="height: 91%"></span>
+                      </div>
+                    </div>
+                    <aside class="chart-side" aria-label="Metric notes">
+                      <div class="metric-note">
+                        <strong>One definition</strong>
+                        <span>Every chart resolves to the same dbt-modeled revenue logic.</span>
+                      </div>
+                      <div class="metric-note">
+                        <strong>Audited access</strong>
+                        <span>Warehouse permissions and Kelvin roles are recorded per query.</span>
+                      </div>
+                      <div class="metric-note">
+                        <strong>Spend aligned</strong>
+                        <span>Pay for queries, not every stakeholder who needs the answer.</span>
+                      </div>
+                    </aside>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="logos" aria-label="Customer logos">
+          <div class="container logos__inner">
+            <p class="logos__intro">Trusted by scale-up finance, data, and operations teams</p>
+            <span class="logo-word">Northstar</span>
+            <span class="logo-word">Ledgerly</span>
+            <span class="logo-word">AtlasOps</span>
+            <span class="logo-word">SignalWorks</span>
+            <span class="logo-word">VectorPay</span>
+          </div>
+        </section>
+
+        <section class="section features" aria-labelledby="features-title">
+          <div class="container">
+            <div class="section-header section-header--center">
+              <span class="eyebrow">Built for governed analysis</span>
+              <h2 id="features-title">The BI layer that respects your warehouse.</h2>
+              <p>Kelvin keeps the analytical contract close to the systems your data team already trusts.</p>
+            </div>
+            <div class="feature-grid">
+              <article class="feature-card">
+                <span class="feature-card__icon" aria-hidden="true">01</span>
+                <h3>Direct warehouse queries</h3>
+                <p>Explore live data without extracts, replicated stores, or sync windows that make finance reconcile the same number twice.</p>
+              </article>
+              <article class="feature-card">
+                <span class="feature-card__icon" aria-hidden="true">02</span>
+                <h3>dbt-defined metrics</h3>
+                <p>Turn approved dbt models into governed metrics so dashboards, ad hoc analysis, and board reporting use one definition.</p>
+              </article>
+              <article class="feature-card">
+                <span class="feature-card__icon" aria-hidden="true">03</span>
+                <h3>Per-query pricing</h3>
+                <p>Invite the whole operating team without managing seat math. Cost scales with analytical usage, not org chart growth.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section workflow" id="workflow" aria-labelledby="workflow-title">
+          <div class="container workflow__grid">
+            <div>
+              <div class="section-header">
+                <span class="eyebrow">How it works</span>
+                <h2 id="workflow-title">Connect Kelvin to the source of truth.</h2>
+                <p>Keep modeling, review, and governance in your existing warehouse stack while Kelvin gives every team a serious interface for answers.</p>
+              </div>
+              <div class="steps">
+                <article class="step">
+                  <span class="step__number">1</span>
+                  <div>
+                    <h3>Map dbt models</h3>
+                    <p>Register approved marts and metric ownership from your dbt project.</p>
+                  </div>
+                </article>
+                <article class="step">
+                  <span class="step__number">2</span>
+                  <div>
+                    <h3>Bind warehouse access</h3>
+                    <p>Use your existing Snowflake, BigQuery, Redshift, or Databricks permissions.</p>
+                  </div>
+                </article>
+                <article class="step">
+                  <span class="step__number">3</span>
+                  <div>
+                    <h3>Analyze with audit context</h3>
+                    <p>Every query records metric definition, requester, warehouse, and cost.</p>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div class="code-block" aria-label="Kelvin configuration code snippet">
+              <div class="code-block__head">
+                <span>kelvin.yml</span>
+                <span>SOC 2 Type II controls enabled</span>
+              </div>
+              <pre><code><span class="muted"># Kelvin metric source configuration</span>
+workspace: scaleup-finance
+warehouse:
+  provider: <span class="accent">snowflake</span>
+  database: analytics_prod
+  role: kelvin_reader
+
+metrics:
+  net_revenue:
+    model: marts.finance.revenue
+    owner: finance-analytics
+    grain: day
+    dimensions:
+      - region
+      - segment
+
+pricing:
+  mode: <span class="accent">per_query</span>
+  budget_alert: 5000</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <section class="section pricing" id="pricing" aria-labelledby="pricing-title">
+          <div class="container">
+            <div class="section-header section-header--center">
+              <span class="eyebrow">Pricing</span>
+              <h2 id="pricing-title">Usage-based pricing without seat anxiety.</h2>
+              <p>Pick the level of governance your team needs, then pay for the warehouse queries Kelvin runs.</p>
+            </div>
+            <div class="pricing-grid">
+              <article class="pricing-card">
+                <h3>Team</h3>
+                <p class="price">$399 <span>/ month</span></p>
+                <p>For a finance or data team standardizing core operating metrics.</p>
+                <ul>
+                  <li>1 warehouse connection</li>
+                  <li>Up to 50 dbt metrics</li>
+                  <li>Query usage dashboard</li>
+                  <li>Email support</li>
+                </ul>
+                <a class="btn btn--secondary" href="#demo">Start Team</a>
+              </article>
+              <article class="pricing-card is-featured">
+                <span class="pricing-card__badge">Most selected</span>
+                <h3>Scale-up</h3>
+                <p class="price">$999 <span>/ month</span></p>
+                <p>For cross-functional analytics with stronger governance and access control.</p>
+                <ul>
+                  <li>4 warehouse connections</li>
+                  <li>Unlimited dbt metrics</li>
+                  <li>Role-based approvals</li>
+                  <li>Priority support and onboarding</li>
+                </ul>
+                <a class="btn btn--primary" href="#demo">Book demo</a>
+              </article>
+              <article class="pricing-card">
+                <h3>Enterprise</h3>
+                <p class="price">Custom</p>
+                <p>For larger organizations with advanced compliance, procurement, and support needs.</p>
+                <ul>
+                  <li>Custom warehouse topology</li>
+                  <li>Dedicated success engineer</li>
+                  <li>SOC 2 evidence exports</li>
+                  <li>Security and legal review</li>
+                </ul>
+                <a class="btn btn--secondary" href="#demo">Contact sales</a>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="cta" aria-labelledby="cta-title">
+          <div class="container">
+            <div class="cta__block">
+              <div>
+                <h2 id="cta-title">Give every team the same trusted number.</h2>
+                <p>Kelvin keeps your metrics in dbt, your data in the warehouse, and your costs aligned to real analytical work.</p>
+              </div>
+              <a class="btn btn--primary" href="#demo">Schedule Kelvin walkthrough</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="container footer__inner">
+          <div>
+            <a class="brand" href="#" aria-label="Kelvin home">
+              <span class="brand__mark" aria-hidden="true"><span></span></span>
+              Kelvin
+            </a>
+            <p>Warehouse-native BI for scale-up data, finance, and operations teams. SOC 2 Type II controls, live warehouse queries, and metrics governed through dbt.</p>
+          </div>
+          <div class="footer__links" aria-label="Footer links">
+            <a href="#workflow">Workflow</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#demo">Demo</a>
+            <a href="#">Security</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <!-- Appended implementation note: customer names, dashboard values, and query metrics are illustrative content decisions needed to complete the specified static page. -->
+    <script src="../demo-switcher.js" defer></script>
+</body>
+</html>

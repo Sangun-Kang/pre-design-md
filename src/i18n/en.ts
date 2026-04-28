@@ -124,6 +124,16 @@ export const en: Messages = {
   'start.info.getTitle': 'One decision set, several outputs',
   'start.info.getBody':
     'Export Google DESIGN.md and Rich Prompt for AI agents, CSS variables for code, and Figma token JSON for design tools.',
+  'start.demo.eyebrow': 'DEMOS',
+  'start.demo.title': 'Codex and Claude, side by side.',
+  'start.demo.body':
+    'The same exported specs are rendered as finished pages so you can compare how each agent interprets the design intent.',
+  'start.demo.label': 'COMPARE',
+  'start.demo.cardTitle': 'Eight static demos, one switcher',
+  'start.demo.cardBody':
+    'Open any Kelvin or Halftone page, then jump between Codex, Claude, Rich Prompt, and Google DESIGN.md without going back to the gallery.',
+  'start.demo.compareBtn': 'Open comparison',
+  'start.demo.galleryBtn': 'Browse all demos',
   'start.info.ctaTitle': 'Ready in about two minutes.',
   'start.info.ctaBody': 'No signup, no saving — just five steps.',
 
