@@ -231,19 +231,22 @@
       @media (max-width: 900px) {
         body {
           overflow: auto;
+          padding-bottom: calc(6rem + env(safe-area-inset-bottom));
         }
 
         .bar {
-          height: auto;
-          display: grid;
-          grid-template-columns: minmax(0, 1fr) auto auto;
-          gap: 0.55rem 0.5rem;
+          height: 56px;
+          display: flex;
           align-items: center;
-          padding: 0.75rem 1rem 0.875rem;
+          gap: 0.5rem;
+          padding: 0.625rem 0.875rem;
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
         }
 
         .brand {
           min-width: 0;
+          margin-right: auto;
         }
 
         .brand-summary {
@@ -252,19 +255,30 @@
         }
 
         .controls {
-          grid-column: 1 / -1;
+          position: fixed;
+          left: max(0.75rem, env(safe-area-inset-left));
+          right: max(0.75rem, env(safe-area-inset-right));
+          top: auto;
+          bottom: max(0.75rem, env(safe-area-inset-bottom));
+          z-index: 20;
           display: grid;
           grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
           gap: 0.5rem;
-          width: 100%;
+          padding: 0.5rem;
+          border: 1px solid var(--border);
+          border-radius: calc(var(--radius-md) + 0.375rem);
+          background: color-mix(in oklch, var(--bg) 90%, transparent);
+          box-shadow: 0 16px 32px -8px oklch(0% 0 0 / 0.16), 0 6px 12px -6px oklch(0% 0 0 / 0.1);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
           flex: none;
           justify-content: stretch;
         }
 
         .toggle {
           display: grid;
-          grid-template-columns: auto minmax(0, 1fr);
-          gap: 0.375rem;
+          grid-template-rows: auto minmax(0, 1fr);
+          gap: 0.25rem;
           min-width: 0;
         }
 
@@ -290,8 +304,6 @@
         }
 
         .links {
-          grid-column: 3;
-          grid-row: 1;
           justify-self: end;
         }
 
@@ -310,8 +322,8 @@
       }
 
       @media (max-width: 560px) {
-        .bar {
-          grid-template-columns: minmax(0, 1fr) auto;
+        body {
+          padding-bottom: calc(8.25rem + env(safe-area-inset-bottom));
         }
 
         .controls {
@@ -320,12 +332,13 @@
         }
 
         .toggle {
-          grid-template-columns: 4.75rem minmax(0, 1fr);
+          grid-template-columns: 4.25rem minmax(0, 1fr);
+          grid-template-rows: auto;
+          align-items: center;
         }
 
-        .links {
-          grid-column: 2;
-          grid-row: 3;
+        .brand-summary {
+          display: none;
         }
       }
     </style>

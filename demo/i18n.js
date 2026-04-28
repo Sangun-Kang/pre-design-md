@@ -217,17 +217,17 @@
 
       @media (max-width: 900px) {
         .bar .pdm-lang-switcher {
-          grid-column: 2;
-          grid-row: 1;
-          justify-self: end;
+          flex: 0 0 auto;
+        }
+
+        .bar .pdm-lang-btn {
+          padding: 0.25rem 0.45rem;
         }
       }
 
       @media (max-width: 560px) {
-        .bar .pdm-lang-switcher {
-          grid-column: 1;
-          grid-row: 3;
-          justify-self: start;
+        .bar .pdm-lang-btn {
+          padding-inline: 0.4rem;
         }
       }
     `;
@@ -292,6 +292,7 @@
   function applyCompare() {
     document.title = t().compareTitle;
     setMetaDescription(t().compareDescription);
+    setText('.brand-summary', t().demos);
     setText('[data-toggle="project"] .toggle-btn[data-value="kelvin"]', t().projects.kelvin);
     setText('[data-toggle="project"] .toggle-btn[data-value="halftone"]', t().projects.halftone);
     setText('[data-toggle="spec"] .toggle-btn[data-value="rich"]', 'Rich Prompt');
