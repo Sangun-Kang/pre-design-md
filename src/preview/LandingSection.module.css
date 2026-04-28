@@ -188,6 +188,7 @@
   letter-spacing: -0.035em;
   margin: 0;
   color: var(--color-text);
+  white-space: nowrap;
 }
 
 /* Preview hero echoes Start: big black main line, smaller tinted second line. */

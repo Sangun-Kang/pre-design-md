@@ -2,6 +2,38 @@
   const params = new URLSearchParams(window.location.search);
   if (params.has('embed')) return;
 
+  const storageKey = 'pdm-lang';
+  const uiMessages = {
+    en: {
+      agent: 'Agent',
+      project: 'Project',
+      spec: 'Spec',
+      compare: 'Compare',
+      app: 'App',
+    },
+    ko: {
+      agent: '에이전트',
+      project: '프로젝트',
+      spec: '스펙',
+      compare: '비교',
+      app: '앱',
+    },
+    ja: {
+      agent: 'エージェント',
+      project: 'プロジェクト',
+      spec: '仕様',
+      compare: '比較',
+      app: 'アプリ',
+    },
+  };
+
+  function readLang() {
+    const stored = localStorage.getItem(storageKey);
+    return stored && stored in uiMessages ? stored : 'en';
+  }
+
+  const ui = uiMessages[readLang()] ?? uiMessages.en;
+
   const agents = [
     { id: 'codex', label: 'Codex' },
     { id: 'claude', label: 'Claude' },
@@ -212,13 +244,13 @@
       <span>${agentLabel} · ${projectLabel} · ${specLabel}</span>
     </a>
     <div class="pdm-switcher-controls">
-      ${linkGroup('Agent', agents, 'agent')}
-      ${linkGroup('Project', projects, 'project')}
-      ${linkGroup('Spec', specs, 'spec')}
+      ${linkGroup(ui.agent, agents, 'agent')}
+      ${linkGroup(ui.project, projects, 'project')}
+      ${linkGroup(ui.spec, specs, 'spec')}
     </div>
     <div class="pdm-switcher-links">
-      <a class="pdm-switcher-link" href="../compare.html?project=${current.project}&spec=${current.spec}">Compare</a>
-      <a class="pdm-switcher-link" href="../../">App</a>
+      <a class="pdm-switcher-link" href="../compare.html?project=${current.project}&spec=${current.spec}">${ui.compare}</a>
+      <a class="pdm-switcher-link" href="../../">${ui.app}</a>
     </div>
   `;
 
