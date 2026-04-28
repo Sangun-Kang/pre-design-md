@@ -52,12 +52,16 @@ export function App() {
         vars['--app-accent-hover'] = 'oklch(45% 0 0)';
         vars['--app-accent-press'] = 'oklch(25% 0 0)';
         vars['--app-accent-soft'] = 'oklch(20% 0 0)';
+        vars['--app-step-accent-text'] = 'oklch(100% 0 0)';
+        vars['--app-step-accent-soft-text'] = 'oklch(100% 0 0)';
         vars['--app-focus'] = 'oklch(60% 0 0)';
       } else {
         vars['--app-accent'] = `oklch(74% ${accentChroma} ${accentHue})`;
         vars['--app-accent-hover'] = `oklch(80% ${accentChroma} ${accentHue})`;
         vars['--app-accent-press'] = `oklch(68% ${accentChroma} ${accentHue})`;
         vars['--app-accent-soft'] = `oklch(30% ${accentChroma * 0.7} ${accentHue})`;
+        vars['--app-step-accent-text'] = 'oklch(14% 0 0)';
+        vars['--app-step-accent-soft-text'] = 'oklch(100% 0 0)';
         vars['--app-focus'] = `oklch(80% ${accentChroma} ${accentHue})`;
       }
     }

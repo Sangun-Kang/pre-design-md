@@ -42,7 +42,10 @@ export function StepNav() {
           const isCurrent = step === currentStep;
           const isComplete = completedGeneric.has(step);
           return (
-            <li key={step} className={styles.item}>
+            <li
+              key={step}
+              className={clsx(styles.item, isCurrent && styles.currentItem)}
+            >
               <button
                 type="button"
                 className={clsx(styles.stepBtn, {

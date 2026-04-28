@@ -47,6 +47,10 @@
   .progressBar {
     transition: none;
   }
+
+  .currentItem .stepBtn {
+    animation: none;
+  }
 }
 
 .list {
@@ -95,13 +99,13 @@
 
 .current .idx {
   background: var(--app-accent);
-  color: var(--app-accent-text);
+  color: var(--app-step-accent-text, var(--app-accent-text));
   border-color: var(--app-accent);
 }
 
 .complete .idx {
   background: var(--app-accent-soft);
-  color: var(--app-text);
+  color: var(--app-step-accent-soft-text, var(--app-text));
   border-color: var(--app-accent-soft);
 }
 
@@ -175,11 +179,46 @@
   .brand {
     font-size: 0.8rem;
   }
+  .list {
+    flex: 1 1 auto;
+    justify-content: center;
+    min-width: 0;
+    overflow: visible;
+  }
+  .item {
+    display: none;
+  }
+  .currentItem {
+    display: flex;
+    min-width: 0;
+  }
+  .currentItem .separator {
+    display: none;
+  }
   .stepBtn {
-    padding: var(--app-space-2xs) var(--app-space-xs);
+    padding: var(--app-space-xs) var(--app-space-sm);
     font-size: 0.8rem;
+    min-width: 0;
+    max-width: min(38vw, 12rem);
+    animation: currentStepIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .currentItem .idx {
+    display: none;
   }
   .label {
-    display: none;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@keyframes currentStepIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
